@@ -1,0 +1,599 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Noah Demuyakor Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Noah Demuyakor: graphic designer, motion designer and AI filmmaker in Accra, Ghana.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a film-studio portfolio. Woven kente bands divide the sections, a sprocketed showreel strip runs under the hero, and the work sits in a filterable masonry wall. */
+:root {
+  --ink: #15112a;        /* page ground: deep indigo night */
+  --ink-2: #1f1940;      /* raised surface */
+  --ink-3: #2c2558;      /* lines, chips */
+  --paper: #f5f1ff;      /* main text */
+  --muted: #b3abd6;      /* secondary text */
+  --gold: #f6b80c;       /* kente gold, primary accent */
+  --flame: #ff5b24;      /* signal orange, from the hero portrait */
+  --leaf: #2fcf8b;       /* kente green, used sparingly */
+  --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --gut-l: max(16px, env(safe-area-inset-left, 0px));
+  --gut-r: max(16px, env(safe-area-inset-right, 0px));
+  --wrap: 1240px;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body { margin: 0; }
+body { background: var(--ink); color: var(--paper); font-family: var(--body); font-size: 17px; line-height: 1.55; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--ink); }
+a { color: inherit; }
+img, video { display: block; max-width: 100%; }
+::selection { background: var(--gold); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--gut-l); padding-right: var(--gut-r); }
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; line-height: .95; margin: 0; text-wrap: balance; }
+
+/* ---------- nav ---------- */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: color-mix(in srgb, var(--ink) 82%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--ink-3); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
+.logo { font-family: var(--display); font-weight: 800; font-size: 20px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+.logo i { width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(var(--gold) 0 25%, var(--flame) 0 50%, var(--leaf) 0 75%, var(--paper) 0); animation: spin 8s linear infinite; }
+@keyframes spin { to { transform: rotate(1turn); } }
+.nav ul { list-style: none; display: flex; gap: 6px; margin: 0; padding: 0; flex-wrap: wrap; justify-content: flex-end; }
+.nav ul a { text-decoration: none; font-size: 15px; font-weight: 500; padding: 6px 12px; border-radius: 99px; color: var(--muted); transition: color .2s, background .2s; }
+.nav ul a:hover { color: var(--paper); background: var(--ink-2); }
+.nav ul a.cta { background: var(--gold); color: var(--ink); font-weight: 600; }
+.nav ul a.cta:hover { background: var(--paper); }
+.logo { white-space: nowrap; }
+@media (max-width: 640px) { .nav ul li:not(.keep) { display: none; } .logo { font-size: 17px; } .nav ul a { padding: 6px 10px; } }
+
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(40px, 7vw, 96px) 40px; position: relative; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
+@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
+.avail { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); margin-bottom: 22px; }
+.avail b { width: 9px; height: 9px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 0 var(--leaf); animation: ping 2s infinite; }
+@keyframes ping { 70% { box-shadow: 0 0 0 10px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
+.hero h1 { font-size: clamp(56px, 10.5vw, 150px); }
+.hero h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
+.hero h1 .line > span { display: inline-block; }
+.hero h1 .accent { color: var(--gold); }
+.roles { margin-top: 26px; font-family: var(--display); font-size: clamp(22px, 2.6vw, 32px); font-weight: 600; color: var(--muted); display: flex; flex-wrap: wrap; gap: 0 .35em; align-items: baseline; }
+.roles .swap { color: var(--paper); position: relative; display: inline-block; min-width: 9ch; }
+.roles .swap::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 4px; background: var(--flame); border-radius: 2px; transform-origin: left; animation: under 2.6s ease-in-out infinite; }
+@keyframes under { 0%, 100% { transform: scaleX(0); } 20%, 80% { transform: scaleX(1); } }
+.lede { max-width: 56ch; margin: 22px 0 30px; color: var(--muted); font-size: 18px; }
+.lede strong { color: var(--paper); font-weight: 600; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; padding: 14px 22px; border-radius: 99px; border: 1.5px solid var(--ink-3); transition: transform .25s, background .25s, color .25s, border-color .25s; cursor: pointer; font: inherit; font-weight: 600; color: var(--paper); background: transparent; }
+.btn.primary { background: var(--flame); border-color: var(--flame); color: #fff; }
+.btn:hover { transform: translateY(-2px); border-color: var(--gold); }
+.btn.primary:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+.btn svg { width: 18px; height: 18px; }
+
+.portrait { position: relative; justify-self: center; width: min(100%, 420px); aspect-ratio: 4/5; }
+.portrait .frame { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; background: var(--flame); transform: rotate(2.5deg); box-shadow: 0 30px 80px -20px rgb(0 0 0 / .6); }
+.portrait .frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
+.portrait .weave { position: absolute; inset: -14px 26px auto -14px; height: 28px; border-radius: 6px; transform: rotate(-4deg); z-index: 2; }
+.sticker { position: absolute; z-index: 3; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; padding: 8px 12px; border-radius: 99px; background: var(--paper); color: var(--ink); font-weight: 500; white-space: nowrap; box-shadow: 0 10px 30px -8px rgb(0 0 0 / .5); }
+.sticker.s1 { left: -18px; bottom: 18%; transform: rotate(-6deg); }
+.sticker.s2 { right: -12px; top: 14%; background: var(--gold); transform: rotate(5deg); }
+@media (max-width: 480px) { .sticker.s1 { left: 0; } .sticker.s2 { right: 0; } }
+
+/* kente weave: woven stripes used as a recurring band */
+.weave { background:
+  repeating-linear-gradient(90deg, var(--gold) 0 22px, var(--ink) 22px 26px, var(--leaf) 26px 34px, var(--ink) 34px 38px, var(--flame) 38px 52px, var(--ink) 52px 56px, var(--paper) 56px 60px, var(--ink) 60px 64px);
+  background-size: 128px 100%; animation: weave 6s linear infinite; }
+@keyframes weave { to { background-position: 128px 0; } }
+.band { height: 14px; margin-block: 0; }
+
+/* ---------- showreel film strip ---------- */
+.strip { background: #0b0918; padding-block: 18px; overflow: hidden; position: relative; border-block: 1px solid var(--ink-3); }
+.strip::before, .strip::after { content: ""; position: absolute; left: 0; right: 0; height: 10px; background: repeating-linear-gradient(90deg, transparent 0 14px, #2d2650 14px 26px); }
+.strip::before { top: 4px; } .strip::after { bottom: 4px; }
+.track { display: flex; gap: 14px; width: max-content; animation: roll 70s linear infinite; padding-block: 8px; }
+.strip:hover .track { animation-play-state: paused; }
+@keyframes roll { to { transform: translateX(-50%); } }
+.frame-cell { position: relative; height: clamp(150px, 20vw, 230px); border-radius: 8px; overflow: hidden; background: var(--ink-2); flex: none; cursor: pointer; border: 0; padding: 0; color: inherit; }
+.frame-cell video, .frame-cell img { height: 100%; width: auto; object-fit: cover; }
+.frame-cell .tc { position: absolute; left: 8px; bottom: 8px; font-family: var(--mono); font-size: 11px; background: rgb(0 0 0 / .65); padding: 3px 7px; border-radius: 4px; color: var(--paper); }
+
+/* ---------- sections ---------- */
+section { padding-block: clamp(64px, 9vw, 120px); }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+.sec-head h2 { font-size: clamp(44px, 7vw, 96px); }
+.sec-head h2 em { font-style: normal; color: var(--gold); }
+.sec-head p { max-width: 44ch; color: var(--muted); margin: 0; }
+.eyebrow { color: var(--flame); margin-bottom: 14px; display: block; }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--ink-3); }
+.stat { padding: 28px 20px; border-left: 1px solid var(--ink-3); }
+.stat:first-child { border-left: 0; padding-left: 0; }
+.stat b { display: block; font-family: var(--display); font-size: clamp(40px, 5vw, 64px); font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 15px; }
+@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stat:nth-child(3) { border-left: 0; padding-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid var(--ink-3); } }
+
+/* featured case study: horizontal gallery */
+.case { background: #0d3b2a; color: var(--paper); padding-block: clamp(56px, 8vw, 100px); overflow: hidden; }
+.case .wrap { display: grid; gap: 18px; }
+.case .eyebrow { color: var(--gold); }
+.case h2 { font-size: clamp(44px, 7.5vw, 110px); }
+.case h2 em { font-style: normal; color: var(--gold); }
+.case .intro { display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; align-items: end; }
+.case .intro p { max-width: 54ch; color: #cfe6da; margin: 0; }
+.case .deliv { display: flex; flex-wrap: wrap; gap: 8px; }
+.case .deliv span { border: 1px solid #2f6b52; border-radius: 99px; padding: 5px 12px; font-size: 14px; color: #cfe6da; }
+.hscroll { margin-top: 34px; overflow-x: auto; scrollbar-width: thin; padding-left: var(--gut-l); padding-right: var(--gut-r); -webkit-overflow-scrolling: touch; }
+.hrow { display: flex; gap: 18px; width: max-content; padding-bottom: 14px; align-items: flex-end; }
+.hrow button { border: 0; padding: 0; background: none; color: inherit; cursor: pointer; text-align: left; font: inherit; flex: none; }
+.hrow img { height: clamp(240px, 42vh, 460px); width: auto; border-radius: 14px; background: #134a35; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
+.hrow button:hover img { transform: translateY(-8px) rotate(-1deg); }
+.hrow figcaption { margin-top: 10px; font-size: 14px; color: #cfe6da; }
+.case-hint { color: #8fc2aa; }
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) { .case.pin .hscroll { overflow: visible; } }
+
+/* filters */
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
+.chip { font: 500 15px var(--body); color: var(--muted); background: transparent; border: 1.5px solid var(--ink-3); padding: 8px 16px; border-radius: 99px; cursor: pointer; transition: all .2s; display: inline-flex; gap: 8px; align-items: center; }
+.chip small { font-family: var(--mono); font-size: 11px; opacity: .7; }
+.chip:hover { color: var(--paper); border-color: var(--muted); }
+.chip[aria-pressed="true"] { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+
+/* masonry wall */
+.wall { columns: 3 320px; column-gap: 18px; }
+.card { break-inside: avoid; margin: 0 0 18px; position: relative; border-radius: 16px; overflow: hidden; background: var(--ink-2); cursor: pointer; display: block; width: 100%; border: 0; padding: 0; text-align: left; color: inherit; font: inherit; transform: translateZ(0); }
+.card .media { position: relative; overflow: hidden; }
+.card img, .card video { width: 100%; height: auto; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.card video { position: absolute; inset: 0; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s; }
+.card.playing video { opacity: 1; }
+.card:hover img { transform: scale(1.04); }
+.card .meta { padding: 14px 16px 16px; display: grid; gap: 4px; }
+.card .meta h3 { font-size: 21px; line-height: 1.1; letter-spacing: -.01em; font-weight: 600; }
+.card .meta span { color: var(--muted); font-size: 14px; }
+.card .tag { position: absolute; top: 12px; left: 12px; z-index: 2; background: rgb(21 17 42 / .78); backdrop-filter: blur(6px); color: var(--paper); padding: 5px 10px; border-radius: 99px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; display: flex; gap: 6px; align-items: center; }
+.card .tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--c, var(--gold)); }
+.card .play { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: 46px; height: 46px; border-radius: 50%; background: var(--flame); display: grid; place-items: center; transition: transform .3s; }
+.card:hover .play { transform: scale(1.12) rotate(-8deg); }
+.card .play svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
+.card.hide { display: none; }
+
+/* archive */
+.archive { margin-top: 44px; border-top: 1px solid var(--ink-3); padding-top: 26px; }
+.archive h3 { font-size: 26px; margin-bottom: 6px; }
+.archive p { color: var(--muted); margin: 0 0 16px; }
+.arch-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 28px; list-style: none; padding: 0; margin: 0; }
+.arch-list a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px dashed var(--ink-3); text-decoration: none; transition: color .2s, padding .2s; }
+.arch-list a:hover { color: var(--gold); padding-left: 6px; }
+.arch-list .mono { color: var(--muted); }
+
+/* clients marquee */
+.clients { padding-block: 34px; border-block: 1px solid var(--ink-3); overflow: hidden; }
+.clients .mono { color: var(--muted); display: block; margin-bottom: 14px; }
+.marq { display: flex; gap: 48px; width: max-content; animation: roll 45s linear infinite; font-family: var(--display); font-weight: 600; font-size: clamp(24px, 3vw, 38px); white-space: nowrap; }
+.marq span { display: inline-flex; align-items: center; gap: 48px; }
+.marq span::after { content: "✦"; color: var(--gold); font-size: .6em; }
+
+/* about */
+.about .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
+@media (max-width: 860px) { .about .wrap { grid-template-columns: 1fr; } }
+.about-photo { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 1; max-width: 520px; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; }
+.about-photo .weave { position: absolute; left: 0; right: 0; bottom: 0; height: 12px; }
+.about h2 { font-size: clamp(40px, 5.5vw, 72px); margin-bottom: 24px; }
+.about p { color: var(--muted); max-width: 62ch; }
+.about p strong { color: var(--paper); font-weight: 600; }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 34px; }
+@media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
+.cols h3 { font-size: 15px; font-family: var(--mono); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pills span { border: 1px solid var(--ink-3); border-radius: 99px; padding: 5px 12px; font-size: 14px; }
+.timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.timeline li { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 12px; font-size: 15px; }
+.timeline .mono { color: var(--muted); padding-top: 3px; font-size: 11px; }
+.timeline b { font-weight: 600; display: block; }
+.timeline span { color: var(--muted); }
+
+/* contact */
+.contact { background: var(--gold); color: var(--ink); }
+.contact .wrap { display: grid; gap: 28px; }
+.contact h2 { font-size: clamp(52px, 10vw, 150px); }
+.contact h2 .o { color: var(--flame); }
+.contact p { max-width: 52ch; font-size: 19px; margin: 0; }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.mail code { font-family: var(--display); font-weight: 600; font-size: clamp(22px, 3.4vw, 40px); background: var(--ink); color: var(--paper); padding: 10px 20px; border-radius: 14px; user-select: all; overflow-wrap: anywhere; }
+.contact .btn { color: var(--ink); border-color: var(--ink); }
+.contact .btn:hover { background: var(--ink); color: var(--paper); }
+.contact .links { display: flex; flex-wrap: wrap; gap: 12px; }
+footer { padding-block: 26px; color: var(--muted); font-size: 14px; }
+footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+/* lightbox */
+.lb { position: fixed; inset: 0; z-index: 100; background: rgb(8 6 20 / .94); backdrop-filter: blur(8px); display: grid; grid-template-rows: minmax(0, 1fr) auto; padding: max(16px, env(safe-area-inset-top, 0px)) var(--gut-r) max(16px, env(safe-area-inset-bottom, 0px)) var(--gut-l); }
+.lb-stage { display: grid; place-items: center; min-height: 0; position: relative; }
+.lb-stage img, .lb-stage video { max-width: 100%; max-height: 100%; border-radius: 10px; object-fit: contain; background: #000; }
+.lb-info { display: flex; gap: 20px; justify-content: space-between; align-items: end; flex-wrap: wrap; max-width: 1100px; margin: 16px auto 0; width: 100%; }
+.lb-info h3 { font-size: clamp(24px, 3vw, 36px); }
+.lb-info p { color: var(--muted); margin: 6px 0 0; max-width: 64ch; }
+.lb-info .mono { color: var(--gold); }
+.lb-ctrl { display: flex; gap: 8px; }
+.ib { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--ink-3); background: var(--ink-2); color: var(--paper); display: grid; place-items: center; cursor: pointer; transition: background .2s, border-color .2s; }
+.ib:hover { border-color: var(--gold); background: var(--ink-3); }
+.ib svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* custom cursor (fine pointers only) */
+.cursor { position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); mix-blend-mode: difference; transform: translate(-50%, -50%); transition: width .25s, height .25s; display: none; }
+.cursor.big { width: 64px; height: 64px; }
+@media (pointer: fine) { .cursor { display: block; } }
+
+.toast { position: fixed; left: 50%; bottom: max(24px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--paper); color: var(--ink); padding: 10px 18px; border-radius: 99px; font-weight: 600; z-index: 120; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; scroll-behavior: auto !important; }
+  .track, .marq { animation: none !important; }
+  .cursor { display: none !important; }
+}
+</style>
+</head>
+<body>
+
+
+<div class="cursor" aria-hidden="true"></div>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="logo" href="#top"><i aria-hidden="true"></i>Noah Demuyakor</a>
+    <ul>
+      <li class="keep"><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li class="keep"><a class="cta" href="#contact">Hire me</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="avail mono"><b aria-hidden="true"></b>Accra, Ghana · Open to remote roles</span>
+      <h1 aria-label="Design that moves people.">
+        <span class="line"><span>Design that</span></span>
+        <span class="line"><span>moves <span class="accent">people.</span></span></span>
+      </h1>
+      <div class="roles" aria-live="polite">Graphic designer for <span class="swap" id="swap">social campaigns</span></div>
+      <p class="lede">I'm <strong>Noah Demuyakor</strong>, Creative Manager at <strong>EduSpots</strong> and director of <strong>Creavia Studios</strong>. For 10+ years I've designed campaigns, reports, brands and animated films, and I now build them with AI tools as a creative partner to ImagineArt, OpenArt, PixVerse, Flick and Pixmax.</p>
+      <div class="btns">
+        <a class="btn primary" href="#work">See the work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <button class="btn" type="button" id="reelBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play the reel</button>
+      </div>
+    </div>
+    <div class="portrait">
+      <div class="weave" aria-hidden="true"></div>
+      <div class="frame"><img src="assets/img/me-hero.webp" alt="Noah Demuyakor in an orange shirt, calling out with both hands" fetchpriority="high"></div>
+      <span class="sticker s1">Brand · Motion · AI film</span>
+      <span class="sticker s2">10+ yrs</span>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-label="Showreel strip: click a frame to watch">
+  <div class="track" id="track"></div>
+</div>
+
+<section class="case" id="orijin" aria-labelledby="caseTitle">
+  <div class="wrap">
+    <span class="eyebrow mono">Featured campaign · Concept</span>
+    <div class="intro">
+      <h2 id="caseTitle">Orijin at 8: <em>the taste of celebration.</em></h2>
+      <p>A 360° anniversary campaign for a Ghanaian drink brand. Two key visuals, one product-led and one people-led, roll out across a limited-edition label, billboards, bus shelters, a music-festival poster, social posts and merch. The illustrated key visual ties the brand to highlife, football and street culture.</p>
+    </div>
+    <div class="deliv"><span>Campaign concept</span><span>Key visuals</span><span>Label design</span><span>Out-of-home</span><span>Event poster</span><span>Social</span><span>Merch</span></div>
+    <span class="case-hint mono">Scroll or swipe the gallery · tap to enlarge</span>
+  </div>
+  <div class="hscroll"><div class="hrow" id="caseRow"></div></div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="stats" aria-label="At a glance">
+      <div class="stat"><b data-count="10">10+</b><span>years designing</span></div>
+      <div class="stat"><b data-count="40">40+</b><span>folktales illustrated</span></div>
+      <div class="stat"><b data-count="5">5</b><span>AI platform partnerships</span></div>
+      <div class="stat"><b>Top 100</b><span>HundrED 2027, campaign I designed</span></div>
+    </div>
+
+    <div class="sec-head" style="margin-top:72px">
+      <div><span class="eyebrow mono">Selected work · 2022–2026</span><h2>The <em>work.</em></h2></div>
+      <p>Social campaigns, reports, identities, illustration and film for NGOs, brands and my own studio. Tap any piece to open it.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filter work" id="filters"></div>
+    <div class="wall" id="wall"></div>
+
+    <div class="archive">
+      <h3>Animation archive</h3>
+      <p>Earlier motion work, hosted on Vimeo. Links open in a new tab.</p>
+      <ul class="arch-list">
+        <li><a href="https://vimeo.com/848382868" target="_blank" rel="noopener">Echoes of Ghana · Animation At Work 2023 <span class="mono">2:19</span></a></li>
+        <li><a href="https://vimeo.com/901174255" target="_blank" rel="noopener">ADventure Offshore explainer <span class="mono">1:42</span></a></li>
+        <li><a href="https://vimeo.com/877038597" target="_blank" rel="noopener">Phone Shopping <span class="mono">0:30</span></a></li>
+        <li><a href="https://vimeo.com/901176400" target="_blank" rel="noopener">Acrobat DC promo <span class="mono">0:46</span></a></li>
+        <li><a href="https://vimeo.com/871908695" target="_blank" rel="noopener">Scapeboard animation <span class="mono">0:23</span></a></li>
+        <li><a href="https://vimeo.com/901180142" target="_blank" rel="noopener">Walk cycle study <span class="mono">0:33</span></a></li>
+        <li><a href="https://vimeo.com/901178716" target="_blank" rel="noopener">Dog and man <span class="mono">0:30</span></a></li>
+        <li><a href="https://vimeo.com/901182990" target="_blank" rel="noopener">Tell us a story <span class="mono">0:13</span></a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="clients">
+  <div class="wrap"><span class="mono">Clients, employers &amp; partners</span></div>
+  <div class="marq" aria-hidden="true" id="marq"></div>
+  <p class="wrap" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">EduSpots, ADventure Offshore, Institute of African Studies at the University of Ghana, Shi.E.L.D. Services, Excellence Touch Medical Services, Vertex Energy &amp; Technologies, Carifika Inc, ImagineArt, OpenArt, PixVerse, Flick, Pixmax.ai.</p>
+</div>
+
+<div class="weave band" aria-hidden="true"></div>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-photo"><img src="assets/img/me-about.webp" alt="Portrait of Noah Demuyakor in glasses and a denim jacket" loading="lazy"><div class="weave" aria-hidden="true"></div></div>
+    <div>
+      <span class="eyebrow mono">About</span>
+      <h2>Clear ideas, made visible.</h2>
+      <p>I studied <strong>Graphic Design at the University of Education, Winneba</strong>, and I've spent the decade since turning complex programmes into things people stop and look at: donor campaigns, 50-page annual reports, brand systems, safety comics for ship crews, and animated films for parents and learners.</p>
+      <p>At <strong>EduSpots</strong> I lead the visual identity of an education charity working across Ghana and Kenya. Through <strong>Creavia Studios</strong> I direct AI films such as <strong>Accra Hustle: No Bush Left</strong> and teach teams to make content with generative tools. I work remotely, I'm used to UK and US hours, and I hit deadlines.</p>
+      <div class="cols">
+        <div>
+          <h3>What I do</h3>
+          <div class="pills"><span>Social &amp; ad design</span><span>Brand identity</span><span>Campaigns</span><span>Reports &amp; decks</span><span>Illustration</span><span>Motion graphics</span><span>2D animation</span><span>AI film</span><span>Video editing</span></div>
+          <h3 style="margin-top:24px">Tools</h3>
+          <div class="pills"><span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>After Effects</span><span>Premiere Pro</span><span>Character Animator</span><span>Canva</span><span>CapCut</span><span>Google Flow</span><span>Midjourney</span><span>Runway</span><span>Kling</span><span>ElevenLabs</span></div>
+        </div>
+        <div>
+          <h3>Experience</h3>
+          <ul class="timeline">
+            <li><span class="mono">2025 – now</span><div><b>Creative Manager, EduSpots</b><span>Graphic Designer from 2024</span></div></li>
+            <li><span class="mono">2026 – now</span><div><b>Creative partner</b><span>ImagineArt, OpenArt, PixVerse, Flick, Pixmax.ai</span></div></li>
+            <li><span class="mono">2022 – 2025</span><div><b>Senior Graphic Designer / IT Lead</b><span>ADventure Offshore Ltd</span></div></li>
+            <li><span class="mono">2022</span><div><b>Freelance Illustrator</b><span>Institute of African Studies, University of Ghana</span></div></li>
+            <li><span class="mono">2020 – now</span><div><b>Freelance Graphic &amp; Motion Designer</b><span>Fiverr</span></div></li>
+            <li><span class="mono">2017 – now</span><div><b>Creative Director</b><span>Creavia Studios</span></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="mono">Contact</span>
+    <h2>Let's make<br>something g<span class="o">o</span>od.</h2>
+    <p>Hiring a designer who can take a campaign from brief to post, deck and video? Send me a note about the role or project.</p>
+    <div class="mail"><code id="email">greatnoah52@gmail.com</code><button class="btn" type="button" id="copyBtn">Copy email</button></div>
+    <div class="links">
+      <a class="btn" href="https://www.linkedin.com/in/noah-demuyakor/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="https://greatnoah52.github.io/Portfolio/index.html" target="_blank" rel="noopener">Previous portfolio ↗</a>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap"><span>© 2026 Noah Demuyakor · Accra, Ghana</span><span class="mono">Designed &amp; animated in code</span></div></footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-labelledby="lbTitle">
+  <div class="lb-stage" id="lbStage"></div>
+  <div class="lb-info">
+    <div><span class="mono" id="lbMeta"></span><h3 id="lbTitle"></h3><p id="lbBlurb"></p></div>
+    <div class="lb-ctrl">
+      <button class="ib" type="button" id="lbPrev" aria-label="Previous piece"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="ib" type="button" id="lbNext" aria-label="Next piece"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button class="ib" type="button" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+const M = {"images": [{"id": "strategy-1", "title": "2026–27 Strategy carousel", "client": "EduSpots", "cat": "Campaigns", "blurb": "Seven-slide Instagram carousel turning a five-year strategy into swipeable social posts.", "w": 1600, "h": 1600}, {"id": "strategy-2", "title": "The Sustain Phase", "client": "EduSpots", "cat": "Campaigns", "blurb": "Carousel slide from the 2026–27 strategy series.", "w": 1600, "h": 1600}, {"id": "strategy-5", "title": "Strengthening EdTech Innovation", "client": "EduSpots", "cat": "Campaigns", "blurb": "Carousel slide from the 2026–27 strategy series.", "w": 1600, "h": 1600}, {"id": "donation", "title": "Together, We Can Ignite", "client": "EduSpots", "cat": "Campaigns", "blurb": "Donation appeal flyer with clear giving tiers and payment details.", "w": 1143, "h": 1600}, {"id": "quote", "title": "World Teachers' Day quotes", "client": "EduSpots · EduChamps Talks", "cat": "Campaigns", "blurb": "Quote card series for World Teachers' Day.", "w": 1600, "h": 1600}, {"id": "possibility", "title": "Join the Possibility Circle", "client": "EduSpots", "cat": "Campaigns", "blurb": "Monthly-giving campaign carousel.", "w": 1600, "h": 1600}, {"id": "lego", "title": "Shape the Future of Education", "client": "EduSpots × LEGO", "cat": "Campaigns", "blurb": "Recruitment flyer for an IB CAS and Duke of Edinburgh's Award volunteer challenge.", "w": 1467, "h": 1600}, {"id": "hiring", "title": "We're Hiring", "client": "EduSpots", "cat": "Campaigns", "blurb": "Recruitment ad for an MEL Manager role.", "w": 1559, "h": 1600}, {"id": "theirworld", "title": "Theirworld Award winner", "client": "EduSpots", "cat": "Campaigns", "blurb": "Announcement graphic for the 2025 Theirworld Education Innovation Award.", "w": 1393, "h": 1600}, {"id": "thirdsector", "title": "Small Charity Big Achiever", "client": "EduSpots", "cat": "Campaigns", "blurb": "Winner announcement for the Third Sector Awards.", "w": 1200, "h": 1446}, {"id": "fifa", "title": "FIFA Global Citizen Education Fund", "client": "EduSpots", "cat": "Campaigns", "blurb": "Selection announcement for the FIFA Global Citizen Education Fund.", "w": 1200, "h": 1446}, {"id": "biggive", "title": "Big Give Christmas Challenge", "client": "EduSpots", "cat": "Campaigns", "blurb": "Match-funding campaign graphics: donations doubled for one week.", "w": 1477, "h": 1600}, {"id": "kss-flyer", "title": "Keeping Children Safe launch", "client": "EduSpots", "cat": "Campaigns", "blurb": "Launch poster for the online-safety animated film.", "w": 1260, "h": 1600}, {"id": "next10", "title": "EduSpots: The Next 10", "client": "EduSpots", "cat": "Campaigns", "blurb": "Event banner for the 10th-anniversary gathering.", "w": 1600, "h": 800}, {"id": "graduation", "title": "Ignite Programme Graduation", "client": "EduSpots", "cat": "Campaigns", "blurb": "Online event invitation for the 2025 graduation ceremony.", "w": 1248, "h": 1600}, {"id": "iwd", "title": "International Women's Day", "client": "ADventure Offshore", "cat": "Campaigns", "blurb": "Staff spotlight for International Women's Day.", "w": 1600, "h": 1160}, {"id": "independence", "title": "Happy Independence Day", "client": "ADventure Offshore", "cat": "Campaigns", "blurb": "Ghana Independence Day social post.", "w": 1585, "h": 1600}, {"id": "annual-cover", "title": "2025 Annual Report", "client": "EduSpots", "cat": "Editorial", "blurb": "48-page annual report: layout, data pages, photo frames and print production.", "w": 1131, "h": 1600}, {"id": "annual-p4", "title": "Annual Report: impact spread", "client": "EduSpots", "cat": "Editorial", "blurb": "Statistics and story spread from the 2025 annual report.", "w": 1131, "h": 1600}, {"id": "annual-p9", "title": "Annual Report: events spread", "client": "EduSpots", "cat": "Editorial", "blurb": "Event highlights spread from the 2025 annual report.", "w": 1131, "h": 1600}, {"id": "cecop", "title": "CECOP 2025 Legacy Report", "client": "Climate Education Community of Practice", "cat": "Editorial", "blurb": "57-page legacy report for Ghana's climate education network.", "w": 1132, "h": 1600}, {"id": "deck", "title": "Kente Bold pitch deck", "client": "Creavia Studios", "cat": "Editorial", "blurb": "Canva pitch-deck template from the Creavia template collection.", "w": 1600, "h": 910}, {"id": "report-mock", "title": "Impact 2030 report template", "client": "Creavia Studios", "cat": "Editorial", "blurb": "Annual-report template cover from the Creavia collection.", "w": 754, "h": 970}, {"id": "harmattan", "title": "Harmattan Fest poster", "client": "Creavia Studios", "cat": "Brand", "blurb": "Event poster template.", "w": 1200, "h": 1600}, {"id": "adinkra", "title": "Adinkra Instagram stories", "client": "Creavia Studios", "cat": "Brand", "blurb": "Fashion Instagram story template set.", "w": 900, "h": 1600}, {"id": "vertex", "title": "Vertex Energy & Technologies", "client": "Vertex", "cat": "Brand", "blurb": "Logo system: horizontal and vertical lockups in colour, black and white, plus letterhead.", "w": 1600, "h": 718}, {"id": "seko", "title": "Seko Eva", "client": "Seko Eva", "cat": "Brand", "blurb": "Monogram and wordmark for a fashion label.", "w": 1600, "h": 1009}, {"id": "impact-studio", "title": "The Impact Studio", "client": "The Impact Studio", "cat": "Brand", "blurb": "Four logo concepts with colour palettes, from the brand brief.", "w": 1600, "h": 873}, {"id": "etmc-1", "title": "Excellence Touch Medical", "client": "Excellence Touch Medical Services", "cat": "Brand", "blurb": "Healthcare brand identity: uniforms, stationery and environment.", "w": 1600, "h": 903}, {"id": "etmc-2", "title": "ETMC business cards", "client": "Excellence Touch Medical Services", "cat": "Brand", "blurb": "Business card system.", "w": 1600, "h": 898}, {"id": "course-1", "title": "Saving the Day", "client": "EduSpots Unlocked course", "cat": "Illustration", "blurb": "Comic-style illustration for an online communications course.", "w": 1600, "h": 943}, {"id": "ama", "title": "Ama: character sheet", "client": "Malaria awareness film", "cat": "Illustration", "blurb": "Turnaround, expressions and palette for a malaria-prevention animated short.", "w": 1600, "h": 900}, {"id": "coffee-lady", "title": "Morning coffee", "client": "Personal", "cat": "Illustration", "blurb": "Vector illustration.", "w": 1600, "h": 1423}, {"id": "headphones", "title": "Sound", "client": "Personal", "cat": "Illustration", "blurb": "Vector portrait.", "w": 1600, "h": 1565}, {"id": "on-bed", "title": "Late scroll", "client": "Personal", "cat": "Illustration", "blurb": "Vector illustration.", "w": 1600, "h": 1389}, {"id": "team-illo", "title": "Team at work", "client": "Personal", "cat": "Illustration", "blurb": "Flat spot illustrations.", "w": 1600, "h": 900}, {"id": "safety-post", "title": "Safety Post", "client": "Shi.E.L.D. Services", "cat": "Illustration", "blurb": "Monthly illustrated safety bulletin for marine crews.", "w": 1057, "h": 1600}, {"id": "safety-comic", "title": "Office safety comic", "client": "ADventure Offshore", "cat": "Illustration", "blurb": "Comic-strip safety illustration.", "w": 1131, "h": 1600}, {"id": "fifa-still", "title": "World Cup promo frames", "client": "FIFA World Cup concept", "cat": "Illustration", "blurb": "AI-directed keyframes for a football promo.", "w": 1600, "h": 900}, {"id": "kusaal-1", "title": "A family harvesting cocoa", "client": "Institute of African Studies, University of Ghana", "cat": "Illustration", "blurb": "One of 40+ illustrations for Kusaal folktales (BANGA-Africa Project).", "w": 642, "h": 401}, {"id": "kusaal-2", "title": "A boy and his mum", "client": "Institute of African Studies, University of Ghana", "cat": "Illustration", "blurb": "Kusaal folktale illustration.", "w": 616, "h": 435}, {"id": "kusaal-3", "title": "A durbar of chiefs", "client": "Institute of African Studies, University of Ghana", "cat": "Illustration", "blurb": "Kusaal folktale illustration.", "w": 641, "h": 453}, {"id": "kuukua-hero", "title": "KUUKUA dark chocolate", "client": "CapCut Design Studio × Dribbble", "cat": "Brand", "blurb": "Product-drop campaign for a single-origin Ghanaian chocolate brand: identity, packaging and hero visuals.", "w": 1600, "h": 1131}, {"id": "kuukua-mock", "title": "KUUKUA packaging", "client": "CapCut Design Studio × Dribbble", "cat": "Brand", "blurb": "3D packaging mockup for the KUUKUA product drop.", "w": 1600, "h": 1283}, {"id": "kuukua-logo", "title": "KUUKUA logo concepts", "client": "CapCut Design Studio × Dribbble", "cat": "Brand", "blurb": "Logo concept sheet and palette.", "w": 1600, "h": 971}, {"id": "kuukua-mood", "title": "KUUKUA moodboard", "client": "CapCut Design Studio × Dribbble", "cat": "Brand", "blurb": "Moodboard setting the brand's tone.", "w": 1600, "h": 395}, {"id": "leafglow-1", "title": "LeafGlow brand identity", "client": "LeafGlow", "cat": "Brand", "blurb": "Botanical skincare identity: leaf-and-sun mark, gold-on-olive palette and applications.", "w": 1600, "h": 1064}, {"id": "leafglow-2", "title": "LeafGlow applications", "client": "LeafGlow", "cat": "Brand", "blurb": "Brand applications for LeafGlow.", "w": 1600, "h": 1073}, {"id": "loose-sleeves", "title": "Loose Sleeves Near Rotating Equipment", "client": "Workplace safety series", "cat": "Illustration", "blurb": "Safety illustration warning crews about loose clothing near machinery.", "w": 1131, "h": 1600}, {"id": "leafglow-board", "title": "LeafGlow brand board", "client": "LeafGlow", "cat": "Brand", "blurb": "Full identity board: logo, palette, pattern, packaging and social ads for an eco-friendly skincare startup.", "w": 819, "h": 2400}, {"id": "leafglow-mock", "title": "LeafGlow packaging", "client": "LeafGlow", "cat": "Brand", "blurb": "Packaging mockup for LeafGlow.", "w": 1129, "h": 1600}, {"id": "safety-nov", "title": "Safety Post: Damaged Tools", "client": "Shi.E.L.D. Services", "cat": "Illustration", "blurb": "Monthly illustrated safety poster for marine and industrial crews, November 2025.", "w": 966, "h": 1600}, {"id": "wellness", "title": "The Wellness Circle", "client": "LSD-YSN Mental Health Programme", "cat": "Campaigns", "blurb": "Event flyer for a youth mental-health awareness programme.", "w": 1477, "h": 1600}], "videos": [{"id": "hundred", "title": "HundrED Global Collection 2027", "client": "EduSpots", "blurb": "Announcement film for EduSpots' selection as one of 100 global education innovations. Motion graphics, photo animation and sound design.", "dur": 49, "shown": 49, "vertical": false, "cat": "Motion"}, {"id": "futurefund", "title": "The Future Fund", "client": "EduSpots", "blurb": "Animated fundraising film for the EduSpots Future Fund.", "dur": 198, "shown": 60, "vertical": false, "cat": "Motion"}, {"id": "kss", "title": "Keeping Spots Safe", "client": "EduSpots", "blurb": "Seven-minute animated online-safety film for parents in Ghana. Excerpt.", "dur": 426, "shown": 60, "vertical": false, "cat": "Motion"}, {"id": "tenth", "title": "Ten Years of EduSpots", "client": "EduSpots", "blurb": "Illustrated anniversary film tracing a decade of community-led learning. Excerpt.", "dur": 284, "shown": 60, "vertical": false, "cat": "Motion"}, {"id": "bike", "title": "Bike2MyRoots", "client": "EduSpots", "blurb": "Animated story for a cycling fundraiser.", "dur": 41, "shown": 41, "vertical": true, "cat": "Motion"}, {"id": "kente", "title": "Kente Warrior", "client": "Creavia Studios", "blurb": "AI short film: a Kente-clad hero against a shadow king. Directed, generated and edited by Noah. Excerpt.", "dur": 154, "shown": 60, "vertical": false, "cat": "Motion"}, {"id": "aku", "title": "AKU", "client": "Creavia Studios", "blurb": "AI-generated character piece with code-built motion graphics.", "dur": 35, "shown": 35, "vertical": false, "cat": "Motion"}, {"id": "coke", "title": "Coca-Cola: The Lone Artist", "client": "Concept ad", "blurb": "Spec commercial built from AI keyframes and generated video.", "dur": 44, "shown": 44, "vertical": false, "cat": "Motion"}, {"id": "football", "title": "Football Fever", "client": "EduSpots", "blurb": "Vertical social reel for a football-themed learning campaign.", "dur": 34, "shown": 34, "vertical": true, "cat": "Motion"}, {"id": "biggive-film", "title": "Big Give appeal", "client": "EduSpots", "blurb": "Vertical fundraising appeal for the Big Give Christmas Challenge. Excerpt.", "dur": 176, "shown": 45, "vertical": true, "cat": "Motion"}, {"id": "creavia", "title": "Creavia Studios reel", "client": "Creavia Studios", "blurb": "Brand reel for Noah's motion and AI film studio.", "dur": 33, "shown": 33, "vertical": true, "cat": "Motion"}, {"id": "edu2d", "title": "Reading corner", "client": "EduSpots", "blurb": "2D animated loop for EduSpots' Edu-Animation channel.", "dur": 14, "shown": 14, "vertical": false, "cat": "Motion"}, {"id": "leafglow", "title": "LeafGlow logo animation", "client": "LeafGlow", "blurb": "Logo reveal animation for the LeafGlow identity.", "dur": 8, "shown": 8, "vertical": false, "cat": "Motion"}, {"id": "redbull", "title": "Red Bull: Wings over the city", "client": "Spec ad", "blurb": "AI-directed spec commercial: a blue-winged eagle carries a can across a coastal city.", "dur": 50, "shown": 50, "vertical": false, "cat": "Motion"}, {"id": "citypork", "title": "City Pork", "client": "Restaurant ad", "blurb": "Food commercial for an Accra pork joint, built from AI-generated scenes. Excerpt.", "dur": 85, "shown": 45, "vertical": false, "cat": "Motion"}, {"id": "apostolic", "title": "3rd Apostolic Visit", "client": "Assemblies of God, Ghana", "blurb": "Event promo with gold type, nebula backgrounds and speaker reveals. Excerpt.", "dur": 69, "shown": 45, "vertical": false, "cat": "Motion"}]};
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const CAT_COLOR = { Motion: "var(--flame)", Campaigns: "var(--gold)", Brand: "var(--leaf)", Editorial: "var(--paper)", Illustration: "#b58cff" };
+const fmt = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+
+// interleave so the wall opens with a mix of film and design
+const vids = M.videos.map(v => ({ ...v, kind: "video" }));
+const imgs = M.images.map(i => ({ ...i, kind: "image" }));
+const order = ["hundred","kuukua-hero","strategy-1","redbull","annual-cover","leafglow-board","kente","donation","vertex","futurefund","lego","ama","coke","theirworld","kuukua-mock","etmc-1","kss","cecop","safety-nov","course-1","citypork","aku","quote","leafglow-1","seko","tenth","kusaal-1","wellness","deck","bike","biggive","headphones","leafglow","football","possibility","loose-sleeves","impact-studio","fifa","apostolic","kuukua-logo","creavia","safety-post","hiring","annual-p4","leafglow-mock","biggive-film","coffee-lady","kss-flyer","thirdsector","edu2d","strategy-2","harmattan","next10","safety-comic","fifa-still","graduation","kuukua-mood","iwd","on-bed","annual-p9","strategy-5","kusaal-2","leafglow-2","report-mock","adinkra","etmc-2","team-illo","independence","kusaal-3"];
+const byId = Object.fromEntries([...vids, ...imgs].map(x => [x.id, x]));
+const ITEMS = [...order.filter(id => byId[id]).map(id => byId[id]), ...[...vids, ...imgs].filter(x => !order.includes(x.id))];
+
+// ---- wall ----
+const wall = document.getElementById("wall");
+ITEMS.forEach((it, i) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "card"; b.dataset.cat = it.cat; b.dataset.i = i;
+  b.style.setProperty("--c", CAT_COLOR[it.cat]);
+  const isV = it.kind === "video";
+  const ratio = isV ? (it.vertical ? "9 / 16" : "16 / 9") : `${it.w} / ${it.h}`;
+  b.innerHTML = `<div class="media" style="aspect-ratio:${ratio}">
+      <span class="tag"><i></i>${it.cat}${isV ? " · " + fmt(it.dur) : ""}</span>
+      <img src="assets/img/${isV ? it.id + "-poster" : it.id}.webp" alt="${it.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover">
+      ${isV ? `<video muted loop playsinline preload="none" data-src="assets/vid/${it.id}-loop.mp4"></video><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>` : ""}
+    </div>
+    <div class="meta"><h3>${it.title}</h3><span>${it.client}</span></div>`;
+  b.addEventListener("click", () => openLB(i));
+  if (isV) {
+    const v = b.querySelector("video");
+    const play = () => { if (!v.src) v.src = v.dataset.src; v.play().then(() => b.classList.add("playing")).catch(() => {}); };
+    const stop = () => { v.pause(); b.classList.remove("playing"); };
+    b.addEventListener("mouseenter", play); b.addEventListener("mouseleave", stop);
+    b.addEventListener("focus", play); b.addEventListener("blur", stop);
+    b._play = play; b._stop = stop;
+  }
+  wall.appendChild(b);
+});
+// on touch screens, play loops as they scroll into view
+if (!matchMedia("(hover: hover)").matches && !reduce) {
+  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? e.target._play?.() : e.target._stop?.()), { threshold: .6 });
+  wall.querySelectorAll(".card").forEach(c => c._play && io.observe(c));
+}
+
+// ---- filters ----
+const cats = ["All", "Motion", "Campaigns", "Brand", "Editorial", "Illustration"];
+const fwrap = document.getElementById("filters");
+let current = "All";
+try { const saved = localStorage.getItem("nd-filter"); if (cats.includes(saved)) current = saved; } catch (e) {}
+cats.forEach(c => {
+  const n = c === "All" ? ITEMS.length : ITEMS.filter(x => x.cat === c).length;
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip"; b.id = "f-" + c.toLowerCase();
+  b.innerHTML = `${c}<small>${n}</small>`;
+  b.addEventListener("click", () => setFilter(c));
+  fwrap.appendChild(b);
+});
+function setFilter(c) {
+  current = c;
+  try { localStorage.setItem("nd-filter", c); } catch (e) {}
+  fwrap.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.id === "f-" + c.toLowerCase()));
+  const cards = [...wall.children];
+  cards.forEach(el => el.classList.toggle("hide", c !== "All" && el.dataset.cat !== c));
+  if (window.gsap && !reduce) gsap.fromTo(cards.filter(el => !el.classList.contains("hide")), { y: 24 }, { y: 0, duration: .5, stagger: .025, ease: "power3.out" });
+  window.ScrollTrigger?.refresh();
+}
+setFilter(current);
+
+// ---- showreel strip ----
+const track = document.getElementById("track");
+const reel = ITEMS.filter(x => x.kind === "video");
+[...reel, ...reel].forEach((it, k) => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "frame-cell"; b.setAttribute("aria-label", "Watch " + it.title);
+  if (k >= reel.length) b.tabIndex = -1;
+  b.innerHTML = reduce
+    ? `<img src="assets/img/${it.id}-poster.webp" alt="">`
+    : `<video src="assets/vid/${it.id}-loop.mp4" poster="assets/img/${it.id}-poster.webp" muted loop playsinline autoplay preload="metadata"></video>`;
+  b.insertAdjacentHTML("beforeend", `<span class="tc">${it.title} · ${fmt(it.dur)}</span>`);
+  b.addEventListener("click", () => openLB(ITEMS.indexOf(it)));
+  track.appendChild(b);
+});
+document.getElementById("reelBtn").addEventListener("click", () => openLB(ITEMS.findIndex(x => x.id === "hundred")));
+
+// ---- Orijin case gallery ----
+const caseRow = document.getElementById("caseRow");
+const CASE = [{"id": "orijin-kv1", "cap": "Key visual: The Taste of Celebration", "w": 1600, "h": 1008}, {"id": "orijin-kv2", "cap": "Key visual: Orijin Pride", "w": 1599, "h": 1600}, {"id": "orijin-illo", "cap": "Illustrated key visual: 8 years of Ghanaian rhythm", "w": 1600, "h": 873}, {"id": "orijin-fest", "cap": "Orijin Pride Fest poster", "w": 1131, "h": 1600}, {"id": "orijin-label", "cap": "Anniversary label", "w": 1600, "h": 956}, {"id": "orijin-bill", "cap": "Billboard", "w": 1600, "h": 1600}, {"id": "orijin-bill2", "cap": "Billboard, human-centred", "w": 1600, "h": 1600}, {"id": "orijin-shelter", "cap": "Bus-shelter posters", "w": 1600, "h": 1066}, {"id": "orijin-bottle", "cap": "Anniversary bottle", "w": 1346, "h": 1600}, {"id": "orijin-tee", "cap": "Merch T-shirt", "w": 1551, "h": 1600}, {"id": "orijin-coaster", "cap": "Coasters", "w": 1600, "h": 1120}, {"id": "orijin-flags", "cap": "Event flags", "w": 1600, "h": 1067}];
+CASE.forEach((c, k) => {
+  const b = document.createElement("button"); b.type = "button";
+  b.innerHTML = `<figure style="margin:0"><img src="assets/img/${c.id}.webp" alt="Orijin campaign: ${c.cap}" loading="lazy" width="${c.w}" height="${c.h}"><figcaption>${c.cap}</figcaption></figure>`;
+  b.addEventListener("click", () => openCase(k));
+  caseRow.appendChild(b);
+});
+let inCase = false;
+function openCase(k) {
+  inCase = true; li = k; lastFocus = document.activeElement;
+  const c = CASE[k];
+  stage.innerHTML = `<img src="assets/img/${c.id}.webp" alt="Orijin campaign: ${c.cap}">`;
+  document.getElementById("lbTitle").textContent = c.cap;
+  document.getElementById("lbBlurb").textContent = "Orijin 8th-anniversary campaign concept.";
+  document.getElementById("lbMeta").textContent = `Orijin · ${k + 1} of ${CASE.length}`;
+  lb.hidden = false; document.body.style.overflow = "hidden"; document.getElementById("lbClose").focus();
+}
+
+// ---- clients marquee ----
+const clients = ["EduSpots", "ADventure Offshore", "University of Ghana · IAS", "Shi.E.L.D. Services", "Excellence Touch Medical", "Vertex Energy", "LeafGlow", "Assemblies of God Ghana", "LSD-YSN", "Carifika Inc", "ImagineArt", "OpenArt", "PixVerse", "Flick", "Pixmax.ai"];
+document.getElementById("marq").innerHTML = [...clients, ...clients].map(c => `<span>${c}</span>`).join("");
+
+// ---- rotating role word ----
+const words = ["social campaigns", "brand systems", "annual reports", "motion graphics", "AI films", "illustration"];
+let wi = 0; const swap = document.getElementById("swap");
+if (!reduce) setInterval(() => {
+  wi = (wi + 1) % words.length;
+  if (window.gsap) gsap.to(swap, { yPercent: -60, opacity: 0, duration: .25, onComplete: () => { swap.textContent = words[wi]; gsap.fromTo(swap, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .35, ease: "back.out(2)" }); } });
+  else swap.textContent = words[wi];
+}, 2600);
+
+// ---- lightbox ----
+const lb = document.getElementById("lb"), stage = document.getElementById("lbStage");
+let li = 0, lastFocus = null;
+function visibleIdx() { return ITEMS.map((x, i) => i).filter(i => current === "All" || ITEMS[i].cat === current || ITEMS[i].kind === "video" && current === "Motion"); }
+function openLB(i) {
+  inCase = false; li = i; lastFocus = document.activeElement;
+  const it = ITEMS[i];
+  stage.innerHTML = it.kind === "video"
+    ? `<video src="assets/vid/${it.id}.mp4" poster="assets/img/${it.id}-poster.webp" controls autoplay playsinline></video>`
+    : `<img src="assets/img/${it.id}.webp" alt="${it.title}">`;
+  document.getElementById("lbTitle").textContent = it.title;
+  document.getElementById("lbBlurb").textContent = it.blurb;
+  document.getElementById("lbMeta").textContent = it.client + " · " + it.cat + (it.kind === "video" ? " · " + fmt(it.shown) + (it.shown < it.dur ? " of " + fmt(it.dur) : "") : "");
+  lb.hidden = false; document.body.style.overflow = "hidden";
+  document.getElementById("lbClose").focus();
+  if (window.gsap && !reduce) gsap.fromTo(stage.firstElementChild, { scale: .94, opacity: 0 }, { scale: 1, opacity: 1, duration: .45, ease: "power3.out" });
+}
+function closeLB() { stage.innerHTML = ""; lb.hidden = true; document.body.style.overflow = ""; lastFocus?.focus(); }
+function step(d) { if (inCase) return openCase((li + d + CASE.length) % CASE.length); const v = visibleIdx(); const p = v.indexOf(li); openLB(v[(p + d + v.length) % v.length] ?? 0); }
+document.getElementById("lbClose").onclick = closeLB;
+document.getElementById("lbPrev").onclick = () => step(-1);
+document.getElementById("lbNext").onclick = () => step(1);
+lb.addEventListener("click", e => { if (e.target === lb || e.target === stage) closeLB(); });
+addEventListener("keydown", e => { if (lb.hidden) return; if (e.key === "Escape") closeLB(); if (e.key === "ArrowRight") step(1); if (e.key === "ArrowLeft") step(-1); });
+
+// ---- copy email ----
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  const t = document.getElementById("email").textContent, btn = document.getElementById("copyBtn");
+  try { await navigator.clipboard.writeText(t); btn.textContent = "Copied"; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents(document.getElementById("email")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected, press Ctrl+C"; }
+  setTimeout(() => btn.textContent = "Copy email", 2200);
+});
+
+// ---- cursor ----
+const cur = document.querySelector(".cursor");
+if (matchMedia("(pointer: fine)").matches && !reduce) {
+  addEventListener("mousemove", e => { cur.style.left = e.clientX + "px"; cur.style.top = e.clientY + "px"; });
+  document.querySelectorAll("a, button").forEach(el => { el.addEventListener("mouseenter", () => cur.classList.add("big")); el.addEventListener("mouseleave", () => cur.classList.remove("big")); });
+}
+
+// ---- motion (GSAP). Everything is visible without it; these only move things in. ----
+if (window.gsap && !reduce) {
+  gsap.registerPlugin(ScrollTrigger);
+  const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+  tl.from(".hero h1 .line > span", { yPercent: 105, duration: 1.1, stagger: .12 })
+    .from(".portrait .frame", { rotate: 12, scale: .85, duration: 1.2, ease: "elastic.out(1, .6)" }, .1)
+    .from(".portrait .weave", { scaleX: 0, transformOrigin: "left", duration: .8 }, .5)
+    .from(".sticker", { scale: 0, duration: .6, stagger: .12, ease: "back.out(3)" }, .7);
+  // portrait tilt toward pointer
+  const pf = document.querySelector(".portrait");
+  if (matchMedia("(pointer: fine)").matches) pf.addEventListener("mousemove", e => {
+    const r = pf.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    gsap.to(".portrait .frame", { rotateY: x * 14, rotateX: -y * 14, rotate: 2.5, transformPerspective: 800, duration: .5 });
+  });
+  pf.addEventListener("mouseleave", () => gsap.to(".portrait .frame", { rotateY: 0, rotateX: 0, duration: .6 }));
+  // stats count up
+  document.querySelectorAll("[data-count]").forEach(el => {
+    const n = +el.dataset.count, suf = el.textContent.replace(/\d+/, ""), o = { v: 0 };
+    ScrollTrigger.create({ trigger: el, start: "top 90%", once: true, onEnter: () => gsap.to(o, { v: n, duration: 1.4, ease: "power2.out", onUpdate: () => el.textContent = Math.round(o.v) + suf }) });
+  });
+  // section headings slide up
+  gsap.utils.toArray(".sec-head h2, .about h2, .contact h2").forEach(h => gsap.from(h, { y: 60, duration: 1, ease: "power3.out", scrollTrigger: { trigger: h, start: "top 92%" } }));
+  ScrollTrigger.batch(".card", { start: "top 95%", once: true, onEnter: els => gsap.from(els, { y: 50, rotate: () => gsap.utils.random(-2, 2), duration: .8, stagger: .06, ease: "power3.out" }) });
+  gsap.from(".about-photo img", { scale: 1.2, ease: "none", scrollTrigger: { trigger: ".about-photo", start: "top bottom", end: "bottom top", scrub: true } });
+  // pin the Orijin gallery and scroll it sideways on wide screens
+  ScrollTrigger.matchMedia({ "(min-width: 900px)": () => {
+    const sec = document.querySelector(".case"), row = document.getElementById("caseRow");
+    sec.classList.add("pin");
+    const dist = () => Math.max(0, row.scrollWidth - innerWidth + 64);
+    const t = gsap.to(row, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: sec, start: () => sec.offsetHeight > innerHeight ? "bottom bottom" : "top top", end: () => "+=" + dist(), pin: true, scrub: .6, invalidateOnRefresh: true } });
+    return () => { sec.classList.remove("pin"); t.scrollTrigger?.kill(); t.kill(); gsap.set(row, { x: 0 }); };
+  } });
+  addEventListener("load", () => ScrollTrigger.refresh());
+  gsap.to(".contact h2 .o", { rotate: 360, repeat: -1, duration: 6, ease: "none", transformOrigin: "50% 55%", display: "inline-block" });
+}
+</script>
+
+</body>
+</html>
