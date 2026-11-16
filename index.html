@@ -8,364 +8,453 @@
 <meta name="description" content="Noah Demuyakor: graphic designer, motion designer and AI filmmaker in Accra, Ghana.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Figtree:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: a film-studio portfolio. Woven kente bands divide the sections, a sprocketed showreel strip runs under the hero, and the work sits in a filterable masonry wall. */
+/* Layout: a product-launch style portfolio. Charcoal stage, apple-green accent, a film that grows to full screen, a 3D film reel, project sheets that open over the page, and real flipbooks for the reports. */
 :root {
-  --ink: #15112a;        /* page ground: deep indigo night */
-  --ink-2: #1f1940;      /* raised surface */
-  --ink-3: #2c2558;      /* lines, chips */
-  --paper: #f5f1ff;      /* main text */
-  --muted: #b3abd6;      /* secondary text */
-  --gold: #f6b80c;       /* kente gold, primary accent */
-  --flame: #ff5b24;      /* signal orange, from the hero portrait */
-  --leaf: #2fcf8b;       /* kente green, used sparingly */
-  --display: "Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
-  --body: "Figtree", "Segoe UI", system-ui, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
-  --gut-l: max(16px, env(safe-area-inset-left, 0px));
-  --gut-r: max(16px, env(safe-area-inset-right, 0px));
-  --wrap: 1240px;
+  --bg: #1d1d1f;          /* charcoal stage */
+  --bg-2: #262628;        /* raised surface */
+  --bg-3: #333336;        /* lines and chips */
+  --text: #f5f5f7;
+  --muted: #a1a1a6;
+  --dim: #48484c;         /* unlit words in the scroll statement */
+  --green: #8db600;       /* apple green */
+  --green-hi: #a4d10f;
+  --paper: #f5f5f7;       /* light section ground */
+  --ink: #1d1d1f;
+  /* Creavia brand type is SF Pro; Apple devices render it natively, everyone else gets Inter */
+  --display: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter Tight", "Segoe UI", system-ui, sans-serif;
+  --body: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --gut-l: max(20px, env(safe-area-inset-left, 0px));
+  --gut-r: max(20px, env(safe-area-inset-right, 0px));
+  --wrap: 1200px;
+  --ease: cubic-bezier(.22, .8, .2, 1);
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
-html { scroll-behavior: smooth; }
-body { margin: 0; }
-body { background: var(--ink); color: var(--paper); font-family: var(--body); font-size: 17px; line-height: 1.55; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--ink); }
+html { overflow-x: clip; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--body); font-size: 17px; line-height: 1.5; letter-spacing: -.011em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg); }
 a { color: inherit; }
 img, video { display: block; max-width: 100%; }
-::selection { background: var(--gold); color: var(--ink); }
-:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+::selection { background: var(--green); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 6px; }
 .wrap { max-width: var(--wrap); margin: 0 auto; padding-left: var(--gut-l); padding-right: var(--gut-r); }
-.mono { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
-h1, h2, h3 { font-family: var(--display); font-weight: 800; letter-spacing: -.02em; line-height: .95; margin: 0; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.035em; line-height: 1.02; margin: 0; text-wrap: balance; }
+.eyebrow { font-family: var(--display); font-weight: 600; font-size: 19px; color: var(--green); letter-spacing: -.01em; display: block; margin-bottom: 10px; }
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.green { color: var(--green); }
+.reveal .w { display: inline-block; }
 
-/* ---------- nav ---------- */
-.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: color-mix(in srgb, var(--ink) 82%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--ink-3); }
-.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 14px; }
-.logo { font-family: var(--display); font-weight: 800; font-size: 20px; text-decoration: none; display: flex; align-items: center; gap: 10px; }
-.logo i { width: 22px; height: 22px; border-radius: 50%; background: conic-gradient(var(--gold) 0 25%, var(--flame) 0 50%, var(--leaf) 0 75%, var(--paper) 0); animation: spin 8s linear infinite; }
-@keyframes spin { to { transform: rotate(1turn); } }
-.nav ul { list-style: none; display: flex; gap: 6px; margin: 0; padding: 0; flex-wrap: wrap; justify-content: flex-end; }
-.nav ul a { text-decoration: none; font-size: 15px; font-weight: 500; padding: 6px 12px; border-radius: 99px; color: var(--muted); transition: color .2s, background .2s; }
-.nav ul a:hover { color: var(--paper); background: var(--ink-2); }
-.nav ul a.cta { background: var(--gold); color: var(--ink); font-weight: 600; }
-.nav ul a.cta:hover { background: var(--paper); }
-.logo { white-space: nowrap; }
-@media (max-width: 640px) { .nav ul li:not(.keep) { display: none; } .logo { font-size: 17px; } .nav ul a { padding: 6px 10px; } }
+/* pills and links, Apple style */
+.pill { display: inline-flex; align-items: center; gap: 8px; font: 500 17px var(--body); padding: 12px 22px; border-radius: 980px; border: 0; cursor: pointer; text-decoration: none; transition: background .25s, color .25s, transform .25s; will-change: transform; }
+.pill.solid { background: var(--green); color: #101010; }
+.pill.solid:hover { background: var(--green-hi); }
+.pill.ghost { background: transparent; color: var(--green); box-shadow: inset 0 0 0 1.5px var(--green); }
+.pill.ghost:hover { background: var(--green); color: #101010; }
+.more { color: var(--green); text-decoration: none; font-size: 19px; display: inline-flex; gap: 4px; align-items: center; background: none; border: 0; cursor: pointer; font-family: var(--body); padding: 0; }
+.more:hover { text-decoration: underline; }
+.more::after { content: "›"; font-size: 1.15em; transition: transform .25s; }
+.more:hover::after { transform: translateX(3px); }
 
-/* ---------- hero ---------- */
-.hero { padding-block: clamp(40px, 7vw, 96px) 40px; position: relative; }
-.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(24px, 4vw, 64px); align-items: center; }
-@media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; } }
-.avail { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); margin-bottom: 22px; }
-.avail b { width: 9px; height: 9px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 0 var(--leaf); animation: ping 2s infinite; }
-@keyframes ping { 70% { box-shadow: 0 0 0 10px transparent; } 100% { box-shadow: 0 0 0 0 transparent; } }
-.hero h1 { font-size: clamp(56px, 10.5vw, 150px); }
-.hero h1 .line { display: block; overflow: hidden; padding-bottom: .06em; }
-.hero h1 .line > span { display: inline-block; }
-.hero h1 .accent { color: var(--gold); }
-.roles { margin-top: 26px; font-family: var(--display); font-size: clamp(22px, 2.6vw, 32px); font-weight: 600; color: var(--muted); display: flex; flex-wrap: wrap; gap: 0 .35em; align-items: baseline; }
-.roles .swap { color: var(--paper); position: relative; display: inline-block; min-width: 9ch; }
-.roles .swap::after { content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 4px; background: var(--flame); border-radius: 2px; transform-origin: left; animation: under 2.6s ease-in-out infinite; }
-@keyframes under { 0%, 100% { transform: scaleX(0); } 20%, 80% { transform: scaleX(1); } }
-.lede { max-width: 56ch; margin: 22px 0 30px; color: var(--muted); font-size: 18px; }
-.lede strong { color: var(--paper); font-weight: 600; }
-.btns { display: flex; flex-wrap: wrap; gap: 12px; }
-.btn { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 600; padding: 14px 22px; border-radius: 99px; border: 1.5px solid var(--ink-3); transition: transform .25s, background .25s, color .25s, border-color .25s; cursor: pointer; font: inherit; font-weight: 600; color: var(--paper); background: transparent; }
-.btn.primary { background: var(--flame); border-color: var(--flame); color: #fff; }
-.btn:hover { transform: translateY(-2px); border-color: var(--gold); }
-.btn.primary:hover { background: var(--gold); border-color: var(--gold); color: var(--ink); }
-.btn svg { width: 18px; height: 18px; }
+/* loader */
+.loader { position: fixed; inset: 0; z-index: 300; background: var(--bg); display: grid; place-items: center; }
+.loader-mark { display: grid; justify-items: center; gap: 18px; }
+.loader-mark b { font-family: var(--display); font-size: 28px; font-weight: 700; letter-spacing: -.03em; }
+.loader-bar { width: 180px; height: 3px; border-radius: 3px; background: var(--bg-3); overflow: hidden; }
+.loader-bar i { display: block; height: 100%; width: 0; background: var(--green); }
 
-.portrait { position: relative; justify-self: center; width: min(100%, 420px); aspect-ratio: 4/5; }
-.portrait .frame { position: absolute; inset: 0; border-radius: 28px; overflow: hidden; background: var(--flame); transform: rotate(2.5deg); box-shadow: 0 30px 80px -20px rgb(0 0 0 / .6); }
-.portrait .frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
-.portrait .weave { position: absolute; inset: -14px 26px auto -14px; height: 28px; border-radius: 6px; transform: rotate(-4deg); z-index: 2; }
-.sticker { position: absolute; z-index: 3; font-family: var(--mono); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; padding: 8px 12px; border-radius: 99px; background: var(--paper); color: var(--ink); font-weight: 500; white-space: nowrap; box-shadow: 0 10px 30px -8px rgb(0 0 0 / .5); }
-.sticker.s1 { left: -18px; bottom: 18%; transform: rotate(-6deg); }
-.sticker.s2 { right: -12px; top: 14%; background: var(--gold); transform: rotate(5deg); }
-@media (max-width: 480px) { .sticker.s1 { left: 0; } .sticker.s2 { right: 0; } }
+/* nav: glass bar */
+.nav { position: fixed; top: env(safe-area-inset-top, 0px); left: 0; right: 0; z-index: 50; background: rgb(29 29 31 / .72); backdrop-filter: saturate(180%) blur(20px); -webkit-backdrop-filter: saturate(180%) blur(20px); border-bottom: 1px solid rgb(255 255 255 / .06); }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 52px; }
+.logo { font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: -.03em; text-decoration: none; display: flex; align-items: center; gap: 9px; white-space: nowrap; }
+.logo i { width: 18px; height: 18px; border-radius: 6px; background: var(--green); position: relative; }
+.logo i::after { content: ""; position: absolute; inset: 5px; border-radius: 50%; background: var(--bg); }
+.nav ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; align-items: center; }
+.nav ul a { text-decoration: none; font-size: 13px; padding: 6px 12px; color: rgb(245 245 247 / .8); transition: color .2s; }
+.nav ul a:hover { color: var(--text); }
+.nav .pill { font-size: 13px; padding: 6px 14px; }
+.motion-btn { font: 500 12px var(--body); color: var(--muted); background: transparent; border: 1px solid var(--bg-3); border-radius: 980px; padding: 5px 10px; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.motion-btn b { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+html.calm .motion-btn b { background: var(--muted); }
+@media (max-width: 720px) { .nav ul li.opt { display: none; } }
 
-/* kente weave: woven stripes used as a recurring band */
-.weave { background:
-  repeating-linear-gradient(90deg, var(--gold) 0 22px, var(--ink) 22px 26px, var(--leaf) 26px 34px, var(--ink) 34px 38px, var(--flame) 38px 52px, var(--ink) 52px 56px, var(--paper) 56px 60px, var(--ink) 60px 64px);
-  background-size: 128px 100%; animation: weave 6s linear infinite; }
-@keyframes weave { to { background-position: 128px 0; } }
-.band { height: 14px; margin-block: 0; }
+/* hero */
+.hero { padding-block: calc(52px + clamp(56px, 9vw, 110px)) 0; text-align: center; }
+.hero .who { font-family: var(--display); font-size: clamp(19px, 2vw, 24px); font-weight: 600; color: var(--muted); letter-spacing: -.02em; }
+.hero h1 { font-size: clamp(52px, 9.4vw, 128px); font-weight: 800; letter-spacing: -.05em; margin-top: 8px; }
+.hero h1 .green { background: linear-gradient(90deg, var(--green), #c7ef3d 50%, var(--green)); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: sheen 6s linear infinite; }
+@keyframes sheen { to { background-position: -200% 0; } }
+.hero .sub { font-size: clamp(19px, 2.2vw, 26px); color: var(--muted); max-width: 40ch; margin: 18px auto 0; letter-spacing: -.02em; line-height: 1.35; }
+.hero .sub b { color: var(--text); font-weight: 600; }
+.hero .ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
 
-/* ---------- showreel film strip ---------- */
-.strip { background: #0b0918; padding-block: 18px; overflow: hidden; position: relative; border-block: 1px solid var(--ink-3); }
-.strip::before, .strip::after { content: ""; position: absolute; left: 0; right: 0; height: 10px; background: repeating-linear-gradient(90deg, transparent 0 14px, #2d2650 14px 26px); }
-.strip::before { top: 4px; } .strip::after { bottom: 4px; }
-.track { display: flex; gap: 14px; width: max-content; animation: roll 70s linear infinite; padding-block: 8px; }
-.strip:hover .track { animation-play-state: paused; }
-@keyframes roll { to { transform: translateX(-50%); } }
-.frame-cell { position: relative; height: clamp(150px, 20vw, 230px); border-radius: 8px; overflow: hidden; background: var(--ink-2); flex: none; cursor: pointer; border: 0; padding: 0; color: inherit; }
-.frame-cell video, .frame-cell img { height: 100%; width: auto; object-fit: cover; }
-.frame-cell .tc { position: absolute; left: 8px; bottom: 8px; font-family: var(--mono); font-size: 11px; background: rgb(0 0 0 / .65); padding: 3px 7px; border-radius: 4px; color: var(--paper); }
+/* showcase: film grows to full bleed on scroll */
+.showcase { height: 210vh; position: relative; margin-top: -9vh; }
+.showcase .stick { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; overflow: hidden; }
+.film { position: relative; width: 78vw; max-width: 100%; aspect-ratio: 16 / 9; max-height: 86vh; border-radius: 28px; overflow: hidden; background: #000; box-shadow: 0 50px 120px -40px rgb(141 182 0 / .25); will-change: width, border-radius; }
+.film video { width: 100%; height: 100%; object-fit: cover; }
+.film .cap { position: absolute; left: 0; right: 0; bottom: 0; padding: 60px clamp(18px, 3vw, 36px) clamp(18px, 3vw, 30px); background: linear-gradient(transparent, rgb(0 0 0 / .78)); display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; text-align: left; }
+.film .cap h2 { font-size: clamp(24px, 3.4vw, 44px); }
+.film .cap p { margin: 6px 0 0; color: #d2d2d7; font-size: 15px; }
+.playbtn { width: 64px; height: 64px; border-radius: 50%; background: rgb(245 245 247 / .18); backdrop-filter: blur(14px); border: 0; display: grid; place-items: center; cursor: pointer; transition: transform .3s var(--ease), background .3s; flex: none; }
+.playbtn:hover { transform: scale(1.08); background: var(--green); }
+.playbtn svg { width: 22px; height: 22px; fill: #fff; margin-left: 4px; }
+@media (max-width: 760px) { .showcase { height: auto; margin-top: 40px; } .showcase .stick { position: static; height: auto; padding-inline: var(--gut-l) var(--gut-r); } .film { width: 100%; border-radius: 18px; } }
 
-/* ---------- sections ---------- */
-section { padding-block: clamp(64px, 9vw, 120px); }
-.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
-.sec-head h2 { font-size: clamp(44px, 7vw, 96px); }
-.sec-head h2 em { font-style: normal; color: var(--gold); }
-.sec-head p { max-width: 44ch; color: var(--muted); margin: 0; }
-.eyebrow { color: var(--flame); margin-bottom: 14px; display: block; }
+/* statement: words light up as you scroll */
+.statement { padding-block: clamp(90px, 14vw, 180px); }
+.statement p { font-family: var(--display); font-weight: 700; font-size: clamp(34px, 5.6vw, 76px); line-height: 1.08; letter-spacing: -.04em; margin: 0; max-width: 18ch; }
+.statement .w { color: var(--dim); transition: color .2s; }
+.statement .w.on { color: var(--text); }
+.statement .w.g.on { color: var(--green); }
+html.calm .statement .w { color: var(--text); }
 
-/* stats */
-.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--ink-3); }
-.stat { padding: 28px 20px; border-left: 1px solid var(--ink-3); }
-.stat:first-child { border-left: 0; padding-left: 0; }
-.stat b { display: block; font-family: var(--display); font-size: clamp(40px, 5vw, 64px); font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
-.stat span { color: var(--muted); font-size: 15px; }
-@media (max-width: 760px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } .stat:nth-child(3) { border-left: 0; padding-left: 0; } .stat:nth-child(n+3) { border-top: 1px solid var(--ink-3); } }
+/* film reel (three.js) */
+.reel { padding-block: clamp(70px, 10vw, 120px) 0; text-align: center; }
+.reel h2 { font-size: clamp(40px, 6.4vw, 84px); }
+.reel p.lead { color: var(--muted); font-size: clamp(18px, 2vw, 22px); margin: 14px auto 0; max-width: 46ch; }
+.stage3d { position: relative; height: clamp(440px, 70vh, 720px); margin-top: 20px; }
+#gl { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: grab; touch-action: pan-y; }
+#gl.drag { cursor: grabbing; }
+.gl-fallback { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; padding-top: 30px; }
+.gl-fallback button { border: 0; padding: 0; background: none; cursor: pointer; border-radius: 14px; overflow: hidden; }
+.gl-fallback img { width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.gl-label { position: fixed; z-index: 90; pointer-events: none; left: 0; top: 0; background: var(--text); color: var(--ink); font: 600 14px var(--body); padding: 7px 13px; border-radius: 980px; transform: translate(16px, 16px); white-space: nowrap; }
+.reel .hint { color: var(--muted); font-size: 14px; }
 
-/* featured case study: horizontal gallery */
-.case { background: #0d3b2a; color: var(--paper); padding-block: clamp(56px, 8vw, 100px); overflow: hidden; }
-.case .wrap { display: grid; gap: 18px; }
-.case .eyebrow { color: var(--gold); }
-.case h2 { font-size: clamp(44px, 7.5vw, 110px); }
-.case h2 em { font-style: normal; color: var(--gold); }
-.case .intro { display: flex; flex-wrap: wrap; gap: 24px 48px; justify-content: space-between; align-items: end; }
-.case .intro p { max-width: 54ch; color: #cfe6da; margin: 0; }
-.case .deliv { display: flex; flex-wrap: wrap; gap: 8px; }
-.case .deliv span { border: 1px solid #2f6b52; border-radius: 99px; padding: 5px 12px; font-size: 14px; color: #cfe6da; }
-.hscroll { margin-top: 34px; overflow-x: auto; scrollbar-width: thin; padding-left: var(--gut-l); padding-right: var(--gut-r); -webkit-overflow-scrolling: touch; }
-.hrow { display: flex; gap: 18px; width: max-content; padding-bottom: 14px; align-items: flex-end; }
+/* intro */
+section.pad { padding-block: clamp(90px, 12vw, 160px); position: relative; }
+.intro .wrap { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: clamp(32px, 6vw, 96px); align-items: center; }
+@media (max-width: 860px) { .intro .wrap { grid-template-columns: 1fr; } }
+.portrait { position: relative; width: min(100%, 440px); aspect-ratio: 4/5; justify-self: center; }
+.portrait .frame { position: absolute; inset: 0; border-radius: 32px; overflow: hidden; background: #ff5b24; cursor: pointer; transform-style: preserve-3d; will-change: transform; box-shadow: 0 40px 90px -35px var(--glow, rgb(255 91 36 / .55)); transition: box-shadow .6s; }
+.portrait .frame .shot { position: absolute; inset: 0; width: 100%; height: 116%; object-fit: cover; object-position: 50% 20%; clip-path: circle(0% at var(--cx, 50%) var(--cy, 50%)); }
+.portrait .frame .shot.on { clip-path: circle(150% at var(--cx, 50%) var(--cy, 50%)); }
+.portrait .halo { position: absolute; inset: -12%; border-radius: 50%; background: radial-gradient(circle, var(--glow, rgb(141 182 0 / .3)), transparent 62%); filter: blur(14px); z-index: -1; transition: background .6s; animation: breathe 5s ease-in-out infinite; }
+@keyframes breathe { 50% { transform: scale(1.08); opacity: .8; } }
+.portrait .swatches { position: absolute; left: 50%; bottom: -46px; transform: translateX(-50%); display: flex; gap: 10px; z-index: 3; }
+.portrait .swatches button { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--bg); box-shadow: 0 0 0 1.5px var(--bg-3); cursor: pointer; padding: 0; transition: transform .3s var(--ease), box-shadow .3s; }
+.portrait .swatches button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--text); transform: scale(1.15); }
+.chipf { position: absolute; z-index: 2; background: rgb(38 38 40 / .82); backdrop-filter: blur(16px); border: 1px solid rgb(255 255 255 / .08); border-radius: 16px; padding: 10px 14px; font-size: 13px; color: var(--muted); display: grid; gap: 2px; }
+.chipf b { color: var(--text); font: 600 15px var(--body); }
+.chipf.c1 { left: -18px; bottom: 14%; } .chipf.c2 { right: -16px; top: 10%; }
+@media (max-width: 480px) { .chipf.c1 { left: 6px; } .chipf.c2 { right: 6px; } }
+.intro h2 { font-size: clamp(40px, 5.6vw, 72px); }
+.intro p { color: var(--muted); font-size: 19px; max-width: 54ch; margin: 22px 0 0; }
+.intro p b { color: var(--text); font-weight: 600; }
+.stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 36px; }
+.stat b { display: block; font-family: var(--display); font-size: clamp(36px, 4vw, 56px); font-weight: 700; letter-spacing: -.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+.stat span { color: var(--muted); font-size: 14px; }
+@media (max-width: 560px) { .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* Orijin case: pinned horizontal gallery */
+.case { background: linear-gradient(180deg, #1d1d1f, #1a2008 30%, #1a2008 70%, #1d1d1f); padding-block: clamp(70px, 9vw, 110px); overflow: hidden; }
+.case .wrap { display: grid; gap: 16px; }
+.case h2 { font-size: clamp(42px, 7vw, 100px); }
+.case .row { display: flex; flex-wrap: wrap; gap: 20px 48px; justify-content: space-between; align-items: end; }
+.case .row p { max-width: 52ch; color: var(--muted); margin: 0; font-size: 18px; }
+.hscroll { margin-top: 34px; overflow-x: auto; padding-left: var(--gut-l); padding-right: var(--gut-r); scrollbar-width: thin; }
+.case.pin .hscroll { overflow: visible; }
+.hrow { display: flex; gap: 20px; width: max-content; padding-bottom: 14px; align-items: flex-end; }
 .hrow button { border: 0; padding: 0; background: none; color: inherit; cursor: pointer; text-align: left; font: inherit; flex: none; }
-.hrow img { height: clamp(240px, 42vh, 460px); width: auto; border-radius: 14px; background: #134a35; transition: transform .5s cubic-bezier(.2,.7,.2,1); }
-.hrow button:hover img { transform: translateY(-8px) rotate(-1deg); }
-.hrow figcaption { margin-top: 10px; font-size: 14px; color: #cfe6da; }
-.case-hint { color: #8fc2aa; }
-@media (min-width: 900px) and (prefers-reduced-motion: no-preference) { .case.pin .hscroll { overflow: visible; } }
+.hrow figure { margin: 0; }
+.hrow .pic { overflow: hidden; border-radius: 20px; }
+.hrow img { height: clamp(220px, 42vh, 460px); width: auto; transition: transform .7s var(--ease); }
+.hrow button:hover img { transform: scale(1.04); }
+.hrow figcaption { margin-top: 12px; font-size: 14px; color: var(--muted); }
 
-/* filters */
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-.chip { font: 500 15px var(--body); color: var(--muted); background: transparent; border: 1.5px solid var(--ink-3); padding: 8px 16px; border-radius: 99px; cursor: pointer; transition: all .2s; display: inline-flex; gap: 8px; align-items: center; }
-.chip small { font-family: var(--mono); font-size: 11px; opacity: .7; }
-.chip:hover { color: var(--paper); border-color: var(--muted); }
-.chip[aria-pressed="true"] { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+/* projects grid */
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 34px; }
+.sec-head h2 { font-size: clamp(44px, 7vw, 96px); }
+.sec-head p { max-width: 42ch; color: var(--muted); margin: 0; font-size: 18px; }
+.filters { display: inline-flex; flex-wrap: wrap; gap: 4px; margin-bottom: 30px; background: var(--bg-2); padding: 4px; border-radius: 980px; }
+.chip { font: 500 14px var(--body); color: var(--muted); background: transparent; border: 0; padding: 8px 16px; border-radius: 980px; cursor: pointer; transition: background .25s, color .25s; }
+.chip:hover { color: var(--text); }
+.chip[aria-pressed="true"] { background: var(--text); color: var(--ink); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); gap: 22px; }
+.proj { border: 0; padding: 0; text-align: left; color: inherit; font: inherit; background: var(--bg-2); border-radius: 28px; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: transform .5s var(--ease), box-shadow .5s var(--ease); }
+.proj:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 30px 70px -30px rgb(0 0 0 / .9), 0 0 0 1px rgb(141 182 0 / .35); }
+.proj .cover { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: #111; }
+.proj .cover img, .proj .cover video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease), opacity .4s; }
+.proj .cover video { opacity: 0; }
+.proj.playing .cover video { opacity: 1; }
+.proj:hover .cover img { transform: scale(1.06); }
+.proj .stack { position: absolute; right: 14px; bottom: 14px; display: flex; }
+.proj .stack i { width: 40px; height: 40px; border-radius: 10px; border: 2px solid var(--bg-2); background-size: cover; background-position: center; margin-left: -14px; box-shadow: 0 6px 16px rgb(0 0 0 / .4); transition: transform .4s var(--ease); }
+.proj:hover .stack i:nth-child(1) { transform: translateX(-10px) rotate(-6deg); }
+.proj:hover .stack i:nth-child(3) { transform: translateX(6px) rotate(6deg); }
+.proj .badge { position: absolute; left: 14px; top: 14px; background: rgb(29 29 31 / .7); backdrop-filter: blur(10px); border-radius: 980px; padding: 5px 11px; font-size: 12px; font-weight: 500; }
+.proj .meta { padding: 20px 22px 24px; display: grid; gap: 4px; }
+.proj .meta h3 { font-size: 26px; letter-spacing: -.03em; }
+.proj .meta span { color: var(--muted); font-size: 15px; }
+.proj .meta .more { font-size: 15px; margin-top: 8px; }
+.proj.hide { display: none; }
 
-/* masonry wall */
-.wall { columns: 3 320px; column-gap: 18px; }
-.card { break-inside: avoid; margin: 0 0 18px; position: relative; border-radius: 16px; overflow: hidden; background: var(--ink-2); cursor: pointer; display: block; width: 100%; border: 0; padding: 0; text-align: left; color: inherit; font: inherit; transform: translateZ(0); }
-.card .media { position: relative; overflow: hidden; }
-.card img, .card video { width: 100%; height: auto; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
-.card video { position: absolute; inset: 0; height: 100%; object-fit: cover; opacity: 0; transition: opacity .35s; }
-.card.playing video { opacity: 1; }
-.card:hover img { transform: scale(1.04); }
-.card .meta { padding: 14px 16px 16px; display: grid; gap: 4px; }
-.card .meta h3 { font-size: 21px; line-height: 1.1; letter-spacing: -.01em; font-weight: 600; }
-.card .meta span { color: var(--muted); font-size: 14px; }
-.card .tag { position: absolute; top: 12px; left: 12px; z-index: 2; background: rgb(21 17 42 / .78); backdrop-filter: blur(6px); color: var(--paper); padding: 5px 10px; border-radius: 99px; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; text-transform: uppercase; display: flex; gap: 6px; align-items: center; }
-.card .tag i { width: 7px; height: 7px; border-radius: 50%; background: var(--c, var(--gold)); }
-.card .play { position: absolute; right: 12px; bottom: 12px; z-index: 2; width: 46px; height: 46px; border-radius: 50%; background: var(--flame); display: grid; place-items: center; transition: transform .3s; }
-.card:hover .play { transform: scale(1.12) rotate(-8deg); }
-.card .play svg { width: 18px; height: 18px; fill: #fff; margin-left: 3px; }
-.card.hide { display: none; }
+/* project sheet */
+.sheet { position: fixed; inset: 0; z-index: 95; background: rgb(0 0 0 / .55); backdrop-filter: blur(6px); }
+.sheet-panel { position: absolute; inset: max(12px, env(safe-area-inset-top, 0px)) 0 0 0; background: var(--bg); border-radius: 26px 26px 0 0; overflow-y: auto; overscroll-behavior: contain; }
+.sheet-head { position: sticky; top: 0; z-index: 2; background: rgb(29 29 31 / .86); backdrop-filter: blur(18px); border-bottom: 1px solid var(--bg-3); }
+.sheet-head .wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 14px; }
+.sheet-head b { font-family: var(--display); font-size: 18px; }
+.sheet-body { padding-block: 40px 80px; }
+.sheet-body h2 { font-size: clamp(40px, 6vw, 80px); }
+.sheet-body .lead { color: var(--muted); font-size: 20px; max-width: 60ch; margin: 16px 0 0; }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 34px; margin: 26px 0 34px; padding-block: 18px; border-block: 1px solid var(--bg-3); }
+.facts div { display: grid; gap: 2px; }
+.facts small { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+.facts span { font-weight: 500; }
+.masonry { columns: 3 300px; column-gap: 16px; }
+.masonry button { break-inside: avoid; display: block; width: 100%; margin: 0 0 16px; border: 0; padding: 0; background: var(--bg-2); border-radius: 18px; overflow: hidden; cursor: zoom-in; position: relative; }
+.masonry img { width: 100%; height: auto; transition: transform .7s var(--ease); }
+.masonry button:hover img { transform: scale(1.03); }
+.masonry .vbadge { position: absolute; inset: auto auto 12px 12px; background: var(--green); color: #111; border-radius: 980px; padding: 5px 12px; font-size: 13px; font-weight: 600; }
+.ib { width: 44px; height: 44px; border-radius: 50%; border: 0; background: var(--bg-3); color: var(--text); display: grid; place-items: center; cursor: pointer; transition: background .2s; flex: none; }
+.ib:hover { background: #4a4a4e; }
+.ib svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
 
-/* archive */
-.archive { margin-top: 44px; border-top: 1px solid var(--ink-3); padding-top: 26px; }
-.archive h3 { font-size: 26px; margin-bottom: 6px; }
-.archive p { color: var(--muted); margin: 0 0 16px; }
-.arch-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 28px; list-style: none; padding: 0; margin: 0; }
-.arch-list a { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px dashed var(--ink-3); text-decoration: none; transition: color .2s, padding .2s; }
-.arch-list a:hover { color: var(--gold); padding-left: 6px; }
-.arch-list .mono { color: var(--muted); }
+/* books: light section */
+.books { background: var(--paper); color: var(--ink); }
+.books .sec-head p { color: #6e6e73; }
+.shelf { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 46px 34px; padding-top: 10px; }
+.book { border: 0; padding: 0; background: none; cursor: pointer; text-align: left; color: inherit; font: inherit; perspective: 1400px; }
+.book .b3d { position: relative; width: 78%; margin: 0 auto 26px; aspect-ratio: var(--ar, 3/4); transform-style: preserve-3d; transform: rotateY(-24deg) rotateX(4deg); transition: transform .8s var(--ease); }
+.book:hover .b3d { transform: rotateY(-8deg) rotateX(0) translateY(-8px); }
+.book .front { position: absolute; inset: 0; border-radius: 3px 8px 8px 3px; overflow: hidden; box-shadow: 0 30px 50px -20px rgb(0 0 0 / .45); backface-visibility: hidden; }
+.book .front img { width: 100%; height: 100%; object-fit: cover; }
+.book .front::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(0 0 0 / .25), transparent 6%, rgb(255 255 255 / .12) 9%, transparent 14%); }
+.book .pages { position: absolute; top: 2%; bottom: 2%; right: 0; width: 26px; transform: rotateY(90deg) translateZ(calc(78% - 0px)); transform-origin: right; background: repeating-linear-gradient(90deg, #fff 0 2px, #e8e8ed 2px 3px); }
+.book .spine { position: absolute; top: 0; bottom: 0; left: 0; width: 26px; transform-origin: left; transform: rotateY(-90deg); background: #2a2a2d; }
+.book h3 { font-size: 24px; letter-spacing: -.03em; }
+.book span { color: #6e6e73; font-size: 15px; }
+.book .more { font-size: 15px; margin-top: 6px; color: #4f7300; }
 
-/* clients marquee */
-.clients { padding-block: 34px; border-block: 1px solid var(--ink-3); overflow: hidden; }
-.clients .mono { color: var(--muted); display: block; margin-bottom: 14px; }
-.marq { display: flex; gap: 48px; width: max-content; animation: roll 45s linear infinite; font-family: var(--display); font-weight: 600; font-size: clamp(24px, 3vw, 38px); white-space: nowrap; }
-.marq span { display: inline-flex; align-items: center; gap: 48px; }
-.marq span::after { content: "✦"; color: var(--gold); font-size: .6em; }
+/* flipbook modal */
+.fb { position: fixed; inset: 0; z-index: 110; background: rgb(14 14 16 / .96); display: grid; grid-template-rows: auto minmax(0, 1fr) auto; padding: max(14px, env(safe-area-inset-top, 0px)) var(--gut-r) max(14px, env(safe-area-inset-bottom, 0px)) var(--gut-l); }
+.fb-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.fb-top b { font-family: var(--display); font-size: 20px; }
+.fb-top span { color: var(--muted); font-size: 14px; display: block; }
+.fb-stage { display: grid; place-items: center; min-height: 0; padding-block: 16px; }
+#flip { margin: 0 auto; }
+.fb-bot { display: flex; justify-content: center; align-items: center; gap: 14px; color: var(--muted); font-size: 14px; }
+.fb .page { background: #fff; }
+.fb .page img { width: 100%; height: 100%; object-fit: contain; background: #fff; }
+
+/* marquee */
+.clients { padding-block: 38px; border-block: 1px solid var(--bg-3); overflow: hidden; }
+.clients .label { color: var(--muted); font-size: 14px; display: block; margin-bottom: 14px; }
+.marq { display: flex; width: max-content; font-family: var(--display); font-weight: 600; font-size: clamp(26px, 3.4vw, 42px); letter-spacing: -.03em; white-space: nowrap; will-change: transform; color: #6e6e73; }
+.marq span { display: inline-flex; align-items: center; gap: 40px; padding-right: 40px; }
+.marq span::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green); }
 
 /* about */
 .about .wrap { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(28px, 5vw, 80px); align-items: start; }
 @media (max-width: 860px) { .about .wrap { grid-template-columns: 1fr; } }
-.about-photo { position: relative; border-radius: 24px; overflow: hidden; aspect-ratio: 1; max-width: 520px; }
-.about-photo img { width: 100%; height: 100%; object-fit: cover; }
-.about-photo .weave { position: absolute; left: 0; right: 0; bottom: 0; height: 12px; }
-.about h2 { font-size: clamp(40px, 5.5vw, 72px); margin-bottom: 24px; }
-.about p { color: var(--muted); max-width: 62ch; }
-.about p strong { color: var(--paper); font-weight: 600; }
-.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 34px; }
+.about-photo { border-radius: 28px; overflow: hidden; aspect-ratio: 1; max-width: 520px; }
+.about-photo img { width: 100%; height: 118%; object-fit: cover; }
+.about h2 { font-size: clamp(40px, 5.4vw, 70px); margin-bottom: 22px; }
+.about p { color: var(--muted); max-width: 60ch; font-size: 18px; }
+.about p b { color: var(--text); font-weight: 600; }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; margin-top: 30px; }
 @media (max-width: 560px) { .cols { grid-template-columns: 1fr; } }
-.cols h3 { font-size: 15px; font-family: var(--mono); font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-.pills { display: flex; flex-wrap: wrap; gap: 8px; }
-.pills span { border: 1px solid var(--ink-3); border-radius: 99px; padding: 5px 12px; font-size: 14px; }
-.timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
-.timeline li { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 12px; font-size: 15px; }
-.timeline .mono { color: var(--muted); padding-top: 3px; font-size: 11px; }
+.cols h3 { font-size: 13px; font-family: var(--body); font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { background: var(--bg-2); border-radius: 980px; padding: 6px 13px; font-size: 14px; transition: background .2s, color .2s; }
+.tags span:hover { background: var(--green); color: #111; }
+.timeline { list-style: none; padding: 0; margin: 0; display: grid; gap: 16px; }
+.timeline li { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 12px; font-size: 15px; }
+.timeline small { color: var(--muted); padding-top: 2px; }
 .timeline b { font-weight: 600; display: block; }
 .timeline span { color: var(--muted); }
 
 /* contact */
-.contact { background: var(--gold); color: var(--ink); }
-.contact .wrap { display: grid; gap: 28px; }
-.contact h2 { font-size: clamp(52px, 10vw, 150px); }
-.contact h2 .o { color: var(--flame); }
-.contact p { max-width: 52ch; font-size: 19px; margin: 0; }
-.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
-.mail code { font-family: var(--display); font-weight: 600; font-size: clamp(22px, 3.4vw, 40px); background: var(--ink); color: var(--paper); padding: 10px 20px; border-radius: 14px; user-select: all; overflow-wrap: anywhere; }
-.contact .btn { color: var(--ink); border-color: var(--ink); }
-.contact .btn:hover { background: var(--ink); color: var(--paper); }
-.contact .links { display: flex; flex-wrap: wrap; gap: 12px; }
-footer { padding-block: 26px; color: var(--muted); font-size: 14px; }
+.contact { text-align: center; padding-block: clamp(110px, 14vw, 200px); background: radial-gradient(60% 70% at 50% 100%, rgb(141 182 0 / .22), transparent 70%); }
+.contact h2 { font-size: clamp(52px, 10vw, 140px); font-weight: 800; letter-spacing: -.05em; }
+.contact p { color: var(--muted); font-size: 21px; max-width: 44ch; margin: 18px auto 30px; }
+.mail { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 12px; }
+.mail code { font-family: var(--display); font-weight: 600; font-size: clamp(22px, 3.2vw, 36px); letter-spacing: -.02em; background: var(--bg-2); padding: 12px 22px; border-radius: 18px; user-select: all; overflow-wrap: anywhere; }
+.socials { display: flex; justify-content: center; gap: 14px; margin-top: 34px; }
+.socials a { width: 54px; height: 54px; border-radius: 50%; background: var(--bg-2); display: grid; place-items: center; transition: background .3s, transform .4s var(--ease); }
+.socials a:hover { background: var(--green); transform: translateY(-4px) rotate(-6deg); }
+.socials svg { width: 22px; height: 22px; fill: var(--text); transition: fill .3s; }
+.socials a:hover svg { fill: #111; }
+.contact .links { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; margin-top: 30px; }
+footer { padding-block: 22px; color: #6e6e73; font-size: 12px; border-top: 1px solid var(--bg-3); }
 footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
 /* lightbox */
-.lb { position: fixed; inset: 0; z-index: 100; background: rgb(8 6 20 / .94); backdrop-filter: blur(8px); display: grid; grid-template-rows: minmax(0, 1fr) auto; padding: max(16px, env(safe-area-inset-top, 0px)) var(--gut-r) max(16px, env(safe-area-inset-bottom, 0px)) var(--gut-l); }
-.lb-stage { display: grid; place-items: center; min-height: 0; position: relative; }
-.lb-stage img, .lb-stage video { max-width: 100%; max-height: 100%; border-radius: 10px; object-fit: contain; background: #000; }
-.lb-info { display: flex; gap: 20px; justify-content: space-between; align-items: end; flex-wrap: wrap; max-width: 1100px; margin: 16px auto 0; width: 100%; }
-.lb-info h3 { font-size: clamp(24px, 3vw, 36px); }
-.lb-info p { color: var(--muted); margin: 6px 0 0; max-width: 64ch; }
-.lb-info .mono { color: var(--gold); }
+.lb { position: fixed; inset: 0; z-index: 120; background: rgb(10 10 12 / .96); display: grid; grid-template-rows: minmax(0, 1fr) auto; padding: max(16px, env(safe-area-inset-top, 0px)) var(--gut-r) max(16px, env(safe-area-inset-bottom, 0px)) var(--gut-l); }
+.lb-stage { display: grid; place-items: center; min-height: 0; }
+.lb-stage img, .lb-stage video { max-width: 100%; max-height: 100%; border-radius: 14px; object-fit: contain; background: #000; }
+.lb-info { display: flex; gap: 20px; justify-content: space-between; align-items: center; flex-wrap: wrap; max-width: 1100px; margin: 16px auto 0; width: 100%; }
+.lb-info h3 { font-size: clamp(20px, 2.4vw, 28px); }
+.lb-info p { color: var(--muted); margin: 4px 0 0; font-size: 15px; }
 .lb-ctrl { display: flex; gap: 8px; }
-.ib { width: 48px; height: 48px; border-radius: 50%; border: 1.5px solid var(--ink-3); background: var(--ink-2); color: var(--paper); display: grid; place-items: center; cursor: pointer; transition: background .2s, border-color .2s; }
-.ib:hover { border-color: var(--gold); background: var(--ink-3); }
-.ib svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
-/* custom cursor (fine pointers only) */
-.cursor { position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none; width: 14px; height: 14px; border-radius: 50%; background: var(--gold); mix-blend-mode: difference; transform: translate(-50%, -50%); transition: width .25s, height .25s; display: none; }
-.cursor.big { width: 64px; height: 64px; }
-@media (pointer: fine) { .cursor { display: block; } }
+/* cursor */
+.cursor { position: fixed; left: 0; top: 0; z-index: 200; pointer-events: none; width: 10px; height: 10px; border-radius: 50%; background: var(--green); transform: translate(-50%, -50%); display: none; }
+.cursor-ring { position: fixed; left: 0; top: 0; z-index: 199; pointer-events: none; width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid rgb(245 245 247 / .35); display: none; place-items: center; font: 600 12px var(--body); color: #111; transition: width .35s var(--ease), height .35s var(--ease), background .3s, border-color .3s; }
+.cursor-ring.big { width: 84px; height: 84px; background: var(--green); border-color: var(--green); }
+@media (pointer: fine) { .cursor { display: block; } .cursor-ring { display: grid; } }
 
-.toast { position: fixed; left: 50%; bottom: max(24px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--paper); color: var(--ink); padding: 10px 18px; border-radius: 99px; font-weight: 600; z-index: 120; }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; scroll-behavior: auto !important; }
-  .track, .marq { animation: none !important; }
-  .cursor { display: none !important; }
-}
+html.calm *, html.calm *::before, html.calm *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; }
+html.calm .cursor, html.calm .cursor-ring, html.calm .loader { display: none !important; }
 </style>
 </head>
 <body>
 
 
-<div class="cursor" aria-hidden="true"></div>
+<div class="loader" id="loader" aria-hidden="true"><div class="loader-mark"><b>Noah Demuyakor</b><div class="loader-bar"><i id="loadBar"></i></div></div></div>
+<div class="cursor" aria-hidden="true"></div><div class="cursor-ring" aria-hidden="true"></div>
+<div class="gl-label" id="glLabel" hidden></div>
 
 <nav class="nav" aria-label="Main">
   <div class="wrap">
     <a class="logo" href="#top"><i aria-hidden="true"></i>Noah Demuyakor</a>
     <ul>
-      <li class="keep"><a href="#work">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li class="keep"><a class="cta" href="#contact">Hire me</a></li>
+      <li class="opt"><a href="#reel">Films</a></li>
+      <li><a href="#work">Work</a></li>
+      <li class="opt"><a href="#books">Books</a></li>
+      <li class="opt"><a href="#about">About</a></li>
+      <li><button class="motion-btn" type="button" id="motionBtn"><b aria-hidden="true"></b><span>Motion on</span></button></li>
+      <li><a class="pill solid magnetic" href="#contact">Hire me</a></li>
     </ul>
   </div>
 </nav>
 
 <header class="hero" id="top">
   <div class="wrap">
-    <div>
-      <span class="avail mono"><b aria-hidden="true"></b>Accra, Ghana · Open to remote roles</span>
-      <h1 aria-label="Design that moves people.">
-        <span class="line"><span>Design that</span></span>
-        <span class="line"><span>moves <span class="accent">people.</span></span></span>
-      </h1>
-      <div class="roles" aria-live="polite">Graphic designer for <span class="swap" id="swap">social campaigns</span></div>
-      <p class="lede">I'm <strong>Noah Demuyakor</strong>, Creative Manager at <strong>EduSpots</strong> and director of <strong>Creavia Studios</strong>. For 10+ years I've designed campaigns, reports, brands and animated films, and I now build them with AI tools as a creative partner to ImagineArt, OpenArt, PixVerse, Flick and Pixmax.</p>
-      <div class="btns">
-        <a class="btn primary" href="#work">See the work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-        <button class="btn" type="button" id="reelBtn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>Play the reel</button>
-      </div>
-    </div>
-    <div class="portrait">
-      <div class="weave" aria-hidden="true"></div>
-      <div class="frame"><img src="assets/img/me-hero.webp" alt="Noah Demuyakor in an orange shirt, calling out with both hands" fetchpriority="high"></div>
-      <span class="sticker s1">Brand · Motion · AI film</span>
-      <span class="sticker s2">10+ yrs</span>
-    </div>
+    <div class="who reveal">Noah Demuyakor</div>
+    <h1 class="reveal">Design that moves <span class="green">people.</span></h1>
+    <p class="sub reveal">Graphic designer, motion designer and AI filmmaker. <b>Brands, campaigns, films and books</b> made in Accra for the world.</p>
+    <div class="ctas"><a class="pill solid magnetic" href="#work">See the work</a><button class="pill ghost magnetic" type="button" id="heroPlay">Watch the film</button></div>
   </div>
 </header>
 
-<div class="strip" aria-label="Showreel strip: click a frame to watch">
-  <div class="track" id="track"></div>
+<div class="showcase" id="showcase">
+  <div class="stick">
+    <div class="film" id="film">
+      <video id="heroVid" src="assets/vid/hero.mp4" poster="assets/img/hero-poster.webp" muted loop playsinline autoplay preload="auto"></video>
+      <div class="cap">
+        <div><span class="eyebrow">Now showing</span><h2>Realm Strider: Echoes of Nyame</h2><p>AI short film · Seedance, Luma, GPT Image, Nano Banana</p></div>
+        <button class="playbtn" type="button" id="filmPlay" aria-label="Play Realm Strider with sound" data-label="Play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+      </div>
+    </div>
+  </div>
 </div>
+
+<section class="statement" aria-label="What I do">
+  <div class="wrap"><p id="statement">I design <span class="g">brands</span>, launch <span class="g">campaigns</span>, direct <span class="g">films</span> and lay out <span class="g">books</span> that people remember.</p></div>
+</section>
+
+<section class="reel" id="reel">
+  <div class="wrap">
+    <span class="eyebrow">The film reel</span>
+    <h2 class="reveal" id="reelTitle">Every film. One spin.</h2>
+    <p class="lead">Drag the ring to spin it. Hover a film to preview, click to watch with sound.</p>
+  </div>
+  <div class="stage3d"><canvas id="gl" aria-label="3D ring of Noah's films"></canvas><div class="wrap gl-fallback" id="glFallback" hidden></div></div>
+</section>
+
+<section class="pad intro" id="intro">
+  <div class="wrap">
+    <div class="portrait" data-speed="-0.06">
+      <div class="halo" aria-hidden="true"></div>
+      <div class="frame" id="meFrame" data-label="Hover">
+        <img class="shot on" src="assets/img/me-hero.webp" alt="Noah Demuyakor calling out with both hands" id="introImg">
+        <img class="shot" src="assets/img/me-purple.webp" alt="" aria-hidden="true">
+        <img class="shot" src="assets/img/me-charcoal.webp" alt="" aria-hidden="true">
+      </div>
+      <div class="swatches" role="group" aria-label="Portrait colour">
+        <button type="button" style="background:#ff5b24" aria-label="Orange" aria-pressed="true"></button>
+        <button type="button" style="background:#8e3fd0" aria-label="Purple" aria-pressed="false"></button>
+        <button type="button" style="background:#9a9a9e" aria-label="Charcoal" aria-pressed="false"></button>
+      </div>
+      <div class="chipf c1" data-speed="0.12"><b>10+ years</b>designing</div>
+      <div class="chipf c2" data-speed="-0.14"><b>Open to remote</b>UK &amp; US hours</div>
+    </div>
+    <div>
+      <span class="eyebrow">Hello</span>
+      <h2 class="reveal">I'm Noah. I make brands loud and ideas clear.</h2>
+      <p>I'm Creative Manager at <b>EduSpots</b> and director of <b>Creavia Studios</b>, where I build identities, campaigns and AI films for brands. I'm also a creative partner to <b>ImagineArt, OpenArt, PixVerse, Flick and Pixmax</b>.</p>
+      <div class="stats">
+        <div class="stat"><b data-count="10" data-suf="+">10+</b><span>years designing</span></div>
+        <div class="stat"><b id="projCount" data-count="20" data-suf="">20</b><span>projects here</span></div>
+        <div class="stat"><b id="filmCount" data-count="10" data-suf="">10</b><span>films</span></div>
+        <div class="stat"><b data-count="5" data-suf="">5</b><span>AI partners</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="case" id="orijin" aria-labelledby="caseTitle">
   <div class="wrap">
-    <span class="eyebrow mono">Featured campaign · Concept</span>
-    <div class="intro">
-      <h2 id="caseTitle">Orijin at 8: <em>the taste of celebration.</em></h2>
-      <p>A 360° anniversary campaign for a Ghanaian drink brand. Two key visuals, one product-led and one people-led, roll out across a limited-edition label, billboards, bus shelters, a music-festival poster, social posts and merch. The illustrated key visual ties the brand to highlife, football and street culture.</p>
+    <span class="eyebrow">Featured campaign · Concept</span>
+    <div class="row">
+      <h2 id="caseTitle" class="reveal">Orijin at 8. The taste of celebration.</h2>
+      <p>A 360° anniversary campaign for a Ghanaian drink brand: two key visuals, a limited-edition label, billboards, bus shelters, a festival poster, social and merch.</p>
     </div>
-    <div class="deliv"><span>Campaign concept</span><span>Key visuals</span><span>Label design</span><span>Out-of-home</span><span>Event poster</span><span>Social</span><span>Merch</span></div>
-    <span class="case-hint mono">Scroll or swipe the gallery · tap to enlarge</span>
   </div>
   <div class="hscroll"><div class="hrow" id="caseRow"></div></div>
 </section>
 
-<section id="work">
+<section class="pad" id="work">
   <div class="wrap">
-    <div class="stats" aria-label="At a glance">
-      <div class="stat"><b data-count="10">10+</b><span>years designing</span></div>
-      <div class="stat"><b data-count="40">40+</b><span>folktales illustrated</span></div>
-      <div class="stat"><b data-count="5">5</b><span>AI platform partnerships</span></div>
-      <div class="stat"><b>Top 100</b><span>HundrED 2027, campaign I designed</span></div>
+    <div class="sec-head">
+      <div><span class="eyebrow">Selected work</span><h2 class="reveal">Projects.</h2></div>
+      <p>Every card is a full project. Open one to see all its designs, assets and films.</p>
     </div>
+    <div class="filters" role="group" aria-label="Filter projects" id="filters"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
 
-    <div class="sec-head" style="margin-top:72px">
-      <div><span class="eyebrow mono">Selected work · 2022–2026</span><h2>The <em>work.</em></h2></div>
-      <p>Social campaigns, reports, identities, illustration and film for NGOs, brands and my own studio. Tap any piece to open it.</p>
+<section class="pad books" id="books">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow" style="color:#4f7300">Editorial</span><h2 class="reveal">Open the books.</h2></div>
+      <p>Reports and collections I designed and laid out. Click a cover and turn the pages.</p>
     </div>
-    <div class="filters" role="group" aria-label="Filter work" id="filters"></div>
-    <div class="wall" id="wall"></div>
-
-    <div class="archive">
-      <h3>Animation archive</h3>
-      <p>Earlier motion work, hosted on Vimeo. Links open in a new tab.</p>
-      <ul class="arch-list">
-        <li><a href="https://vimeo.com/848382868" target="_blank" rel="noopener">Echoes of Ghana · Animation At Work 2023 <span class="mono">2:19</span></a></li>
-        <li><a href="https://vimeo.com/901174255" target="_blank" rel="noopener">ADventure Offshore explainer <span class="mono">1:42</span></a></li>
-        <li><a href="https://vimeo.com/877038597" target="_blank" rel="noopener">Phone Shopping <span class="mono">0:30</span></a></li>
-        <li><a href="https://vimeo.com/901176400" target="_blank" rel="noopener">Acrobat DC promo <span class="mono">0:46</span></a></li>
-        <li><a href="https://vimeo.com/871908695" target="_blank" rel="noopener">Scapeboard animation <span class="mono">0:23</span></a></li>
-        <li><a href="https://vimeo.com/901180142" target="_blank" rel="noopener">Walk cycle study <span class="mono">0:33</span></a></li>
-        <li><a href="https://vimeo.com/901178716" target="_blank" rel="noopener">Dog and man <span class="mono">0:30</span></a></li>
-        <li><a href="https://vimeo.com/901182990" target="_blank" rel="noopener">Tell us a story <span class="mono">0:13</span></a></li>
-      </ul>
-    </div>
+    <div class="shelf" id="shelf"></div>
   </div>
 </section>
 
 <div class="clients">
-  <div class="wrap"><span class="mono">Clients, employers &amp; partners</span></div>
+  <div class="wrap"><span class="label">Clients, employers and partners</span></div>
   <div class="marq" aria-hidden="true" id="marq"></div>
-  <p class="wrap" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">EduSpots, ADventure Offshore, Institute of African Studies at the University of Ghana, Shi.E.L.D. Services, Excellence Touch Medical Services, Vertex Energy &amp; Technologies, Carifika Inc, ImagineArt, OpenArt, PixVerse, Flick, Pixmax.ai.</p>
+  <p class="sr">EduSpots, ADventure Offshore, Institute of African Studies at the University of Ghana, Shi.E.L.D. Services, Excellence Touch Medical Services, Vertex Energy &amp; Technologies, LeafGlow, Assemblies of God Ghana, LSD-YSN, GenHQ, ImagineArt, OpenArt, PixVerse, Flick, Pixmax.ai.</p>
 </div>
 
-<div class="weave band" aria-hidden="true"></div>
-
-<section class="about" id="about">
+<section class="pad about" id="about">
   <div class="wrap">
-    <div class="about-photo"><img src="assets/img/me-about.webp" alt="Portrait of Noah Demuyakor in glasses and a denim jacket" loading="lazy"><div class="weave" aria-hidden="true"></div></div>
+    <div class="about-photo"><img src="assets/img/me-about.webp" alt="Portrait of Noah Demuyakor in glasses and a denim jacket" loading="lazy" id="aboutImg"></div>
     <div>
-      <span class="eyebrow mono">About</span>
-      <h2>Clear ideas, made visible.</h2>
-      <p>I studied <strong>Graphic Design at the University of Education, Winneba</strong>, and I've spent the decade since turning complex programmes into things people stop and look at: donor campaigns, 50-page annual reports, brand systems, safety comics for ship crews, and animated films for parents and learners.</p>
-      <p>At <strong>EduSpots</strong> I lead the visual identity of an education charity working across Ghana and Kenya. Through <strong>Creavia Studios</strong> I direct AI films such as <strong>Accra Hustle: No Bush Left</strong> and teach teams to make content with generative tools. I work remotely, I'm used to UK and US hours, and I hit deadlines.</p>
+      <span class="eyebrow">About</span>
+      <h2 class="reveal">Clear ideas, made visible.</h2>
+      <p>I studied <b>Graphic Design at the University of Education, Winneba</b>. Since then I've turned complex briefs into work people stop for: product launches, identity systems, out-of-home campaigns, safety comics for ship crews, annual reports and AI films.</p>
+      <p>I work remotely, I'm used to UK and US hours, and I hit deadlines.</p>
       <div class="cols">
         <div>
           <h3>What I do</h3>
-          <div class="pills"><span>Social &amp; ad design</span><span>Brand identity</span><span>Campaigns</span><span>Reports &amp; decks</span><span>Illustration</span><span>Motion graphics</span><span>2D animation</span><span>AI film</span><span>Video editing</span></div>
+          <div class="tags"><span>Brand identity</span><span>Packaging</span><span>Campaigns</span><span>Social &amp; ads</span><span>Editorial</span><span>Illustration</span><span>Motion graphics</span><span>AI film</span><span>Video editing</span></div>
           <h3 style="margin-top:24px">Tools</h3>
-          <div class="pills"><span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>After Effects</span><span>Premiere Pro</span><span>Character Animator</span><span>Canva</span><span>CapCut</span><span>Google Flow</span><span>Midjourney</span><span>Runway</span><span>Kling</span><span>ElevenLabs</span></div>
+          <div class="tags"><span>Photoshop</span><span>Illustrator</span><span>InDesign</span><span>After Effects</span><span>Premiere Pro</span><span>Canva</span><span>CapCut</span><span>Google Flow</span><span>Seedance</span><span>Midjourney</span><span>Runway</span><span>Kling</span><span>ElevenLabs</span></div>
         </div>
         <div>
           <h3>Experience</h3>
           <ul class="timeline">
-            <li><span class="mono">2025 – now</span><div><b>Creative Manager, EduSpots</b><span>Graphic Designer from 2024</span></div></li>
-            <li><span class="mono">2026 – now</span><div><b>Creative partner</b><span>ImagineArt, OpenArt, PixVerse, Flick, Pixmax.ai</span></div></li>
-            <li><span class="mono">2022 – 2025</span><div><b>Senior Graphic Designer / IT Lead</b><span>ADventure Offshore Ltd</span></div></li>
-            <li><span class="mono">2022</span><div><b>Freelance Illustrator</b><span>Institute of African Studies, University of Ghana</span></div></li>
-            <li><span class="mono">2020 – now</span><div><b>Freelance Graphic &amp; Motion Designer</b><span>Fiverr</span></div></li>
-            <li><span class="mono">2017 – now</span><div><b>Creative Director</b><span>Creavia Studios</span></div></li>
+            <li><small>2025 – now</small><div><b>Creative Manager, EduSpots</b><span>Graphic Designer from 2024</span></div></li>
+            <li><small>2026 – now</small><div><b>Creative partner</b><span>ImagineArt, OpenArt, PixVerse, Flick, Pixmax.ai</span></div></li>
+            <li><small>2022 – 2025</small><div><b>Senior Graphic Designer / IT Lead</b><span>ADventure Offshore Ltd</span></div></li>
+            <li><small>2022</small><div><b>Freelance Illustrator</b><span>Institute of African Studies, University of Ghana</span></div></li>
+            <li><small>2020 – now</small><div><b>Freelance Graphic &amp; Motion Designer</b><span>Fiverr</span></div></li>
+            <li><small>2017 – now</small><div><b>Creative Director</b><span>Creavia Studios</span></div></li>
           </ul>
         </div>
       </div>
@@ -375,25 +464,49 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
 <section class="contact" id="contact">
   <div class="wrap">
-    <span class="mono">Contact</span>
-    <h2>Let's make<br>something g<span class="o">o</span>od.</h2>
-    <p>Hiring a designer who can take a campaign from brief to post, deck and video? Send me a note about the role or project.</p>
-    <div class="mail"><code id="email">greatnoah52@gmail.com</code><button class="btn" type="button" id="copyBtn">Copy email</button></div>
+    <h2 class="reveal">Let's make something <span class="green">good.</span></h2>
+    <p>Hiring a designer who can take a campaign from brief to post, deck and film? Send me a note.</p>
+    <div class="mail"><code id="email">greatnoah52@gmail.com</code><button class="pill solid magnetic" type="button" id="copyBtn">Copy email</button></div>
+    <div class="socials" aria-label="Socials">
+      <a href="https://www.linkedin.com/in/noah-demuyakor/" target="_blank" rel="noopener" aria-label="LinkedIn" data-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11.2 21 14.5V21h-4v-5.8c0-1.4-.03-3.2-1.95-3.2-1.95 0-2.25 1.52-2.25 3.1V21H9z"/></svg></a>
+      <a href="https://dribbble.com/noah-nkra-demuyakor" target="_blank" rel="noopener" aria-label="Dribbble" data-label="Dribbble"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.6 4.6a8.4 8.4 0 0 1 1.8 5.1c-.3-.06-2.9-.6-5.6-.25-.2-.5-.4-.95-.65-1.45 2.95-1.2 4.3-2.95 4.45-3.4zM12 3.6c2.1 0 4.05.8 5.5 2.1-.12.2-1.33 1.8-4.18 2.87A41 41 0 0 0 10.4 3.8 8.5 8.5 0 0 1 12 3.6zm-3.3.75a49 49 0 0 1 2.94 4.6 31 31 0 0 1-7.9 1.04 8.45 8.45 0 0 1 4.96-5.64zM3.6 12v-.26c.34.01 4.6.07 8.9-1.23.25.5.5 1 .72 1.5-.12.03-.23.07-.34.1-4.5 1.45-6.88 5.42-7.08 5.75A8.4 8.4 0 0 1 3.6 12zM12 20.4a8.4 8.4 0 0 1-5.2-1.8c.15-.32 1.94-3.75 6.88-5.47l.06-.02a35 35 0 0 1 1.8 6.4 8.3 8.3 0 0 1-3.54.89zm5.18-1.6a36 36 0 0 0-1.63-6c2.5-.4 4.7.26 4.97.35a8.42 8.42 0 0 1-3.34 5.65z"/></svg></a>
+      <a href="https://twitter.com/GreatNoah5" target="_blank" rel="noopener" aria-label="X (Twitter)" data-label="X"><svg viewBox="0 0 24 24"><path d="M17.75 3h3.07l-6.7 7.66L22 21h-6.18l-4.84-6.33L5.44 21H2.37l7.17-8.2L2 3h6.34l4.37 5.78zm-1.08 16.2h1.7L7.4 4.73H5.58z"/></svg></a>
+      <a href="https://www.facebook.com/demuyakor.noah/" target="_blank" rel="noopener" aria-label="Facebook" data-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.87.25-1.46 1.5-1.46h1.55V4.47A21 21 0 0 0 14.3 4.3c-2.2 0-3.7 1.34-3.7 3.8v2.4H8.1v3h2.5V21z"/></svg></a>
+    </div>
     <div class="links">
-      <a class="btn" href="https://www.linkedin.com/in/noah-demuyakor/" target="_blank" rel="noopener">LinkedIn ↗</a>
-      <a class="btn" href="https://greatnoah52.github.io/Portfolio/index.html" target="_blank" rel="noopener">Previous portfolio ↗</a>
+      <a class="more" href="https://www.linkedin.com/in/noah-demuyakor/recent-activity/all/" target="_blank" rel="noopener">Film posts on LinkedIn</a>
+      <a class="more" href="https://greatnoah52.github.io/Portfolio/index.html" target="_blank" rel="noopener">Previous portfolio</a>
     </div>
   </div>
 </section>
-<footer><div class="wrap"><span>© 2026 Noah Demuyakor · Accra, Ghana</span><span class="mono">Designed &amp; animated in code</span></div></footer>
+<footer><div class="wrap"><span>© 2026 Noah Demuyakor. Accra, Ghana.</span><span><a href="https://www.linkedin.com/in/noah-demuyakor/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://dribbble.com/noah-nkra-demuyakor" target="_blank" rel="noopener">Dribbble</a> · <a href="https://twitter.com/GreatNoah5" target="_blank" rel="noopener">X</a> · <a href="https://www.facebook.com/demuyakor.noah/" target="_blank" rel="noopener">Facebook</a></span></div></footer>
+
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="shTitle">
+  <div class="sheet-panel" id="sheetPanel" data-lenis-prevent>
+    <div class="sheet-head"><div class="wrap"><b id="shHead"></b><button class="ib" type="button" id="shClose" aria-label="Close project"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div></div>
+    <div class="sheet-body"><div class="wrap">
+      <span class="eyebrow" id="shCat"></span>
+      <h2 id="shTitle"></h2>
+      <p class="lead" id="shBlurb"></p>
+      <div class="facts" id="shFacts"></div>
+      <div class="masonry" id="shItems"></div>
+    </div></div>
+  </div>
+</div>
+
+<div class="fb" id="fb" hidden role="dialog" aria-modal="true" aria-labelledby="fbTitle">
+  <div class="fb-top"><div><b id="fbTitle"></b><span id="fbSub"></span></div><button class="ib" type="button" id="fbClose" aria-label="Close book"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="fb-stage" id="fbStage"></div>
+  <div class="fb-bot"><button class="ib" type="button" id="fbPrev" aria-label="Previous page"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button><span id="fbPage"></span><button class="ib" type="button" id="fbNext" aria-label="Next page"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button></div>
+</div>
 
 <div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-labelledby="lbTitle">
   <div class="lb-stage" id="lbStage"></div>
   <div class="lb-info">
-    <div><span class="mono" id="lbMeta"></span><h3 id="lbTitle"></h3><p id="lbBlurb"></p></div>
+    <div><h3 id="lbTitle"></h3><p id="lbMeta"></p></div>
     <div class="lb-ctrl">
-      <button class="ib" type="button" id="lbPrev" aria-label="Previous piece"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <button class="ib" type="button" id="lbNext" aria-label="Next piece"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+      <button class="ib" type="button" id="lbPrev" aria-label="Previous"><svg viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button class="ib" type="button" id="lbNext" aria-label="Next"><svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
       <button class="ib" type="button" id="lbClose" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     </div>
   </div>
@@ -401,198 +514,400 @@ footer .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wr
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
 <script>
-const M = {"images": [{"id": "strategy-1", "title": "2026–27 Strategy carousel", "client": "EduSpots", "cat": "Campaigns", "blurb": "Seven-slide Instagram carousel turning a five-year strategy into swipeable social posts.", "w": 1600, "h": 1600}, {"id": "strategy-2", "title": "The Sustain Phase", "client": "EduSpots", "cat": "Campaigns", "blurb": "Carousel slide from the 2026–27 strategy series.", "w": 1600, "h": 1600}, {"id": "strategy-5", "title": "Strengthening EdTech Innovation", "client": "EduSpots", "cat": "Campaigns", "blurb": "Carousel slide from the 2026–27 strategy series.", "w": 1600, "h": 1600}, {"id": "donation", "title": "Together, We Can Ignite", "client": "EduSpots", "cat": "Campaigns", "blurb": "Donation appeal flyer with clear giving tiers and payment details.", "w": 1143, "h": 1600}, {"id": "quote", "title": "World Teachers' Day quotes", "client": "EduSpots · EduChamps Talks", "cat": "Campaigns", "blurb": "Quote card series for World Teachers' Day.", "w": 1600, "h": 1600}, {"id": "possibility", "title": "Join the Possibility Circle", "client": "EduSpots", "cat": "Campaigns", "blurb": "Monthly-giving campaign carousel.", "w": 1600, "h": 1600}, {"id": "lego", "title": "Shape the Future of Education", "client": "EduSpots × LEGO", "cat": "Campaigns", "blurb": "Recruitment flyer for an IB CAS and Duke of Edinburgh's Award volunteer challenge.", "w": 1467, "h": 1600}, {"id": "hiring", "title": "We're Hiring", "client": "EduSpots", "cat": "Campaigns", "blurb": "Recruitment ad for an MEL Manager role.", "w": 1559, "h": 1600}, {"id": "theirworld", "title": "Theirworld Award winner", "client": "EduSpots", "cat": "Campaigns", "blurb": "Announcement graphic for the 2025 Theirworld Education Innovation Award.", "w": 1393, "h": 1600}, {"id": "thirdsector", "title": "Small Charity Big Achiever", "client": "EduSpots", "cat": "Campaigns", "blurb": "Winner announcement for the Third Sector Awards.", "w": 1200, "h": 1446}, {"id": "fifa", "title": "FIFA Global Citizen Education Fund", "client": "EduSpots", "cat": "Campaigns", "blurb": "Selection announcement for the FIFA Global Citizen Education Fund.", "w": 1200, "h": 1446}, {"id": "biggive", "title": "Big Give Christmas Challenge", "client": "EduSpots", "cat": "Campaigns", "blurb": "Match-funding campaign graphics: donations doubled for one week.", "w": 1477, "h": 1600}, {"id": "kss-flyer", "title": "Keeping Children Safe launch", "client": "EduSpots", "cat": "Campaigns", "blurb": "Launch poster for the online-safety animated film.", "w": 1260, "h": 1600}, {"id": "next10", "title": "EduSpots: The Next 10", "client": "EduSpots", "cat": "Campaigns", "blurb": "Event banner for the 10th-anniversary gathering.", "w": 1600, "h": 800}, {"id": "graduation", "title": "Ignite Programme Graduation", "client": "EduSpots", "cat": "Campaigns", "blurb": "Online event invitation for the 2025 graduation ceremony.", "w": 1248, "h": 1600}, {"id": "iwd", "title": "International Women's Day", "client": "ADventure Offshore", "cat": "Campaigns", "blurb": "Staff spotlight for International Women's Day.", "w": 1600, "h": 1160}, {"id": "independence", "title": "Happy Independence Day", "client": "ADventure Offshore", "cat": "Campaigns", "blurb": "Ghana Independence Day social post.", "w": 1585, "h": 1600}, {"id": "annual-cover", "title": "2025 Annual Report", "client": "EduSpots", "cat": "Editorial", "blurb": "48-page annual report: layout, data pages, photo frames and print production.", "w": 1131, "h": 1600}, {"id": "annual-p4", "title": "Annual Report: impact spread", "client": "EduSpots", "cat": "Editorial", "blurb": "Statistics and story spread from the 2025 annual report.", "w": 1131, "h": 1600}, {"id": "annual-p9", "title": "Annual Report: events spread", "client": "EduSpots", "cat": "Editorial", "blurb": "Event highlights spread from the 2025 annual report.", "w": 1131, "h": 1600}, {"id": "cecop", "title": "CECOP 2025 Legacy Report", "client": "Climate Education Community of Practice", "cat": "Editorial", "blurb": "57-page legacy report for Ghana's climate education network.", "w": 1132, "h": 1600}, {"id": "deck", "title": "Kente Bold pitch deck", "client": "Creavia Studios", "cat": "Editorial", "blurb": "Canva pitch-deck template from the Creavia template collection.", "w": 1600, "h": 910}, {"id": "report-mock", "title": "Impact 2030 report template", "client": "Creavia Studios", "cat": "Editorial", "blurb": "Annual-report template cover from the Creavia collection.", "w": 754, "h": 970}, {"id": "harmattan", "title": "Harmattan Fest poster", "client": "Creavia Studios", "cat": "Brand", "blurb": "Event poster template.", "w": 1200, "h": 1600}, {"id": "adinkra", "title": "Adinkra Instagram stories", "client": "Creavia Studios", "cat": "Brand", "blurb": "Fashion Instagram story template set.", "w": 900, "h": 1600}, {"id": "vertex", "title": "Vertex Energy & Technologies", "client": "Vertex", "cat": "Brand", "blurb": "Logo system: horizontal and vertical lockups in colour, black and white, plus letterhead.", "w": 1600, "h": 718}, {"id": "seko", "title": "Seko Eva", "client": "Seko Eva", "cat": "Brand", "blurb": "Monogram and wordmark for a fashion label.", "w": 1600, "h": 1009}, {"id": "impact-studio", "title": "The Impact Studio", "client": "The Impact Studio", "cat": "Brand", "blurb": "Four logo concepts with colour palettes, from the brand brief.", "w": 1600, "h": 873}, {"id": "etmc-1", "title": "Excellence Touch Medical", "client": "Excellence Touch Medical Services", "cat": "Brand", "blurb": "Healthcare brand identity: uniforms, stationery and environment.", "w": 1600, "h": 903}, {"id": "etmc-2", "title": "ETMC business cards", "client": "Excellence Touch Medical Services", "cat": "Brand", "blurb": "Business card system.", "w": 1600, "h": 898}, {"id": "course-1", "title": "Saving the Day", "client": "EduSpots Unlocked course", "cat": "Illustration", "blurb": "Comic-style illustration for an online communications course.", "w": 1600, "h": 943}, {"id": "ama", "title": "Ama: character sheet", "client": "Malaria awareness film", "cat": "Illustration", "blurb": "Turnaround, expressions and palette for a malaria-prevention animated short.", "w": 1600, "h": 900}, {"id": "coffee-lady", "title": "Morning coffee", "client": "Personal", "cat": "Illustration", "blurb": "Vector illustration.", "w": 1600, "h": 1423}, {"id": "headphones", "title": "Sound", "client": "Personal", "cat": "Illustration", "blurb": "Vector portrait.", "w": 1600, "h": 1565}, {"id": "on-bed", "title": "Late scroll", "client": "Personal", "cat": "Illustration", "blurb": "Vector illustration.", "w": 1600, "h": 1389}, {"id": "team-illo", "title": "Team at work", "client": "Personal", "cat": "Illustration", "blurb": "Flat spot illustrations.", "w": 1600, "h": 900}, {"id": "safety-post", "title": "Safety Post", "client": "Shi.E.L.D. Services", "cat": "Illustration", "blurb": "Monthly illustrated safety bulletin for marine crews.", "w": 1057, "h": 1600}, {"id": "safety-comic", "title": "Office safety comic", "client": "ADventure Offshore", "cat": "Illustration", "blurb": "Comic-strip safety illustration.", "w": 1131, "h": 1600}, {"id": "fifa-still", "title": "World Cup promo frames", "client": "FIFA World Cup concept", "cat": "Illustration", "blurb": "AI-directed keyframes for a football promo.", "w": 1600, "h": 900}, {"id": "kusaal-1", "title": "A family harvesting cocoa", "client": "Institute of African Studies, University of Ghana", "cat": "Illustration", "blurb": "One of 40+ illustrations for Kusaal folktales (BANGA-Africa Project).", "w": 642, "h": 401}, {"id": "kusaal-2", "title": "A boy and his mum", "client": "Institute of African Studies, University of Ghana", "cat": "Illustration", "blurb": "Kusaal folktale illustration.", "w": 616, "h": 435}, {"id": "kusaal-3", "title": "A durbar of chiefs", "client": "Institute of African Studies, University of Ghana", "cat": "Illustration", "blurb": "Kusaal folktale illustration.", "w": 641, "h": 453}, {"id": "kuukua-hero", "title": "KUUKUA dark chocolate", "client": "CapCut Design Studio × Dribbble", "cat": "Brand", "blurb": "Product-drop campaign for a single-origin Ghanaian chocolate brand: identity, packaging and hero visuals.", "w": 1600, "h": 1131}, {"id": "kuukua-mock", "title": "KUUKUA packaging", "client": "CapCut Design Studio × Dribbble", "cat": "Brand", "blurb": "3D packaging mockup for the KUUKUA product drop.", "w": 1600, "h": 1283}, {"id": "kuukua-logo", "title": "KUUKUA logo concepts", "client": "CapCut Design Studio × Dribbble", "cat": "Brand", "blurb": "Logo concept sheet and palette.", "w": 1600, "h": 971}, {"id": "kuukua-mood", "title": "KUUKUA moodboard", "client": "CapCut Design Studio × Dribbble", "cat": "Brand", "blurb": "Moodboard setting the brand's tone.", "w": 1600, "h": 395}, {"id": "leafglow-1", "title": "LeafGlow brand identity", "client": "LeafGlow", "cat": "Brand", "blurb": "Botanical skincare identity: leaf-and-sun mark, gold-on-olive palette and applications.", "w": 1600, "h": 1064}, {"id": "leafglow-2", "title": "LeafGlow applications", "client": "LeafGlow", "cat": "Brand", "blurb": "Brand applications for LeafGlow.", "w": 1600, "h": 1073}, {"id": "loose-sleeves", "title": "Loose Sleeves Near Rotating Equipment", "client": "Workplace safety series", "cat": "Illustration", "blurb": "Safety illustration warning crews about loose clothing near machinery.", "w": 1131, "h": 1600}, {"id": "leafglow-board", "title": "LeafGlow brand board", "client": "LeafGlow", "cat": "Brand", "blurb": "Full identity board: logo, palette, pattern, packaging and social ads for an eco-friendly skincare startup.", "w": 819, "h": 2400}, {"id": "leafglow-mock", "title": "LeafGlow packaging", "client": "LeafGlow", "cat": "Brand", "blurb": "Packaging mockup for LeafGlow.", "w": 1129, "h": 1600}, {"id": "safety-nov", "title": "Safety Post: Damaged Tools", "client": "Shi.E.L.D. Services", "cat": "Illustration", "blurb": "Monthly illustrated safety poster for marine and industrial crews, November 2025.", "w": 966, "h": 1600}, {"id": "wellness", "title": "The Wellness Circle", "client": "LSD-YSN Mental Health Programme", "cat": "Campaigns", "blurb": "Event flyer for a youth mental-health awareness programme.", "w": 1477, "h": 1600}], "videos": [{"id": "hundred", "title": "HundrED Global Collection 2027", "client": "EduSpots", "blurb": "Announcement film for EduSpots' selection as one of 100 global education innovations. Motion graphics, photo animation and sound design.", "dur": 49, "shown": 49, "vertical": false, "cat": "Motion"}, {"id": "futurefund", "title": "The Future Fund", "client": "EduSpots", "blurb": "Animated fundraising film for the EduSpots Future Fund.", "dur": 198, "shown": 60, "vertical": false, "cat": "Motion"}, {"id": "kss", "title": "Keeping Spots Safe", "client": "EduSpots", "blurb": "Seven-minute animated online-safety film for parents in Ghana. Excerpt.", "dur": 426, "shown": 60, "vertical": false, "cat": "Motion"}, {"id": "tenth", "title": "Ten Years of EduSpots", "client": "EduSpots", "blurb": "Illustrated anniversary film tracing a decade of community-led learning. Excerpt.", "dur": 284, "shown": 60, "vertical": false, "cat": "Motion"}, {"id": "bike", "title": "Bike2MyRoots", "client": "EduSpots", "blurb": "Animated story for a cycling fundraiser.", "dur": 41, "shown": 41, "vertical": true, "cat": "Motion"}, {"id": "kente", "title": "Kente Warrior", "client": "Creavia Studios", "blurb": "AI short film: a Kente-clad hero against a shadow king. Directed, generated and edited by Noah. Excerpt.", "dur": 154, "shown": 60, "vertical": false, "cat": "Motion"}, {"id": "aku", "title": "AKU", "client": "Creavia Studios", "blurb": "AI-generated character piece with code-built motion graphics.", "dur": 35, "shown": 35, "vertical": false, "cat": "Motion"}, {"id": "coke", "title": "Coca-Cola: The Lone Artist", "client": "Concept ad", "blurb": "Spec commercial built from AI keyframes and generated video.", "dur": 44, "shown": 44, "vertical": false, "cat": "Motion"}, {"id": "football", "title": "Football Fever", "client": "EduSpots", "blurb": "Vertical social reel for a football-themed learning campaign.", "dur": 34, "shown": 34, "vertical": true, "cat": "Motion"}, {"id": "biggive-film", "title": "Big Give appeal", "client": "EduSpots", "blurb": "Vertical fundraising appeal for the Big Give Christmas Challenge. Excerpt.", "dur": 176, "shown": 45, "vertical": true, "cat": "Motion"}, {"id": "creavia", "title": "Creavia Studios reel", "client": "Creavia Studios", "blurb": "Brand reel for Noah's motion and AI film studio.", "dur": 33, "shown": 33, "vertical": true, "cat": "Motion"}, {"id": "edu2d", "title": "Reading corner", "client": "EduSpots", "blurb": "2D animated loop for EduSpots' Edu-Animation channel.", "dur": 14, "shown": 14, "vertical": false, "cat": "Motion"}, {"id": "leafglow", "title": "LeafGlow logo animation", "client": "LeafGlow", "blurb": "Logo reveal animation for the LeafGlow identity.", "dur": 8, "shown": 8, "vertical": false, "cat": "Motion"}, {"id": "redbull", "title": "Red Bull: Wings over the city", "client": "Spec ad", "blurb": "AI-directed spec commercial: a blue-winged eagle carries a can across a coastal city.", "dur": 50, "shown": 50, "vertical": false, "cat": "Motion"}, {"id": "citypork", "title": "City Pork", "client": "Restaurant ad", "blurb": "Food commercial for an Accra pork joint, built from AI-generated scenes. Excerpt.", "dur": 85, "shown": 45, "vertical": false, "cat": "Motion"}, {"id": "apostolic", "title": "3rd Apostolic Visit", "client": "Assemblies of God, Ghana", "blurb": "Event promo with gold type, nebula backgrounds and speaker reveals. Excerpt.", "dur": 69, "shown": 45, "vertical": false, "cat": "Motion"}]};
-const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const CAT_COLOR = { Motion: "var(--flame)", Campaigns: "var(--gold)", Brand: "var(--leaf)", Editorial: "var(--paper)", Illustration: "#b58cff" };
-const fmt = s => Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
+const DATA = {"projects": [{"id": "realm", "title": "Realm Strider: Echoes of Nyame", "client": "Creavia Studios · GenHQ", "cat": "Film", "year": "2026", "blurb": "AI short film. After awakening an ancient relic, a young huntress and her animal companion are flung through mythical African realms in a race to get home. Made with Seedance, Luma Dream Machine, GPT Image and Nano Banana.", "items": [{"t": "vid", "id": "realm", "vertical": false, "dur": 94, "shown": 90}]}, {"id": "creavia-brand", "title": "Creavia Studios", "client": "Creavia Studios (my studio)", "cat": "Brand", "year": "2026", "blurb": "Identity for my own motion and AI film studio: logo, brand identity kit, social templates, platform covers and a launch ad.", "items": [{"t": "vid", "id": "creavia-ad", "vertical": false, "dur": 60, "shown": 60}, {"t": "img", "src": "assets/img/p/creavia-kit-0.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-kit-1.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-kit-2.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-kit-3.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-kit-4.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-kit-5.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-kit-6.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-kit-7.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-kit-8.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-kit-9.webp", "w": 1287, "h": 1287}, {"t": "img", "src": "assets/img/p/creavia-s0.webp", "w": 1132, "h": 1600}, {"t": "img", "src": "assets/img/p/creavia-s1.webp", "w": 1132, "h": 1600}, {"t": "img", "src": "assets/img/p/creavia-s2.webp", "w": 1132, "h": 1600}, {"t": "img", "src": "assets/img/p/creavia-s3.webp", "w": 1600, "h": 523}, {"t": "img", "src": "assets/img/p/creavia-s4.webp", "w": 1600, "h": 902}]}, {"id": "kuukua", "title": "KUUKUA Dark Chocolate", "client": "CapCut Design Studio × Dribbble", "cat": "Brand", "year": "2026", "blurb": "Product-drop identity for a single-origin Ghanaian chocolate: logo, palette, moodboard, packaging and campaign hero shots.", "items": [{"t": "img", "src": "assets/img/p/kuukua-0.webp", "w": 1600, "h": 1131}, {"t": "img", "src": "assets/img/p/kuukua-1.webp", "w": 1600, "h": 893}, {"t": "img", "src": "assets/img/p/kuukua-2.webp", "w": 1600, "h": 1283}, {"t": "img", "src": "assets/img/p/kuukua-3.webp", "w": 1151, "h": 928}, {"t": "img", "src": "assets/img/p/kuukua-4.webp", "w": 1600, "h": 924}, {"t": "img", "src": "assets/img/p/kuukua-5.webp", "w": 1600, "h": 971}, {"t": "img", "src": "assets/img/p/kuukua-6.webp", "w": 1600, "h": 321}, {"t": "img", "src": "assets/img/p/kuukua-7.webp", "w": 1600, "h": 395}]}, {"id": "leafglow", "title": "LeafGlow", "client": "Eco-friendly skincare startup", "cat": "Brand", "year": "2025", "blurb": "Botanical skincare identity: leaf-and-sun mark, olive and gold palette, type system, pattern, packaging, stationery and social ads.", "items": [{"t": "vid", "id": "leafglow", "vertical": false, "dur": 8, "shown": 8}, {"t": "img", "src": "assets/img/p/leafglow-1.webp", "w": 1600, "h": 1064}, {"t": "img", "src": "assets/img/p/leafglow-2.webp", "w": 1600, "h": 1073}, {"t": "img", "src": "assets/img/p/leafglow-3.webp", "w": 1600, "h": 1022}, {"t": "img", "src": "assets/img/p/leafglow-4.webp", "w": 1600, "h": 1023}, {"t": "img", "src": "assets/img/p/leafglow-5.webp", "w": 1562, "h": 1538}, {"t": "img", "src": "assets/img/p/leafglow-6.webp", "w": 1600, "h": 1282}, {"t": "img", "src": "assets/img/p/leafglow-7.webp", "w": 1600, "h": 457}, {"t": "img", "src": "assets/img/p/leafglow-8.webp", "w": 1506, "h": 1600}, {"t": "img", "src": "assets/img/p/leafglow-9.webp", "w": 1405, "h": 1600}, {"t": "img", "src": "assets/img/p/leafglow-10.webp", "w": 1600, "h": 1254}, {"t": "img", "src": "assets/img/p/leafglow-11.webp", "w": 1600, "h": 1347}, {"t": "img", "src": "assets/img/p/leafglow-12.webp", "w": 1562, "h": 1600}, {"t": "img", "src": "assets/img/p/leafglow-13.webp", "w": 1453, "h": 1600}]}, {"id": "etmc", "title": "Excellence Touch Medical", "client": "Excellence Touch Medical Services", "cat": "Brand", "year": "2023", "blurb": "Healthcare identity rolled out across uniforms, scrubs, stationery, ID cards, signage, mugs, roll-up banners and an ambulance livery.", "items": [{"t": "img", "src": "assets/img/p/etmc-0.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/etmc-1.webp", "w": 1600, "h": 1011}, {"t": "img", "src": "assets/img/p/etmc-2.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/etmc-3.webp", "w": 1600, "h": 901}, {"t": "img", "src": "assets/img/p/etmc-4.webp", "w": 1600, "h": 898}, {"t": "img", "src": "assets/img/p/etmc-5.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/etmc-6.webp", "w": 1600, "h": 902}, {"t": "img", "src": "assets/img/p/etmc-7.webp", "w": 1600, "h": 899}, {"t": "img", "src": "assets/img/p/etmc-8.webp", "w": 1600, "h": 898}, {"t": "img", "src": "assets/img/p/etmc-9.webp", "w": 1600, "h": 1017}, {"t": "img", "src": "assets/img/p/etmc-10.webp", "w": 1600, "h": 903}, {"t": "img", "src": "assets/img/p/etmc-11.webp", "w": 1600, "h": 907}, {"t": "img", "src": "assets/img/p/etmc-12.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/etmc-13.webp", "w": 1600, "h": 903}, {"t": "img", "src": "assets/img/p/etmc-14.webp", "w": 1600, "h": 899}, {"t": "img", "src": "assets/img/p/etmc-15.webp", "w": 1600, "h": 899}, {"t": "img", "src": "assets/img/p/etmc-16.webp", "w": 1600, "h": 960}, {"t": "img", "src": "assets/img/p/etmc-17.webp", "w": 1600, "h": 864}, {"t": "img", "src": "assets/img/p/etmc-18.webp", "w": 1600, "h": 898}]}, {"id": "vertex", "title": "Vertex Energy & Technologies", "client": "Vertex", "cat": "Brand", "year": "2026", "blurb": "Logo system for an energy company: horizontal and vertical lockups in colour, black and white.", "items": [{"t": "img", "src": "assets/img/p/vertex-0.webp", "w": 1600, "h": 1372}, {"t": "img", "src": "assets/img/p/vertex-1.webp", "w": 1600, "h": 1371}, {"t": "img", "src": "assets/img/p/vertex-2.webp", "w": 1600, "h": 1465}, {"t": "img", "src": "assets/img/p/vertex-3.webp", "w": 1600, "h": 718}, {"t": "img", "src": "assets/img/p/vertex-4.webp", "w": 1600, "h": 718}, {"t": "img", "src": "assets/img/p/vertex-5.webp", "w": 1600, "h": 771}]}, {"id": "seko", "title": "Seko Eva", "client": "Seko Eva", "cat": "Brand", "year": "2026", "blurb": "Monogram and wordmark for a fashion label.", "items": [{"t": "img", "src": "assets/img/p/seko-0.webp", "w": 1600, "h": 406}, {"t": "img", "src": "assets/img/p/seko-1.webp", "w": 1600, "h": 1009}]}, {"id": "impact", "title": "The Impact Studio", "client": "The Impact Studio", "cat": "Brand", "year": "2026", "blurb": "Four logo directions with palettes, from the brand brief.", "items": [{"t": "img", "src": "assets/img/p/impact-0.webp", "w": 1600, "h": 873}, {"t": "img", "src": "assets/img/p/impact-1.webp", "w": 1600, "h": 873}]}, {"id": "creavia-templates", "title": "Creavia Canva Templates", "client": "Creavia Studios", "cat": "Brand", "year": "2026", "blurb": "A collection of Canva templates with a Ghanaian visual language: pitch deck, annual report, Instagram posts and stories, event poster, flyer, résumé, wedding invitation and YouTube thumbnails.", "items": [{"t": "img", "src": "assets/img/deck.webp", "w": 1600, "h": 910}, {"t": "img", "src": "assets/img/report-mock.webp", "w": 754, "h": 970}, {"t": "img", "src": "assets/img/harmattan.webp", "w": 1200, "h": 1600}, {"t": "img", "src": "assets/img/adinkra.webp", "w": 900, "h": 1600}, {"t": "img", "src": "assets/img/p/creavia-templates-4.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/creavia-templates-5.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/creavia-templates-6.webp", "w": 1131, "h": 1600}, {"t": "img", "src": "assets/img/p/creavia-templates-7.webp", "w": 1080, "h": 1080}, {"t": "img", "src": "assets/img/p/creavia-templates-8.webp", "w": 900, "h": 1600}, {"t": "img", "src": "assets/img/p/creavia-templates-9.webp", "w": 1236, "h": 1600}, {"t": "img", "src": "assets/img/p/creavia-templates-10.webp", "w": 1131, "h": 1600}, {"t": "img", "src": "assets/img/p/creavia-templates-11.webp", "w": 1143, "h": 1600}, {"t": "img", "src": "assets/img/p/creavia-templates-12.webp", "w": 1280, "h": 720}]}, {"id": "kente", "title": "Kente Warrior", "client": "Creavia Studios", "cat": "Film", "year": "2026", "blurb": "AI short film: a Kente-clad hero against a shadow king. Directed, generated and edited by Noah.", "items": [{"t": "vid", "id": "kente", "vertical": false, "dur": 154, "shown": 60}]}, {"id": "redbull", "title": "Red Bull: Wings over the City", "client": "Spec ad", "cat": "Film", "year": "2025", "blurb": "AI-directed spec commercial: a blue-winged eagle carries a can across a coastal city.", "items": [{"t": "vid", "id": "redbull", "vertical": false, "dur": 50, "shown": 50}]}, {"id": "coke", "title": "Coca-Cola: The Lone Artist", "client": "Spec ad", "cat": "Film", "year": "2025", "blurb": "Spec commercial built from AI keyframes and generated video.", "items": [{"t": "vid", "id": "coke", "vertical": false, "dur": 44, "shown": 44}, {"t": "img", "src": "assets/img/p/coke-1.webp", "w": 1600, "h": 900}]}, {"id": "citypork", "title": "City Pork", "client": "Restaurant ad", "cat": "Film", "year": "2025", "blurb": "Food commercial for an Accra pork joint, built from AI-generated scenes.", "items": [{"t": "vid", "id": "citypork", "vertical": false, "dur": 85, "shown": 45}]}, {"id": "aku", "title": "AKU", "client": "Creavia Studios", "cat": "Film", "year": "2026", "blurb": "AI character piece with code-built motion graphics.", "items": [{"t": "vid", "id": "aku", "vertical": false, "dur": 35, "shown": 35}]}, {"id": "apostolic", "title": "3rd Apostolic Visit", "client": "Assemblies of God, Ghana", "cat": "Film", "year": "2026", "blurb": "Event promo with gold type, nebula backgrounds and speaker reveals.", "items": [{"t": "vid", "id": "apostolic", "vertical": false, "dur": 69, "shown": 45}]}, {"id": "creavia-reel", "title": "Creavia Studios Reel", "client": "Creavia Studios", "cat": "Film", "year": "2026", "blurb": "Brand reel for Noah's motion and AI film studio.", "items": [{"t": "vid", "id": "creavia", "vertical": true, "dur": 33, "shown": 33}]}, {"id": "fifa-promo", "title": "World Cup Promo Frames", "client": "FIFA World Cup concept", "cat": "Film", "year": "2026", "blurb": "AI-directed keyframes for a football promo, staged at landmarks around the world.", "items": [{"t": "img", "src": "assets/img/p/fifa-promo-0.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/fifa-promo-1.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/fifa-promo-2.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/fifa-promo-3.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/fifa-promo-4.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/fifa-promo-5.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/fifa-promo-6.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/fifa-promo-7.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/fifa-promo-8.webp", "w": 1600, "h": 900}]}, {"id": "orijin", "title": "Orijin at 8", "client": "Campaign concept", "cat": "Campaigns", "year": "2025", "blurb": "360° anniversary campaign: two key visuals, label, billboards, bus shelters, festival poster, social and merch.", "items": [{"t": "img", "src": "assets/img/orijin-kv1.webp", "w": 1600, "h": 1008}, {"t": "img", "src": "assets/img/orijin-kv2.webp", "w": 1599, "h": 1600}, {"t": "img", "src": "assets/img/orijin-illo.webp", "w": 1600, "h": 873}, {"t": "img", "src": "assets/img/orijin-fest.webp", "w": 1131, "h": 1600}, {"t": "img", "src": "assets/img/orijin-label.webp", "w": 1600, "h": 956}, {"t": "img", "src": "assets/img/orijin-bottle.webp", "w": 1346, "h": 1600}, {"t": "img", "src": "assets/img/orijin-bill.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/orijin-bill2.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/orijin-shelter.webp", "w": 1600, "h": 1066}, {"t": "img", "src": "assets/img/orijin-flags.webp", "w": 1600, "h": 1067}, {"t": "img", "src": "assets/img/orijin-tee.webp", "w": 1551, "h": 1600}, {"t": "img", "src": "assets/img/orijin-coaster.webp", "w": 1600, "h": 1120}, {"t": "img", "src": "assets/img/p/orijin-12.webp", "w": 1600, "h": 941}, {"t": "img", "src": "assets/img/p/orijin-13.webp", "w": 1600, "h": 1200}]}, {"id": "adventure", "title": "ADventure Offshore social", "client": "ADventure Offshore", "cat": "Campaigns", "year": "2022–2025", "blurb": "Social and print campaigns for a marine services company: holidays, staff spotlights, recruitment and safety days.", "items": [{"t": "img", "src": "assets/img/p/adventure-0.webp", "w": 1600, "h": 1160}, {"t": "img", "src": "assets/img/p/adventure-1.webp", "w": 1600, "h": 1159}, {"t": "img", "src": "assets/img/p/adventure-2.webp", "w": 1585, "h": 1600}, {"t": "img", "src": "assets/img/p/adventure-3.webp", "w": 1600, "h": 1429}, {"t": "img", "src": "assets/img/p/adventure-4.webp", "w": 1484, "h": 1600}, {"t": "img", "src": "assets/img/p/adventure-5.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/p/adventure-6.webp", "w": 1493, "h": 1600}, {"t": "img", "src": "assets/img/p/adventure-7.webp", "w": 1558, "h": 1600}, {"t": "img", "src": "assets/img/p/adventure-8.webp", "w": 1600, "h": 1435}, {"t": "img", "src": "assets/img/p/adventure-9.webp", "w": 1512, "h": 1600}, {"t": "img", "src": "assets/img/p/adventure-10.webp", "w": 1600, "h": 1600}]}, {"id": "wellness", "title": "The Wellness Circle", "client": "LSD-YSN Mental Health Programme", "cat": "Campaigns", "year": "2025", "blurb": "Event flyers for a youth mental-health awareness programme.", "items": [{"t": "img", "src": "assets/img/p/wellness-0.webp", "w": 1477, "h": 1600}, {"t": "img", "src": "assets/img/p/wellness-1.webp", "w": 1477, "h": 1600}, {"t": "img", "src": "assets/img/p/wellness-2.webp", "w": 1477, "h": 1600}]}, {"id": "eduspots", "title": "EduSpots", "client": "EduSpots (UK charity)", "cat": "Campaigns", "year": "2024–2026", "blurb": "Selected work as Creative Manager: the HundrED 2027 announcement film, the Future Fund animation, the 2026–27 strategy carousel and a donation appeal.", "items": [{"t": "vid", "id": "hundred", "vertical": false, "dur": 49, "shown": 49}, {"t": "vid", "id": "futurefund", "vertical": false, "dur": 198, "shown": 60}, {"t": "img", "src": "assets/img/p/eduspots-2.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/p/eduspots-3.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/p/eduspots-4.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/p/eduspots-5.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/p/eduspots-6.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/p/eduspots-7.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/p/eduspots-8.webp", "w": 1600, "h": 1600}, {"t": "img", "src": "assets/img/donation.webp", "w": 1143, "h": 1600}]}, {"id": "safety", "title": "Safety Post", "client": "Shi.E.L.D. Services · ADventure Offshore", "cat": "Illustration", "year": "2022–2025", "blurb": "Monthly illustrated safety posters and comics for marine and industrial crews.", "items": [{"t": "img", "src": "assets/img/safety-nov.webp", "w": 966, "h": 1600}, {"t": "img", "src": "assets/img/p/safety-1.webp", "w": 966, "h": 1600}, {"t": "img", "src": "assets/img/safety-post.webp", "w": 1057, "h": 1600}, {"t": "img", "src": "assets/img/loose-sleeves.webp", "w": 1131, "h": 1600}, {"t": "img", "src": "assets/img/p/safety-4.webp", "w": 1255, "h": 1600}, {"t": "img", "src": "assets/img/safety-comic.webp", "w": 1131, "h": 1600}]}, {"id": "malaria", "title": "Malaria film characters", "client": "Malaria awareness film", "cat": "Illustration", "year": "2026", "blurb": "Character sheets with turnarounds, expressions and palettes for a malaria-prevention animated short.", "items": [{"t": "img", "src": "assets/img/p/malaria-0.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/malaria-1.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/malaria-2.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/malaria-3.webp", "w": 1600, "h": 900}, {"t": "img", "src": "assets/img/p/malaria-4.webp", "w": 1600, "h": 900}]}, {"id": "kusaal", "title": "Kusaal Folktales", "client": "Institute of African Studies, University of Ghana", "cat": "Illustration", "year": "2022", "blurb": "Over 40 illustrations for Kusaal folktales under the BANGA-Africa Project.", "items": [{"t": "img", "src": "assets/img/kusaal-1.webp", "w": 642, "h": 401}, {"t": "img", "src": "assets/img/kusaal-2.webp", "w": 616, "h": 435}, {"t": "img", "src": "assets/img/kusaal-3.webp", "w": 641, "h": 453}, {"t": "img", "src": "assets/img/p/kusaal-3.webp", "w": 628, "h": 392}, {"t": "img", "src": "assets/img/p/kusaal-4.webp", "w": 652, "h": 408}, {"t": "img", "src": "assets/img/p/kusaal-5.webp", "w": 520, "h": 404}, {"t": "img", "src": "assets/img/p/kusaal-6.webp", "w": 569, "h": 402}, {"t": "img", "src": "assets/img/p/kusaal-7.webp", "w": 619, "h": 438}, {"t": "img", "src": "assets/img/p/kusaal-8.webp", "w": 580, "h": 410}, {"t": "img", "src": "assets/img/p/kusaal-9.webp", "w": 644, "h": 455}, {"t": "img", "src": "assets/img/p/kusaal-10.webp", "w": 637, "h": 450}, {"t": "img", "src": "assets/img/p/kusaal-11.webp", "w": 658, "h": 465}]}, {"id": "personal", "title": "Personal illustration", "client": "Personal", "cat": "Illustration", "year": "2023–2024", "blurb": "Vector illustrations and character portraits.", "items": [{"t": "img", "src": "assets/img/headphones.webp", "w": 1600, "h": 1565}, {"t": "img", "src": "assets/img/coffee-lady.webp", "w": 1600, "h": 1423}, {"t": "img", "src": "assets/img/on-bed.webp", "w": 1600, "h": 1389}, {"t": "img", "src": "assets/img/team-illo.webp", "w": 1600, "h": 900}]}], "books": [{"id": "annual-report", "title": "EduSpots Annual Report 2025", "client": "EduSpots", "total": 48, "pages": ["assets/book/annual-report-0.webp", "assets/book/annual-report-1.webp", "assets/book/annual-report-2.webp", "assets/book/annual-report-3.webp", "assets/book/annual-report-4.webp", "assets/book/annual-report-5.webp", "assets/book/annual-report-6.webp", "assets/book/annual-report-7.webp", "assets/book/annual-report-8.webp", "assets/book/annual-report-9.webp", "assets/book/annual-report-10.webp", "assets/book/annual-report-11.webp", "assets/book/annual-report-12.webp", "assets/book/annual-report-13.webp", "assets/book/annual-report-14.webp", "assets/book/annual-report-15.webp", "assets/book/annual-report-16.webp", "assets/book/annual-report-17.webp", "assets/book/annual-report-18.webp", "assets/book/annual-report-19.webp", "assets/book/annual-report-20.webp", "assets/book/annual-report-21.webp", "assets/book/annual-report-22.webp", "assets/book/annual-report-23.webp"], "w": 707, "h": 1000}, {"id": "cecop-report", "title": "CECOP 2025 Legacy Report", "client": "Climate Education Community of Practice", "total": 57, "pages": ["assets/book/cecop-report-0.webp", "assets/book/cecop-report-1.webp", "assets/book/cecop-report-2.webp", "assets/book/cecop-report-3.webp", "assets/book/cecop-report-4.webp", "assets/book/cecop-report-5.webp", "assets/book/cecop-report-6.webp", "assets/book/cecop-report-7.webp", "assets/book/cecop-report-8.webp", "assets/book/cecop-report-9.webp", "assets/book/cecop-report-10.webp", "assets/book/cecop-report-11.webp", "assets/book/cecop-report-12.webp", "assets/book/cecop-report-13.webp", "assets/book/cecop-report-14.webp", "assets/book/cecop-report-15.webp", "assets/book/cecop-report-16.webp", "assets/book/cecop-report-17.webp", "assets/book/cecop-report-18.webp", "assets/book/cecop-report-19.webp", "assets/book/cecop-report-20.webp", "assets/book/cecop-report-21.webp", "assets/book/cecop-report-22.webp", "assets/book/cecop-report-23.webp"], "w": 708, "h": 1000}, {"id": "catalysts", "title": "Catalysts Handbook", "client": "EduSpots", "total": 51, "pages": ["assets/book/catalysts-0.webp", "assets/book/catalysts-1.webp", "assets/book/catalysts-2.webp", "assets/book/catalysts-3.webp", "assets/book/catalysts-4.webp", "assets/book/catalysts-5.webp", "assets/book/catalysts-6.webp", "assets/book/catalysts-7.webp", "assets/book/catalysts-8.webp", "assets/book/catalysts-9.webp", "assets/book/catalysts-10.webp", "assets/book/catalysts-11.webp", "assets/book/catalysts-12.webp", "assets/book/catalysts-13.webp", "assets/book/catalysts-14.webp", "assets/book/catalysts-15.webp", "assets/book/catalysts-16.webp", "assets/book/catalysts-17.webp", "assets/book/catalysts-18.webp", "assets/book/catalysts-19.webp"], "w": 667, "h": 1000}, {"id": "possibilities", "title": "Book of Possibilities", "client": "EduSpots", "total": 14, "pages": ["assets/book/possibilities-0.webp", "assets/book/possibilities-1.webp", "assets/book/possibilities-2.webp", "assets/book/possibilities-3.webp", "assets/book/possibilities-4.webp", "assets/book/possibilities-5.webp", "assets/book/possibilities-6.webp", "assets/book/possibilities-7.webp", "assets/book/possibilities-8.webp", "assets/book/possibilities-9.webp", "assets/book/possibilities-10.webp", "assets/book/possibilities-11.webp", "assets/book/possibilities-12.webp", "assets/book/possibilities-13.webp"], "w": 1000, "h": 707}, {"id": "one-spot", "title": "One Spot, 1000 Possibilities", "client": "EduSpots", "total": 20, "pages": ["assets/book/one-spot-0.webp", "assets/book/one-spot-1.webp", "assets/book/one-spot-2.webp", "assets/book/one-spot-3.webp", "assets/book/one-spot-4.webp", "assets/book/one-spot-5.webp", "assets/book/one-spot-6.webp", "assets/book/one-spot-7.webp", "assets/book/one-spot-8.webp", "assets/book/one-spot-9.webp", "assets/book/one-spot-10.webp", "assets/book/one-spot-11.webp", "assets/book/one-spot-12.webp", "assets/book/one-spot-13.webp", "assets/book/one-spot-14.webp", "assets/book/one-spot-15.webp", "assets/book/one-spot-16.webp", "assets/book/one-spot-17.webp", "assets/book/one-spot-18.webp", "assets/book/one-spot-19.webp"], "w": 1000, "h": 1000}, {"id": "gced", "title": "Global Citizenship Education Booklet", "client": "EduSpots", "total": 34, "pages": ["assets/book/gced-0.webp", "assets/book/gced-1.webp", "assets/book/gced-2.webp", "assets/book/gced-3.webp", "assets/book/gced-4.webp", "assets/book/gced-5.webp", "assets/book/gced-6.webp", "assets/book/gced-7.webp", "assets/book/gced-8.webp", "assets/book/gced-9.webp", "assets/book/gced-10.webp", "assets/book/gced-11.webp", "assets/book/gced-12.webp", "assets/book/gced-13.webp", "assets/book/gced-14.webp", "assets/book/gced-15.webp", "assets/book/gced-16.webp", "assets/book/gced-17.webp", "assets/book/gced-18.webp", "assets/book/gced-19.webp"], "w": 707, "h": 1000}, {"id": "planet", "title": "Play for the Planet Guide", "client": "EduSpots", "total": 9, "pages": ["assets/book/planet-0.webp", "assets/book/planet-1.webp", "assets/book/planet-2.webp", "assets/book/planet-3.webp", "assets/book/planet-4.webp", "assets/book/planet-5.webp", "assets/book/planet-6.webp", "assets/book/planet-7.webp"], "w": 707, "h": 1000}, {"id": "fifa-academy", "title": "FIFA Global Citizen Education Academy Handbook", "client": "EduSpots × FIFA Foundation", "total": 10, "pages": ["assets/book/fifa-academy-0.webp", "assets/book/fifa-academy-1.webp", "assets/book/fifa-academy-2.webp", "assets/book/fifa-academy-3.webp", "assets/book/fifa-academy-4.webp", "assets/book/fifa-academy-5.webp", "assets/book/fifa-academy-6.webp", "assets/book/fifa-academy-7.webp", "assets/book/fifa-academy-8.webp", "assets/book/fifa-academy-9.webp"], "w": 707, "h": 1000}, {"id": "corporate", "title": "Corporate Partnership Guide", "client": "EduSpots", "total": 16, "pages": ["assets/book/corporate-0.webp", "assets/book/corporate-1.webp", "assets/book/corporate-2.webp", "assets/book/corporate-3.webp", "assets/book/corporate-4.webp", "assets/book/corporate-5.webp", "assets/book/corporate-6.webp", "assets/book/corporate-7.webp", "assets/book/corporate-8.webp", "assets/book/corporate-9.webp", "assets/book/corporate-10.webp", "assets/book/corporate-11.webp", "assets/book/corporate-12.webp", "assets/book/corporate-13.webp", "assets/book/corporate-14.webp", "assets/book/corporate-15.webp"], "w": 1000, "h": 1000}, {"id": "creavia-kit", "title": "Creavia Studios Brand Identity Kit", "client": "Creavia Studios", "total": 11, "pages": ["assets/book/creavia-kit-0.webp", "assets/book/creavia-kit-1.webp", "assets/book/creavia-kit-2.webp", "assets/book/creavia-kit-3.webp", "assets/book/creavia-kit-4.webp", "assets/book/creavia-kit-5.webp", "assets/book/creavia-kit-6.webp", "assets/book/creavia-kit-7.webp", "assets/book/creavia-kit-8.webp", "assets/book/creavia-kit-9.webp"], "w": 1000, "h": 1000}, {"id": "digital-champions", "title": "Digital Champion's Handbook", "client": "EduSpots", "total": 16, "pages": ["assets/book/digital-champions-0.webp", "assets/book/digital-champions-1.webp", "assets/book/digital-champions-2.webp", "assets/book/digital-champions-3.webp", "assets/book/digital-champions-4.webp", "assets/book/digital-champions-5.webp", "assets/book/digital-champions-6.webp", "assets/book/digital-champions-7.webp", "assets/book/digital-champions-8.webp", "assets/book/digital-champions-9.webp", "assets/book/digital-champions-10.webp", "assets/book/digital-champions-11.webp", "assets/book/digital-champions-12.webp", "assets/book/digital-champions-13.webp", "assets/book/digital-champions-14.webp", "assets/book/digital-champions-15.webp"], "w": 707, "h": 1000}, {"id": "hse-handbook", "title": "Health and Safety Handbook", "client": "ADventure Offshore", "total": 58, "pages": ["assets/book/hse-handbook-0.webp", "assets/book/hse-handbook-1.webp", "assets/book/hse-handbook-2.webp", "assets/book/hse-handbook-3.webp", "assets/book/hse-handbook-4.webp", "assets/book/hse-handbook-5.webp", "assets/book/hse-handbook-6.webp", "assets/book/hse-handbook-7.webp", "assets/book/hse-handbook-8.webp", "assets/book/hse-handbook-9.webp", "assets/book/hse-handbook-10.webp", "assets/book/hse-handbook-11.webp", "assets/book/hse-handbook-12.webp", "assets/book/hse-handbook-13.webp", "assets/book/hse-handbook-14.webp", "assets/book/hse-handbook-15.webp", "assets/book/hse-handbook-16.webp", "assets/book/hse-handbook-17.webp", "assets/book/hse-handbook-18.webp", "assets/book/hse-handbook-19.webp"], "w": 723, "h": 1000}, {"id": "corporate-profile", "title": "Corporate Profile", "client": "ADventure Offshore", "total": 16, "pages": ["assets/book/corporate-profile-0.webp", "assets/book/corporate-profile-1.webp", "assets/book/corporate-profile-2.webp", "assets/book/corporate-profile-3.webp", "assets/book/corporate-profile-4.webp", "assets/book/corporate-profile-5.webp", "assets/book/corporate-profile-6.webp", "assets/book/corporate-profile-7.webp", "assets/book/corporate-profile-8.webp", "assets/book/corporate-profile-9.webp", "assets/book/corporate-profile-10.webp", "assets/book/corporate-profile-11.webp", "assets/book/corporate-profile-12.webp", "assets/book/corporate-profile-13.webp", "assets/book/corporate-profile-14.webp", "assets/book/corporate-profile-15.webp"], "w": 707, "h": 1000}]};
+const CASE = [{"id": "orijin-kv1", "cap": "Key visual: The Taste of Celebration", "w": 1600, "h": 1008}, {"id": "orijin-kv2", "cap": "Key visual: Orijin Pride", "w": 1599, "h": 1600}, {"id": "orijin-illo", "cap": "Illustrated key visual: 8 years of Ghanaian rhythm", "w": 1600, "h": 873}, {"id": "orijin-fest", "cap": "Orijin Pride Fest poster", "w": 1131, "h": 1600}, {"id": "orijin-label", "cap": "Anniversary label", "w": 1600, "h": 956}, {"id": "orijin-bill", "cap": "Billboard", "w": 1600, "h": 1600}, {"id": "orijin-bill2", "cap": "Billboard, human-centred", "w": 1600, "h": 1600}, {"id": "orijin-shelter", "cap": "Bus-shelter posters", "w": 1600, "h": 1066}, {"id": "orijin-bottle", "cap": "Anniversary bottle", "w": 1346, "h": 1600}, {"id": "orijin-tee", "cap": "Merch T-shirt", "w": 1551, "h": 1600}, {"id": "orijin-coaster", "cap": "Coasters", "w": 1600, "h": 1120}, {"id": "orijin-flags", "cap": "Event flags", "w": 1600, "h": 1067}];
+const $ = s => document.querySelector(s);
+const fine = matchMedia("(pointer: fine)").matches;
+const fmt = s => Math.floor(s / 60) + ":" + String(Math.round(s) % 60).padStart(2, "0");
 
-// interleave so the wall opens with a mix of film and design
-const vids = M.videos.map(v => ({ ...v, kind: "video" }));
-const imgs = M.images.map(i => ({ ...i, kind: "image" }));
-const order = ["hundred","kuukua-hero","strategy-1","redbull","annual-cover","leafglow-board","kente","donation","vertex","futurefund","lego","ama","coke","theirworld","kuukua-mock","etmc-1","kss","cecop","safety-nov","course-1","citypork","aku","quote","leafglow-1","seko","tenth","kusaal-1","wellness","deck","bike","biggive","headphones","leafglow","football","possibility","loose-sleeves","impact-studio","fifa","apostolic","kuukua-logo","creavia","safety-post","hiring","annual-p4","leafglow-mock","biggive-film","coffee-lady","kss-flyer","thirdsector","edu2d","strategy-2","harmattan","next10","safety-comic","fifa-still","graduation","kuukua-mood","iwd","on-bed","annual-p9","strategy-5","kusaal-2","leafglow-2","report-mock","adinkra","etmc-2","team-illo","independence","kusaal-3"];
-const byId = Object.fromEntries([...vids, ...imgs].map(x => [x.id, x]));
-const ITEMS = [...order.filter(id => byId[id]).map(id => byId[id]), ...[...vids, ...imgs].filter(x => !order.includes(x.id))];
+// Motion follows the system setting unless the viewer chose with the toggle.
+let reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+try { const p = localStorage.getItem("nd-motion"); if (p) reduce = p === "off"; } catch (e) {}
+document.documentElement.classList.toggle("calm", reduce);
+$("#motionBtn span").textContent = reduce ? "Motion off" : "Motion on";
+$("#motionBtn").setAttribute("aria-pressed", String(!reduce));
+$("#motionBtn").addEventListener("click", () => { try { localStorage.setItem("nd-motion", reduce ? "on" : "off"); } catch (e) {} location.reload(); });
 
-// ---- wall ----
-const wall = document.getElementById("wall");
-ITEMS.forEach((it, i) => {
-  const b = document.createElement("button");
-  b.type = "button"; b.className = "card"; b.dataset.cat = it.cat; b.dataset.i = i;
-  b.style.setProperty("--c", CAT_COLOR[it.cat]);
-  const isV = it.kind === "video";
-  const ratio = isV ? (it.vertical ? "9 / 16" : "16 / 9") : `${it.w} / ${it.h}`;
-  b.innerHTML = `<div class="media" style="aspect-ratio:${ratio}">
-      <span class="tag"><i></i>${it.cat}${isV ? " · " + fmt(it.dur) : ""}</span>
-      <img src="assets/img/${isV ? it.id + "-poster" : it.id}.webp" alt="${it.title}" loading="lazy" style="width:100%;height:100%;object-fit:cover">
-      ${isV ? `<video muted loop playsinline preload="none" data-src="assets/vid/${it.id}-loop.mp4"></video><span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>` : ""}
-    </div>
-    <div class="meta"><h3>${it.title}</h3><span>${it.client}</span></div>`;
-  b.addEventListener("click", () => openLB(i));
-  if (isV) {
-    const v = b.querySelector("video");
-    const play = () => { if (!v.src) v.src = v.dataset.src; v.play().then(() => b.classList.add("playing")).catch(() => {}); };
-    const stop = () => { v.pause(); b.classList.remove("playing"); };
-    b.addEventListener("mouseenter", play); b.addEventListener("mouseleave", stop);
-    b.addEventListener("focus", play); b.addEventListener("blur", stop);
-    b._play = play; b._stop = stop;
-  }
-  wall.appendChild(b);
-});
-// on touch screens, play loops as they scroll into view
-if (!matchMedia("(hover: hover)").matches && !reduce) {
-  const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? e.target._play?.() : e.target._stop?.()), { threshold: .6 });
-  wall.querySelectorAll(".card").forEach(c => c._play && io.observe(c));
+const PROJ = DATA.projects, BOOKS = DATA.books;
+const vidSrc = id => `assets/vid/${id}.mp4`, poster = id => `assets/img/${id}-poster.webp`;
+const coverOf = p => { const it = p.items[0]; return it.t === "vid" ? poster(it.id) : it.src; };
+const FILMS = PROJ.flatMap(p => p.items.filter(i => i.t === "vid").map(i => ({ ...i, title: p.items.length > 1 && p.id === "eduspots" ? (i.id === "hundred" ? "HundrED 2027" : "The Future Fund") : p.title, project: p })));
+$("#projCount").dataset.count = $("#projCount").textContent = PROJ.length;
+$("#filmCount").dataset.count = $("#filmCount").textContent = FILMS.length;
+
+let lenis = null;
+const lock = () => { document.body.style.overflow = "hidden"; lenis?.stop(); };
+const unlock = () => { if ([$("#sheet"), $("#fb"), $("#lb")].every(e => e.hidden)) { document.body.style.overflow = ""; lenis?.start(); } };
+
+// ---------- lightbox (works on any list of items) ----------
+let LB = { list: [], i: 0, last: null };
+function openLB(list, i) {
+  LB = { list, i, last: LB.last || document.activeElement };
+  const it = list[i], st = $("#lbStage");
+  st.innerHTML = it.t === "vid"
+    ? `<video src="${vidSrc(it.id)}" poster="${poster(it.id)}" controls autoplay playsinline></video>`
+    : `<img src="${it.src}" alt="${it.title || ""}">`;
+  $("#lbTitle").textContent = it.title || "";
+  $("#lbMeta").textContent = (it.t === "vid" && it.shown ? fmt(it.shown) + (it.shown < it.dur - 2 ? " excerpt of " + fmt(it.dur) : "") + " · " : "") + `${i + 1} of ${list.length}`;
+  $("#lb").hidden = false; lock(); $("#lbClose").focus();
+  if (window.gsap && !reduce) gsap.fromTo(st.firstElementChild, { scale: .94, opacity: 0 }, { scale: 1, opacity: 1, duration: .5, ease: "power3.out" });
 }
+function closeLB() { $("#lbStage").innerHTML = ""; $("#lb").hidden = true; unlock(); LB.last?.focus(); LB.last = null; }
+$("#lbClose").onclick = closeLB;
+$("#lbPrev").onclick = () => openLB(LB.list, (LB.i - 1 + LB.list.length) % LB.list.length);
+$("#lbNext").onclick = () => openLB(LB.list, (LB.i + 1) % LB.list.length);
+$("#lb").addEventListener("click", e => { if (e.target.id === "lb" || e.target.id === "lbStage") closeLB(); });
 
-// ---- filters ----
-const cats = ["All", "Motion", "Campaigns", "Brand", "Editorial", "Illustration"];
-const fwrap = document.getElementById("filters");
-let current = "All";
-try { const saved = localStorage.getItem("nd-filter"); if (cats.includes(saved)) current = saved; } catch (e) {}
-cats.forEach(c => {
-  const n = c === "All" ? ITEMS.length : ITEMS.filter(x => x.cat === c).length;
+// ---------- hero film ----------
+const realm = FILMS.find(f => f.id === "realm") || FILMS[0];
+const playRealm = () => openLB([{ ...realm, title: "Realm Strider: Echoes of Nyame" }], 0);
+$("#filmPlay").onclick = playRealm; $("#heroPlay").onclick = playRealm;
+$("#film").addEventListener("click", e => { if (!e.target.closest("button")) playRealm(); });
+
+// ---------- statement: wrap words ----------
+(() => {
+  const p = $("#statement");
+  const walk = n => [...n.childNodes].forEach(c => {
+    if (c.nodeType === 3) { const f = document.createDocumentFragment(); c.textContent.split(/(\s+)/).forEach(w => { if (!w) return; if (/^\s+$/.test(w)) return f.appendChild(document.createTextNode(" ")); const s = document.createElement("span"); s.className = "w" + (n.classList?.contains("g") ? " g" : ""); s.textContent = w; f.appendChild(s); }); c.replaceWith(f); }
+    else if (c.nodeType === 1) walk(c);
+  });
+  walk(p);
+})();
+
+// ---------- Orijin gallery ----------
+const caseList = CASE.map(c => ({ t: "img", src: `assets/img/${c.id}.webp`, title: "Orijin · " + c.cap }));
+CASE.forEach((c, k) => {
+  const b = document.createElement("button"); b.type = "button"; b.dataset.label = "View";
+  b.innerHTML = `<figure><div class="pic"><img src="assets/img/${c.id}.webp" alt="Orijin campaign: ${c.cap}" loading="lazy" width="${c.w}" height="${c.h}"></div><figcaption>${c.cap}</figcaption></figure>`;
+  b.onclick = () => openLB(caseList, k);
+  $("#caseRow").appendChild(b);
+});
+
+// ---------- projects grid ----------
+const grid = $("#grid");
+PROJ.forEach((p, k) => {
   const b = document.createElement("button");
-  b.type = "button"; b.className = "chip"; b.id = "f-" + c.toLowerCase();
-  b.innerHTML = `${c}<small>${n}</small>`;
-  b.addEventListener("click", () => setFilter(c));
-  fwrap.appendChild(b);
+  b.type = "button"; b.className = "proj"; b.dataset.cat = p.cat; b.dataset.label = "Open";
+  const v = p.items.find(i => i.t === "vid");
+  const thumbs = p.items.slice(1, 4).map(i => `<i style="background-image:url('${i.t === "vid" ? poster(i.id) : i.src}')"></i>`).join("");
+  const nImg = p.items.filter(i => i.t === "img").length, nVid = p.items.length - nImg;
+  const count = [nVid ? `${nVid} film${nVid > 1 ? "s" : ""}` : "", nImg ? `${nImg} design${nImg > 1 ? "s" : ""}` : ""].filter(Boolean).join(" · ");
+  b.innerHTML = `<div class="cover"><img src="${coverOf(p)}" alt="" loading="lazy">${v ? `<video muted loop playsinline preload="none" data-src="assets/vid/${v.id}-loop.mp4"></video>` : ""}<span class="badge">${p.cat}</span>${p.items.length > 1 ? `<span class="stack">${thumbs}</span>` : ""}</div>
+    <div class="meta"><h3>${p.title}</h3><span>${p.client} · ${count}</span><span class="more">Open project</span></div>`;
+  b.onclick = () => openSheet(k);
+  if (v) {
+    const vid = b.querySelector("video");
+    b._play = () => { if (!vid.src) vid.src = vid.dataset.src; vid.play().then(() => b.classList.add("playing")).catch(() => {}); };
+    b._stop = () => { vid.pause(); b.classList.remove("playing"); };
+    b.addEventListener("mouseenter", b._play); b.addEventListener("mouseleave", b._stop);
+  }
+  grid.appendChild(b);
+});
+const cats = ["All", "Brand", "Film", "Campaigns", "Illustration"];
+let current = "All";
+try { const s = localStorage.getItem("nd-cat"); if (cats.includes(s)) current = s; } catch (e) {}
+cats.forEach(c => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "chip"; b.id = "f-" + c.toLowerCase(); b.textContent = c;
+  b.onclick = () => setFilter(c); $("#filters").appendChild(b);
 });
 function setFilter(c) {
-  current = c;
-  try { localStorage.setItem("nd-filter", c); } catch (e) {}
-  fwrap.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.id === "f-" + c.toLowerCase()));
-  const cards = [...wall.children];
-  cards.forEach(el => el.classList.toggle("hide", c !== "All" && el.dataset.cat !== c));
-  if (window.gsap && !reduce) gsap.fromTo(cards.filter(el => !el.classList.contains("hide")), { y: 24 }, { y: 0, duration: .5, stagger: .025, ease: "power3.out" });
+  current = c; try { localStorage.setItem("nd-cat", c); } catch (e) {}
+  document.querySelectorAll(".chip").forEach(b => b.setAttribute("aria-pressed", b.id === "f-" + c.toLowerCase()));
+  const cards = [...grid.children]; cards.forEach(el => el.classList.toggle("hide", c !== "All" && el.dataset.cat !== c));
+  if (window.gsap && !reduce) gsap.fromTo(cards.filter(e => !e.classList.contains("hide")), { y: 30, opacity: .3 }, { y: 0, opacity: 1, duration: .55, stagger: .04, ease: "power3.out" });
   window.ScrollTrigger?.refresh();
 }
 setFilter(current);
 
-// ---- showreel strip ----
-const track = document.getElementById("track");
-const reel = ITEMS.filter(x => x.kind === "video");
-[...reel, ...reel].forEach((it, k) => {
-  const b = document.createElement("button");
-  b.type = "button"; b.className = "frame-cell"; b.setAttribute("aria-label", "Watch " + it.title);
-  if (k >= reel.length) b.tabIndex = -1;
-  b.innerHTML = reduce
-    ? `<img src="assets/img/${it.id}-poster.webp" alt="">`
-    : `<video src="assets/vid/${it.id}-loop.mp4" poster="assets/img/${it.id}-poster.webp" muted loop playsinline autoplay preload="metadata"></video>`;
-  b.insertAdjacentHTML("beforeend", `<span class="tc">${it.title} · ${fmt(it.dur)}</span>`);
-  b.addEventListener("click", () => openLB(ITEMS.indexOf(it)));
-  track.appendChild(b);
-});
-document.getElementById("reelBtn").addEventListener("click", () => openLB(ITEMS.findIndex(x => x.id === "hundred")));
-
-// ---- Orijin case gallery ----
-const caseRow = document.getElementById("caseRow");
-const CASE = [{"id": "orijin-kv1", "cap": "Key visual: The Taste of Celebration", "w": 1600, "h": 1008}, {"id": "orijin-kv2", "cap": "Key visual: Orijin Pride", "w": 1599, "h": 1600}, {"id": "orijin-illo", "cap": "Illustrated key visual: 8 years of Ghanaian rhythm", "w": 1600, "h": 873}, {"id": "orijin-fest", "cap": "Orijin Pride Fest poster", "w": 1131, "h": 1600}, {"id": "orijin-label", "cap": "Anniversary label", "w": 1600, "h": 956}, {"id": "orijin-bill", "cap": "Billboard", "w": 1600, "h": 1600}, {"id": "orijin-bill2", "cap": "Billboard, human-centred", "w": 1600, "h": 1600}, {"id": "orijin-shelter", "cap": "Bus-shelter posters", "w": 1600, "h": 1066}, {"id": "orijin-bottle", "cap": "Anniversary bottle", "w": 1346, "h": 1600}, {"id": "orijin-tee", "cap": "Merch T-shirt", "w": 1551, "h": 1600}, {"id": "orijin-coaster", "cap": "Coasters", "w": 1600, "h": 1120}, {"id": "orijin-flags", "cap": "Event flags", "w": 1600, "h": 1067}];
-CASE.forEach((c, k) => {
-  const b = document.createElement("button"); b.type = "button";
-  b.innerHTML = `<figure style="margin:0"><img src="assets/img/${c.id}.webp" alt="Orijin campaign: ${c.cap}" loading="lazy" width="${c.w}" height="${c.h}"><figcaption>${c.cap}</figcaption></figure>`;
-  b.addEventListener("click", () => openCase(k));
-  caseRow.appendChild(b);
-});
-let inCase = false;
-function openCase(k) {
-  inCase = true; li = k; lastFocus = document.activeElement;
-  const c = CASE[k];
-  stage.innerHTML = `<img src="assets/img/${c.id}.webp" alt="Orijin campaign: ${c.cap}">`;
-  document.getElementById("lbTitle").textContent = c.cap;
-  document.getElementById("lbBlurb").textContent = "Orijin 8th-anniversary campaign concept.";
-  document.getElementById("lbMeta").textContent = `Orijin · ${k + 1} of ${CASE.length}`;
-  lb.hidden = false; document.body.style.overflow = "hidden"; document.getElementById("lbClose").focus();
+// ---------- project sheet ----------
+let sheetLast = null;
+function openSheet(k) {
+  const p = PROJ[k]; sheetLast = document.activeElement;
+  $("#shHead").textContent = p.title; $("#shTitle").textContent = p.title; $("#shCat").textContent = p.cat;
+  $("#shBlurb").textContent = p.blurb;
+  const nImg = p.items.filter(i => i.t === "img").length, nVid = p.items.length - nImg;
+  $("#shFacts").innerHTML = `<div><small>Client</small><span>${p.client}</span></div><div><small>Year</small><span>${p.year}</span></div><div><small>Discipline</small><span>${p.cat}</span></div><div><small>In this project</small><span>${[nVid ? nVid + " film" + (nVid > 1 ? "s" : "") : "", nImg ? nImg + " design" + (nImg > 1 ? "s" : "") : ""].filter(Boolean).join(", ")}</span></div>`;
+  const list = p.items.map((it, n) => ({ ...it, title: `${p.title}${p.items.length > 1 ? " · " + (n + 1) : ""}` }));
+  const box = $("#shItems"); box.innerHTML = "";
+  list.forEach((it, n) => {
+    const b = document.createElement("button"); b.type = "button"; b.dataset.label = it.t === "vid" ? "Play" : "View";
+    b.innerHTML = it.t === "vid"
+      ? `<img src="${poster(it.id)}" alt="${it.title}" loading="lazy"><span class="vbadge">▶ Play film${it.shown ? " · " + fmt(it.shown) : ""}</span>`
+      : `<img src="${it.src}" alt="${it.title}" loading="lazy" width="${it.w}" height="${it.h}">`;
+    b.onclick = () => openLB(list, n);
+    box.appendChild(b);
+  });
+  $("#sheet").hidden = false; $("#sheetPanel").scrollTop = 0; lock(); $("#shClose").focus();
+  if (window.gsap && !reduce) {
+    gsap.fromTo("#sheetPanel", { yPercent: 100 }, { yPercent: 0, duration: .7, ease: "power4.out" });
+    gsap.fromTo("#shItems button", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: .6, stagger: .04, delay: .25, ease: "power3.out" });
+  }
 }
-
-// ---- clients marquee ----
-const clients = ["EduSpots", "ADventure Offshore", "University of Ghana · IAS", "Shi.E.L.D. Services", "Excellence Touch Medical", "Vertex Energy", "LeafGlow", "Assemblies of God Ghana", "LSD-YSN", "Carifika Inc", "ImagineArt", "OpenArt", "PixVerse", "Flick", "Pixmax.ai"];
-document.getElementById("marq").innerHTML = [...clients, ...clients].map(c => `<span>${c}</span>`).join("");
-
-// ---- rotating role word ----
-const words = ["social campaigns", "brand systems", "annual reports", "motion graphics", "AI films", "illustration"];
-let wi = 0; const swap = document.getElementById("swap");
-if (!reduce) setInterval(() => {
-  wi = (wi + 1) % words.length;
-  if (window.gsap) gsap.to(swap, { yPercent: -60, opacity: 0, duration: .25, onComplete: () => { swap.textContent = words[wi]; gsap.fromTo(swap, { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, duration: .35, ease: "back.out(2)" }); } });
-  else swap.textContent = words[wi];
-}, 2600);
-
-// ---- lightbox ----
-const lb = document.getElementById("lb"), stage = document.getElementById("lbStage");
-let li = 0, lastFocus = null;
-function visibleIdx() { return ITEMS.map((x, i) => i).filter(i => current === "All" || ITEMS[i].cat === current || ITEMS[i].kind === "video" && current === "Motion"); }
-function openLB(i) {
-  inCase = false; li = i; lastFocus = document.activeElement;
-  const it = ITEMS[i];
-  stage.innerHTML = it.kind === "video"
-    ? `<video src="assets/vid/${it.id}.mp4" poster="assets/img/${it.id}-poster.webp" controls autoplay playsinline></video>`
-    : `<img src="assets/img/${it.id}.webp" alt="${it.title}">`;
-  document.getElementById("lbTitle").textContent = it.title;
-  document.getElementById("lbBlurb").textContent = it.blurb;
-  document.getElementById("lbMeta").textContent = it.client + " · " + it.cat + (it.kind === "video" ? " · " + fmt(it.shown) + (it.shown < it.dur ? " of " + fmt(it.dur) : "") : "");
-  lb.hidden = false; document.body.style.overflow = "hidden";
-  document.getElementById("lbClose").focus();
-  if (window.gsap && !reduce) gsap.fromTo(stage.firstElementChild, { scale: .94, opacity: 0 }, { scale: 1, opacity: 1, duration: .45, ease: "power3.out" });
+function closeSheet() {
+  const done = () => { $("#sheet").hidden = true; unlock(); sheetLast?.focus(); };
+  if (window.gsap && !reduce) gsap.to("#sheetPanel", { yPercent: 100, duration: .45, ease: "power3.in", onComplete: done }); else done();
 }
-function closeLB() { stage.innerHTML = ""; lb.hidden = true; document.body.style.overflow = ""; lastFocus?.focus(); }
-function step(d) { if (inCase) return openCase((li + d + CASE.length) % CASE.length); const v = visibleIdx(); const p = v.indexOf(li); openLB(v[(p + d + v.length) % v.length] ?? 0); }
-document.getElementById("lbClose").onclick = closeLB;
-document.getElementById("lbPrev").onclick = () => step(-1);
-document.getElementById("lbNext").onclick = () => step(1);
-lb.addEventListener("click", e => { if (e.target === lb || e.target === stage) closeLB(); });
-addEventListener("keydown", e => { if (lb.hidden) return; if (e.key === "Escape") closeLB(); if (e.key === "ArrowRight") step(1); if (e.key === "ArrowLeft") step(-1); });
+$("#shClose").onclick = closeSheet;
+$("#sheet").addEventListener("click", e => { if (e.target.id === "sheet") closeSheet(); });
 
-// ---- copy email ----
-document.getElementById("copyBtn").addEventListener("click", async () => {
-  const t = document.getElementById("email").textContent, btn = document.getElementById("copyBtn");
-  try { await navigator.clipboard.writeText(t); btn.textContent = "Copied"; }
-  catch (e) { const r = document.createRange(); r.selectNodeContents(document.getElementById("email")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected, press Ctrl+C"; }
-  setTimeout(() => btn.textContent = "Copy email", 2200);
+// ---------- books + flipbook ----------
+BOOKS.forEach((bk, k) => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "book"; b.dataset.label = "Open";
+  b.style.setProperty("--ar", `${bk.w} / ${bk.h}`);
+  b.innerHTML = `<div class="b3d"><div class="spine"></div><div class="front"><img src="${bk.pages[0]}" alt="${bk.title} cover" loading="lazy"></div></div>
+    <h3>${bk.title}</h3><span>${bk.client} · ${bk.total} pages</span><br><span class="more">Open the book</span>`;
+  b.onclick = () => openBook(k);
+  $("#shelf").appendChild(b);
+});
+let flip = null, fbLast = null;
+function openBook(k) {
+  const bk = BOOKS[k]; fbLast = document.activeElement;
+  $("#fbTitle").textContent = bk.title;
+  $("#fbSub").textContent = bk.total > bk.pages.length ? `First ${bk.pages.length} of ${bk.total} pages` : `${bk.total} pages`;
+  $("#fb").hidden = false; lock(); $("#fbClose").focus();
+  const stage = $("#fbStage"); stage.innerHTML = '<div id="flip"></div>';
+  const H = stage.clientHeight - 20, W = stage.clientWidth;
+  const portrait = W < 760;
+  let h = H, w = Math.round(h * bk.w / bk.h);
+  const maxW = portrait ? W : W / 2;
+  if (w > maxW) { w = Math.floor(maxW); h = Math.round(w * bk.h / bk.w); }
+  if (window.St?.PageFlip) {
+    flip = new St.PageFlip($("#flip"), { width: w, height: h, size: "fixed", showCover: true, usePortrait: portrait, maxShadowOpacity: .45, mobileScrollSupport: false, flippingTime: reduce ? 1 : 900 });
+    const nodes = bk.pages.map((src, i) => { const d = document.createElement("div"); d.className = "page"; d.dataset.density = (i === 0 || i === bk.pages.length - 1) ? "hard" : "soft"; d.innerHTML = `<img src="${src}" alt="Page ${i + 1}" draggable="false">`; return d; });
+    nodes.forEach(n => $("#flip").appendChild(n));
+    flip.loadFromHTML(nodes);
+    const upd = () => $("#fbPage").textContent = `Page ${flip.getCurrentPageIndex() + 1} of ${bk.pages.length}`;
+    flip.on("flip", upd); upd();
+    $("#fbPrev").onclick = () => flip.flipPrev(); $("#fbNext").onclick = () => flip.flipNext();
+  } else {
+    // simple fallback: page through images
+    let i = 0; const show = () => { $("#flip").innerHTML = `<img src="${bk.pages[i]}" alt="Page ${i + 1}" style="max-height:${H}px">`; $("#fbPage").textContent = `Page ${i + 1} of ${bk.pages.length}`; };
+    show(); $("#fbPrev").onclick = () => { i = Math.max(0, i - 1); show(); }; $("#fbNext").onclick = () => { i = Math.min(bk.pages.length - 1, i + 1); show(); };
+  }
+}
+function closeBook() { try { flip?.destroy(); } catch (e) {} flip = null; $("#fbStage").innerHTML = ""; $("#fb").hidden = true; unlock(); fbLast?.focus(); }
+$("#fbClose").onclick = closeBook;
+
+addEventListener("keydown", e => {
+  if (!$("#lb").hidden) { if (e.key === "Escape") closeLB(); if (e.key === "ArrowRight") $("#lbNext").click(); if (e.key === "ArrowLeft") $("#lbPrev").click(); return; }
+  if (!$("#fb").hidden) { if (e.key === "Escape") closeBook(); if (e.key === "ArrowRight") $("#fbNext").click(); if (e.key === "ArrowLeft") $("#fbPrev").click(); return; }
+  if (!$("#sheet").hidden && e.key === "Escape") closeSheet();
 });
 
-// ---- cursor ----
-const cur = document.querySelector(".cursor");
-if (matchMedia("(pointer: fine)").matches && !reduce) {
-  addEventListener("mousemove", e => { cur.style.left = e.clientX + "px"; cur.style.top = e.clientY + "px"; });
-  document.querySelectorAll("a, button").forEach(el => { el.addEventListener("mouseenter", () => cur.classList.add("big")); el.addEventListener("mouseleave", () => cur.classList.remove("big")); });
+// ---------- portrait: colour swap on hover / tap, with tilt ----------
+(() => {
+  const frame = $("#meFrame"), shots = [...frame.querySelectorAll(".shot")], sw = [...document.querySelectorAll(".swatches button")];
+  const GLOW = ["rgb(255 91 36 / .55)", "rgb(142 63 208 / .55)", "rgb(160 160 165 / .45)"];
+  const BG = ["#ff5b24", "#8e3fd0", "#8f8f93"];
+  let cur = 0, busy = false;
+  const portrait = frame.closest(".portrait");
+  function go(n, x = 50, y = 40) {
+    if (n === cur || busy) return; busy = true;
+    const next = shots[n];
+    frame.style.setProperty("--cx", x + "%"); frame.style.setProperty("--cy", y + "%");
+    next.style.zIndex = 2; shots[cur].style.zIndex = 1;
+    const done = () => { shots.forEach((s, i) => { s.classList.toggle("on", i === n); s.style.zIndex = i === n ? 1 : 0; }); cur = n; busy = false; };
+    portrait.style.setProperty("--glow", GLOW[n]); frame.style.background = BG[n];
+    sw.forEach((b, i) => b.setAttribute("aria-pressed", String(i === n)));
+    if (window.gsap && !reduce) {
+      next.classList.remove("on");
+      gsap.fromTo(next, { clipPath: `circle(0% at ${x}% ${y}%)`, scale: 1.12 }, { clipPath: `circle(150% at ${x}% ${y}%)`, scale: 1, duration: .9, ease: "power3.inOut", onComplete: () => { gsap.set(next, { clearProps: "clipPath,scale" }); done(); } });
+      gsap.fromTo(frame, { scale: .97 }, { scale: 1, duration: .8, ease: "elastic.out(1,.5)" });
+    } else done();
+  }
+  frame.addEventListener("mouseenter", e => { const r = frame.getBoundingClientRect(); go((cur + 1) % shots.length, (e.clientX - r.left) / r.width * 100, (e.clientY - r.top) / r.height * 100); });
+  frame.addEventListener("click", e => { const r = frame.getBoundingClientRect(); go((cur + 1) % shots.length, (e.clientX - r.left) / r.width * 100, (e.clientY - r.top) / r.height * 100); });
+  sw.forEach((b, i) => b.addEventListener("click", () => go(i)));
+  if (fine && !reduce) {
+    frame.addEventListener("mousemove", e => { const r = frame.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; gsap.to(frame, { rotateY: x * 16, rotateX: -y * 14, transformPerspective: 900, duration: .5, ease: "power2.out" }); });
+    frame.addEventListener("mouseleave", () => gsap.to(frame, { rotateY: 0, rotateX: 0, duration: .8, ease: "elastic.out(1,.5)" }));
+  }
+  // gentle idle float so the photo feels alive
+  if (window.gsap && !reduce) gsap.to(frame, { y: -10, duration: 2.6, yoyo: true, repeat: -1, ease: "sine.inOut" });
+})();
+
+// ---------- marquee ----------
+const clients = ["EduSpots", "ADventure Offshore", "University of Ghana", "Shi.E.L.D. Services", "Excellence Touch Medical", "Vertex Energy", "LeafGlow", "Assemblies of God Ghana", "LSD-YSN", "GenHQ", "ImagineArt", "OpenArt", "PixVerse", "Flick", "Pixmax.ai"];
+const marq = $("#marq"); marq.innerHTML = [...clients, ...clients].map(c => `<span>${c}</span>`).join("");
+
+// ---------- copy email ----------
+$("#copyBtn").addEventListener("click", async () => {
+  const btn = $("#copyBtn");
+  try { await navigator.clipboard.writeText($("#email").textContent); btn.textContent = "Copied"; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents($("#email")); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = "Selected"; }
+  setTimeout(() => btn.textContent = "Copy email", 2000);
+});
+
+// ---------- cursor + magnetic ----------
+if (fine && !reduce) {
+  const cur = $(".cursor"), ring = $(".cursor-ring");
+  let mx = innerWidth / 2, my = innerHeight / 2, rx = mx, ry = my;
+  addEventListener("mousemove", e => { mx = e.clientX; my = e.clientY; cur.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`; });
+  (function loop() { rx += (mx - rx) * .18; ry += (my - ry) * .18; ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`; requestAnimationFrame(loop); })();
+  document.addEventListener("mouseover", e => { const t = e.target.closest("[data-label]"); ring.classList.toggle("big", !!t); ring.textContent = t ? t.dataset.label : ""; });
+  document.querySelectorAll(".magnetic").forEach(el => {
+    el.addEventListener("mousemove", e => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * .25}px,${(e.clientY - r.top - r.height / 2) * .35}px)`; });
+    el.addEventListener("mouseleave", () => { el.style.transition = "transform .5s cubic-bezier(.2,.9,.3,1.4)"; el.style.transform = ""; setTimeout(() => el.style.transition = "", 500); });
+  });
 }
 
-// ---- motion (GSAP). Everything is visible without it; these only move things in. ----
-if (window.gsap && !reduce) {
+// ---------- three.js film reel ----------
+function initReel() {
+  const canvas = $("#gl"), fb = $("#glFallback");
+  const fallback = () => {
+    canvas.hidden = true; fb.hidden = false;
+    fb.innerHTML = FILMS.map((f, i) => `<button type="button" data-i="${i}" aria-label="Play ${f.title}"><img src="${poster(f.id)}" alt="" loading="lazy"></button>`).join("");
+    fb.querySelectorAll("button").forEach(b => b.onclick = () => openLB(FILMS, +b.dataset.i));
+  };
+  if (!window.THREE || reduce) return fallback();
+  let renderer; try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); } catch (e) { return fallback(); }
+  const small = innerWidth < 760;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  const scene = new THREE.Scene(); scene.fog = new THREE.Fog(0x1d1d1f, 12, 26);
+  const camera = new THREE.PerspectiveCamera(small ? 52 : 34, 1, .1, 100); camera.position.set(0, 1.4, small ? 15 : 17);
+  const group = new THREE.Group(); scene.add(group);
+  const N = FILMS.length, R = small ? 5.6 : 7.2, H = 2.3, arc = Math.PI * 2 / N * .8;
+  const panels = [], videos = [];
+  FILMS.forEach((it, i) => {
+    const v = document.createElement("video");
+    Object.assign(v, { src: `assets/vid/${it.id}-loop.mp4`, muted: true, loop: true, playsInline: true, preload: "auto" });
+    v.setAttribute("muted", ""); v.setAttribute("playsinline", ""); videos.push(v);
+    const tex = new THREE.VideoTexture(v); tex.colorSpace = THREE.SRGBColorSpace;
+    const pst = new THREE.TextureLoader().load(poster(it.id)); pst.colorSpace = THREE.SRGBColorSpace;
+    const mat = new THREE.MeshBasicMaterial({ map: pst, side: THREE.DoubleSide });
+    v.addEventListener("playing", () => { mat.map = tex; mat.needsUpdate = true; }, { once: true });
+    const w = it.vertical ? arc * .42 : arc, h = it.vertical ? H * 1.3 : H;
+    const m = new THREE.Mesh(new THREE.CylinderGeometry(R, R, h, 24, 1, true, -w / 2, w), mat);
+    m.rotation.y = i * Math.PI * 2 / N; m.position.y = Math.sin(i * 1.9) * .45;
+    m.userData = { i, base: m.position.y }; group.add(m); panels.push(m);
+  });
+  // reflection-like floor glow and green particles
+  const floor = new THREE.Mesh(new THREE.CircleGeometry(R * 1.35, 64), new THREE.MeshBasicMaterial({ color: 0x8db600, transparent: true, opacity: .06 }));
+  floor.rotation.x = -Math.PI / 2; floor.position.y = -2; group.add(floor);
+  const P = small ? 500 : 1200, pos = new Float32Array(P * 3);
+  for (let i = 0; i < P; i++) { const r = 2 + Math.random() * 13, t = Math.random() * Math.PI * 2; pos.set([Math.cos(t) * r, (Math.random() - .5) * 10, Math.sin(t) * r], i * 3); }
+  const pg = new THREE.BufferGeometry(); pg.setAttribute("position", new THREE.BufferAttribute(pos, 3));
+  const points = new THREE.Points(pg, new THREE.PointsMaterial({ color: 0xa4d10f, size: .045, transparent: true, opacity: .6, depthWrite: false, blending: THREE.AdditiveBlending }));
+  scene.add(points);
+  const size = () => { const w = canvas.clientWidth, h = canvas.clientHeight; renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); };
+  size(); addEventListener("resize", size);
+  let spin = .002, vel = 0, drag = false, lastX = 0, moved = 0, px = 0, py = 0, hover = null, visible = false, enter = 0;
+  const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(-9, -9), label = $("#glLabel");
+  canvas.addEventListener("pointerdown", e => { drag = true; moved = 0; lastX = e.clientX; canvas.classList.add("drag"); canvas.setPointerCapture(e.pointerId); });
+  canvas.addEventListener("pointermove", e => {
+    const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); px = ndc.x; py = ndc.y;
+    if (drag) { const dx = e.clientX - lastX; vel = dx * .004; moved += Math.abs(dx); lastX = e.clientX; }
+    label.style.left = e.clientX + "px"; label.style.top = e.clientY + "px";
+  });
+  canvas.addEventListener("pointerup", () => { if (!drag) return; drag = false; canvas.classList.remove("drag"); if (moved < 6 && hover) openLB(FILMS, hover.userData.i); });
+  canvas.addEventListener("pointercancel", () => drag = false);
+  canvas.addEventListener("pointerleave", () => { ndc.set(-9, -9); label.hidden = true; });
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; videos.forEach(v => visible ? v.play().catch(() => {}) : v.pause()); }, { threshold: .05 }).observe(canvas);
+  ScrollTrigger.create({ trigger: ".stage3d", start: "top bottom", end: "bottom top", onUpdate: s => enter = s.progress });
+  const clock = new THREE.Clock();
+  (function render() {
+    requestAnimationFrame(render); if (!visible) return;
+    const t = clock.getElapsedTime();
+    vel *= .94; group.rotation.y += spin + vel + 0;
+    group.rotation.x += (py * .1 + .05 - group.rotation.x) * .05;
+    camera.position.x += (px * 1.6 - camera.position.x) * .04;
+    camera.position.y = 1.4 + (enter - .5) * 2.4;
+    camera.lookAt(0, -.2, 0);
+    points.rotation.y = t * .03;
+    panels.forEach(p => p.position.y = p.userData.base + Math.sin(t * .8 + p.userData.i) * .1);
+    ray.setFromCamera(ndc, camera);
+    const hit = ray.intersectObjects(panels)[0]?.object || null;
+    if (hit !== hover) {
+      if (hover) gsap.to(hover.scale, { x: 1, y: 1, z: 1, duration: .4 });
+      hover = hit;
+      if (hover) { gsap.to(hover.scale, { x: 1.05, y: 1.1, z: 1.05, duration: .4 }); label.textContent = "▶ " + FILMS[hover.userData.i].title; label.hidden = false; spin = .0005; }
+      else { label.hidden = true; spin = .002; }
+    }
+    renderer.render(scene, camera);
+  })();
+}
+
+// ---------- motion ----------
+function blurIn(targets, trigger, opts = {}) {
+  return gsap.from(targets, { y: 40, opacity: 0, filter: "blur(12px)", duration: 1.1, stagger: .08, ease: "power3.out", clearProps: "filter", ...opts, scrollTrigger: trigger ? { trigger, start: "top 86%" } : undefined });
+}
+function startMotion() {
+  if (!window.gsap) return;
   gsap.registerPlugin(ScrollTrigger);
-  const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-  tl.from(".hero h1 .line > span", { yPercent: 105, duration: 1.1, stagger: .12 })
-    .from(".portrait .frame", { rotate: 12, scale: .85, duration: 1.2, ease: "elastic.out(1, .6)" }, .1)
-    .from(".portrait .weave", { scaleX: 0, transformOrigin: "left", duration: .8 }, .5)
-    .from(".sticker", { scale: 0, duration: .6, stagger: .12, ease: "back.out(3)" }, .7);
-  // portrait tilt toward pointer
-  const pf = document.querySelector(".portrait");
-  if (matchMedia("(pointer: fine)").matches) pf.addEventListener("mousemove", e => {
-    const r = pf.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-    gsap.to(".portrait .frame", { rotateY: x * 14, rotateX: -y * 14, rotate: 2.5, transformPerspective: 800, duration: .5 });
-  });
-  pf.addEventListener("mouseleave", () => gsap.to(".portrait .frame", { rotateY: 0, rotateX: 0, duration: .6 }));
-  // stats count up
-  document.querySelectorAll("[data-count]").forEach(el => {
-    const n = +el.dataset.count, suf = el.textContent.replace(/\d+/, ""), o = { v: 0 };
-    ScrollTrigger.create({ trigger: el, start: "top 90%", once: true, onEnter: () => gsap.to(o, { v: n, duration: 1.4, ease: "power2.out", onUpdate: () => el.textContent = Math.round(o.v) + suf }) });
-  });
-  // section headings slide up
-  gsap.utils.toArray(".sec-head h2, .about h2, .contact h2").forEach(h => gsap.from(h, { y: 60, duration: 1, ease: "power3.out", scrollTrigger: { trigger: h, start: "top 92%" } }));
-  ScrollTrigger.batch(".card", { start: "top 95%", once: true, onEnter: els => gsap.from(els, { y: 50, rotate: () => gsap.utils.random(-2, 2), duration: .8, stagger: .06, ease: "power3.out" }) });
-  gsap.from(".about-photo img", { scale: 1.2, ease: "none", scrollTrigger: { trigger: ".about-photo", start: "top bottom", end: "bottom top", scrub: true } });
-  // pin the Orijin gallery and scroll it sideways on wide screens
-  ScrollTrigger.matchMedia({ "(min-width: 900px)": () => {
-    const sec = document.querySelector(".case"), row = document.getElementById("caseRow");
-    sec.classList.add("pin");
-    const dist = () => Math.max(0, row.scrollWidth - innerWidth + 64);
-    const t = gsap.to(row, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: sec, start: () => sec.offsetHeight > innerHeight ? "bottom bottom" : "top top", end: () => "+=" + dist(), pin: true, scrub: .6, invalidateOnRefresh: true } });
-    return () => { sec.classList.remove("pin"); t.scrollTrigger?.kill(); t.kill(); gsap.set(row, { x: 0 }); };
+  initReel();
+  if (reduce) return;
+  if (window.Lenis) {
+    lenis = new Lenis({ lerp: .09, smoothWheel: true });
+    lenis.on("scroll", ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000)); gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener("click", e => { const t = document.querySelector(a.getAttribute("href")); if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -52, duration: 1.4 }); } }));
+  }
+  // hero: blur-in sequence
+  gsap.timeline({ defaults: { ease: "power3.out" } })
+    .from(".hero .who", { y: 20, opacity: 0, filter: "blur(10px)", duration: .9, clearProps: "filter" })
+    .from(".hero h1", { y: 50, opacity: 0, filter: "blur(18px)", scale: .96, duration: 1.3, clearProps: "filter" }, .1)
+    .from(".hero .sub, .hero .ctas", { y: 24, opacity: 0, filter: "blur(10px)", duration: 1, stagger: .12, clearProps: "filter" }, .45)
+    .from("#film", { y: 80, opacity: 0, duration: 1.4 }, .5);
+  // showcase: film grows to full bleed, headline drifts away
+  ScrollTrigger.matchMedia({ "(min-width: 761px)": () => {
+    const tl = gsap.timeline({ scrollTrigger: { trigger: "#showcase", start: "top 60%", end: "bottom bottom", scrub: .8 } });
+    tl.fromTo("#film", { width: "78vw", borderRadius: 28 }, { width: "100vw", borderRadius: 0, ease: "none" })
+      .fromTo("#heroVid", { scale: 1.12 }, { scale: 1, ease: "none" }, 0);
   } });
+  gsap.to(".hero .wrap", { yPercent: -40, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
+  // statement words light up
+  const words = gsap.utils.toArray("#statement .w");
+  ScrollTrigger.create({ trigger: ".statement", start: "top 75%", end: "bottom 55%", scrub: true, onUpdate: s => { const n = Math.round(s.progress * words.length); words.forEach((w, i) => w.classList.toggle("on", i < n)); } });
+  // headings
+  gsap.utils.toArray(".reveal").forEach(el => { if (!el.closest(".hero")) blurIn(el, el); });
+  blurIn(".intro p, .stats .stat", ".intro");
+  // parallax
+  gsap.utils.toArray("[data-speed]").forEach(el => gsap.to(el, { y: () => parseFloat(el.dataset.speed) * 600, ease: "none", scrollTrigger: { trigger: el.closest("section"), start: "top bottom", end: "bottom top", scrub: true } }));
+  gsap.fromTo(".portrait .shot", { yPercent: -8 }, { yPercent: 4, ease: "none", scrollTrigger: { trigger: ".portrait", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.fromTo("#aboutImg", { yPercent: -10, scale: 1.08 }, { yPercent: 0, scale: 1, ease: "none", scrollTrigger: { trigger: ".about-photo", start: "top bottom", end: "bottom top", scrub: true } });
+  gsap.from(".portrait .frame", { scale: .85, rotate: -6, duration: 1.4, ease: "elastic.out(1,.7)", scrollTrigger: { trigger: ".portrait", start: "top 80%" } });
+  // counters
+  document.querySelectorAll("[data-count]").forEach(el => { const n = +el.dataset.count, suf = el.dataset.suf, o = { v: 0 }; ScrollTrigger.create({ trigger: el, start: "top 92%", once: true, onEnter: () => gsap.to(o, { v: n, duration: 1.6, ease: "power2.out", onUpdate: () => el.textContent = Math.round(o.v) + suf }) }); });
+  // project cards
+  ScrollTrigger.batch(".proj", { start: "top 92%", once: true, onEnter: els => gsap.from(els, { y: 80, opacity: 0, scale: .96, duration: 1, stagger: .08, ease: "power3.out" }) });
+  // books rise and turn
+  gsap.from(".book .b3d", { rotateY: -70, y: 60, opacity: 0, duration: 1.4, stagger: .15, ease: "power3.out", scrollTrigger: { trigger: ".shelf", start: "top 85%" } });
+  // Orijin pinned horizontal scroll
+  ScrollTrigger.matchMedia({ "(min-width: 900px)": () => {
+    const sec = $(".case"), row = $("#caseRow"); sec.classList.add("pin");
+    const dist = () => Math.max(0, row.scrollWidth - innerWidth + 80);
+    const tw = gsap.to(row, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: sec, start: () => sec.offsetHeight > innerHeight ? "bottom bottom" : "top top", end: () => "+=" + dist(), pin: true, scrub: .7, invalidateOnRefresh: true } });
+    const sub = gsap.utils.toArray("#caseRow img").map(img => gsap.fromTo(img, { scale: 1.18 }, { scale: 1, ease: "none", scrollTrigger: { trigger: img, containerAnimation: tw, start: "left right", end: "right left", scrub: true } }));
+    return () => { sec.classList.remove("pin"); sub.forEach(t => { t.scrollTrigger?.kill(); t.kill(); }); tw.scrollTrigger?.kill(); tw.kill(); gsap.set(row, { x: 0 }); };
+  } });
+  // marquee speeds with scroll velocity
+  let x = 0, boost = 0;
+  ScrollTrigger.create({ onUpdate: s => boost = Math.min(Math.abs(s.getVelocity()) / 250, 14) });
+  gsap.ticker.add(() => { boost *= .92; x -= .8 + boost; const w = marq.scrollWidth / 2; if (-x > w) x += w; marq.style.transform = `translateX(${x}px)`; });
+  gsap.from(".tags span", { y: 14, opacity: 0, duration: .5, stagger: .02, scrollTrigger: { trigger: ".cols", start: "top 85%" } });
+  gsap.from(".timeline li", { x: 30, opacity: 0, duration: .7, stagger: .08, scrollTrigger: { trigger: ".timeline", start: "top 85%" } });
   addEventListener("load", () => ScrollTrigger.refresh());
-  gsap.to(".contact h2 .o", { rotate: 360, repeat: -1, duration: 6, ease: "none", transformOrigin: "50% 55%", display: "inline-block" });
 }
+
+// ---------- boot (loader never blocks: gone on load or after 2.2s) ----------
+(function boot() {
+  const loader = $("#loader");
+  if (reduce || !window.gsap) { loader.remove(); startMotion(); return; }
+  gsap.to("#loadBar", { width: "85%", duration: 1.2, ease: "power2.out" });
+  let done = false;
+  const finish = () => {
+    if (done) return; done = true;
+    gsap.to("#loadBar", { width: "100%", duration: .25 });
+    gsap.to(loader, { opacity: 0, duration: .6, delay: .3, onComplete: () => loader.remove() });
+    gsap.delayedCall(.35, startMotion);
+  };
+  if (document.readyState === "complete") setTimeout(finish, 700); else addEventListener("load", () => setTimeout(finish, 200));
+  setTimeout(finish, 2200);
+})();
 </script>
 
 </body>
