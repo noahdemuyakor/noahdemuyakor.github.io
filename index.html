@@ -38,7 +38,7 @@ html { overflow-x: clip; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
-body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--body); font-size: 17px; line-height: 1.5; letter-spacing: -.011em; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--body); font-size: 17px; line-height: 1.5; letter-spacing: -.011em; -webkit-font-smoothing: antialiased; }
 body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 60; background: var(--bg); }
 a { color: inherit; }
 img, video { display: block; max-width: 100%; }
@@ -84,6 +84,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 700; letter-spacing: -.03
 .motion-btn b { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
 html.calm .motion-btn b { background: var(--muted); }
 @media (max-width: 720px) { .nav ul li.opt { display: none; } }
+@media (max-width: 480px) {
+  .logo { font-size: 16px; gap: 7px; }
+  .nav .wrap { gap: 8px; }
+  .nav ul { gap: 2px; }
+  .nav ul a { padding: 6px 8px; }
+  .motion-btn { padding: 7px; }
+  .motion-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+}
+@media (max-width: 420px) { .nav .work-link { display: none; } }
 
 /* hero */
 .hero { padding-block: calc(52px + clamp(56px, 9vw, 110px)) 0; text-align: center; }
@@ -97,6 +106,7 @@ html.calm .motion-btn b { background: var(--muted); }
 
 /* showcase: film grows to full bleed on scroll */
 .showcase { height: 210vh; position: relative; margin-top: -9vh; }
+@media (max-width: 760px) { .showcase { margin-top: 44px; } }
 .showcase .stick { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; overflow: hidden; }
 .film { position: relative; width: 78vw; max-width: 100%; aspect-ratio: 16 / 9; max-height: 86vh; border-radius: 28px; overflow: hidden; background: #000; box-shadow: 0 50px 120px -40px rgb(141 182 0 / .25); will-change: width, border-radius; }
 .film video { width: 100%; height: 100%; object-fit: cover; }
@@ -106,7 +116,7 @@ html.calm .motion-btn b { background: var(--muted); }
 .playbtn { width: 64px; height: 64px; border-radius: 50%; background: rgb(245 245 247 / .18); backdrop-filter: blur(14px); border: 0; display: grid; place-items: center; cursor: pointer; transition: transform .3s var(--ease), background .3s; flex: none; }
 .playbtn:hover { transform: scale(1.08); background: var(--green); }
 .playbtn svg { width: 22px; height: 22px; fill: #fff; margin-left: 4px; }
-@media (max-width: 760px) { .showcase { height: auto; margin-top: 40px; } .showcase .stick { position: static; height: auto; padding-inline: var(--gut-l) var(--gut-r); } .film { width: 100%; border-radius: 18px; } }
+@media (max-width: 760px) { .showcase { height: auto; margin-top: 44px; } .showcase .stick { position: static; height: auto; padding-inline: var(--gut-l) var(--gut-r); } .film { width: 100%; border-radius: 18px; aspect-ratio: 3 / 4; max-height: 78vh; } .film .cap { padding-top: 90px; } .playbtn { width: 54px; height: 54px; } }
 
 /* statement: words light up as you scroll */
 .statement { padding-block: clamp(90px, 14vw, 180px); }
@@ -139,6 +149,7 @@ section.pad { padding-block: clamp(90px, 12vw, 160px); position: relative; }
 .portrait .frame .shot.on { clip-path: circle(150% at var(--cx, 50%) var(--cy, 50%)); }
 .portrait .halo { position: absolute; inset: -12%; border-radius: 50%; background: radial-gradient(circle, var(--glow, rgb(141 182 0 / .3)), transparent 62%); filter: blur(14px); z-index: -1; transition: background .6s; animation: breathe 5s ease-in-out infinite; }
 @keyframes breathe { 50% { transform: scale(1.08); opacity: .8; } }
+@media (max-width: 860px) { .intro .portrait { margin-bottom: 64px; } }
 .portrait .swatches { position: absolute; left: 50%; bottom: -46px; transform: translateX(-50%); display: flex; gap: 10px; z-index: 3; }
 .portrait .swatches button { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--bg); box-shadow: 0 0 0 1.5px var(--bg-3); cursor: pointer; padding: 0; transition: transform .3s var(--ease), box-shadow .3s; }
 .portrait .swatches button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--text); transform: scale(1.15); }
@@ -162,6 +173,12 @@ section.pad { padding-block: clamp(90px, 12vw, 160px); position: relative; }
 .case .row p { max-width: 52ch; color: var(--muted); margin: 0; font-size: 18px; }
 .hscroll { margin-top: 34px; overflow-x: auto; padding-left: var(--gut-l); padding-right: var(--gut-r); scrollbar-width: thin; }
 .case.pin .hscroll { overflow: visible; }
+@media (min-width: 900px) and (max-height: 820px) {
+  .case.pin { padding-block: 72px 30px; }
+  .case.pin h2 { font-size: clamp(34px, 4.6vw, 60px); }
+  .case.pin .row p { font-size: 16px; }
+  .case.pin .hscroll { margin-top: 20px; }
+}
 .hrow { display: flex; gap: 20px; width: max-content; padding-bottom: 14px; align-items: flex-end; }
 .hrow button { border: 0; padding: 0; background: none; color: inherit; cursor: pointer; text-align: left; font: inherit; flex: none; }
 .hrow figure { margin: 0; }
@@ -224,13 +241,13 @@ section.pad { padding-block: clamp(90px, 12vw, 160px); position: relative; }
 .books .sec-head p { color: #6e6e73; }
 .shelf { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 46px 34px; padding-top: 10px; }
 .book { border: 0; padding: 0; background: none; cursor: pointer; text-align: left; color: inherit; font: inherit; perspective: 1400px; }
-.book .b3d { position: relative; width: 78%; margin: 0 auto 26px; aspect-ratio: var(--ar, 3/4); transform-style: preserve-3d; transform: rotateY(-24deg) rotateX(4deg); transition: transform .8s var(--ease); }
-.book:hover .b3d { transform: rotateY(-8deg) rotateX(0) translateY(-8px); }
-.book .front { position: absolute; inset: 0; border-radius: 3px 8px 8px 3px; overflow: hidden; box-shadow: 0 30px 50px -20px rgb(0 0 0 / .45); backface-visibility: hidden; }
+.book .stand { display: grid; place-items: end center; height: clamp(240px, 26vw, 320px); margin-bottom: 22px; }
+.book .b3d { position: relative; height: 100%; max-width: 100%; aspect-ratio: var(--ar, 3/4); transform-origin: left center; transition: transform .8s var(--ease), box-shadow .8s var(--ease); border-radius: 3px 8px 8px 3px; box-shadow: 0 24px 40px -18px rgb(0 0 0 / .45), 6px 0 0 -1px #e3e3e8, 8px 0 0 -2px #d2d2d7; }
+.book:hover .b3d { transform: perspective(1200px) rotateY(-16deg) translateY(-6px); box-shadow: 18px 30px 50px -20px rgb(0 0 0 / .5), 6px 0 0 -1px #e3e3e8, 8px 0 0 -2px #d2d2d7; }
+.book .front { position: absolute; inset: 0; border-radius: inherit; overflow: hidden; }
 .book .front img { width: 100%; height: 100%; object-fit: cover; }
-.book .front::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(0 0 0 / .25), transparent 6%, rgb(255 255 255 / .12) 9%, transparent 14%); }
-.book .pages { position: absolute; top: 2%; bottom: 2%; right: 0; width: 26px; transform: rotateY(90deg) translateZ(calc(78% - 0px)); transform-origin: right; background: repeating-linear-gradient(90deg, #fff 0 2px, #e8e8ed 2px 3px); }
-.book .spine { position: absolute; top: 0; bottom: 0; left: 0; width: 26px; transform-origin: left; transform: rotateY(-90deg); background: #2a2a2d; }
+.book .front::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgb(0 0 0 / .28), transparent 5%, rgb(255 255 255 / .14) 7.5%, transparent 12%); }
+.book h3, .book span { display: block; }
 .book h3 { font-size: 24px; letter-spacing: -.03em; }
 .book span { color: #6e6e73; font-size: 15px; }
 .book .more { font-size: 15px; margin-top: 6px; color: #4f7300; }
@@ -319,7 +336,7 @@ html.calm .cursor, html.calm .cursor-ring, html.calm .loader { display: none !im
     <a class="logo" href="#top"><i aria-hidden="true"></i>Noah Demuyakor</a>
     <ul>
       <li class="opt"><a href="#reel">Films</a></li>
-      <li><a href="#work">Work</a></li>
+      <li class="work-link"><a href="#work">Work</a></li>
       <li class="opt"><a href="#books">Books</a></li>
       <li class="opt"><a href="#about">About</a></li>
       <li><button class="motion-btn" type="button" id="motionBtn"><b aria-hidden="true"></b><span>Motion on</span></button></li>
@@ -658,8 +675,8 @@ $("#sheet").addEventListener("click", e => { if (e.target.id === "sheet") closeS
 BOOKS.forEach((bk, k) => {
   const b = document.createElement("button"); b.type = "button"; b.className = "book"; b.dataset.label = "Open";
   b.style.setProperty("--ar", `${bk.w} / ${bk.h}`);
-  b.innerHTML = `<div class="b3d"><div class="spine"></div><div class="front"><img src="${bk.pages[0]}" alt="${bk.title} cover" loading="lazy"></div></div>
-    <h3>${bk.title}</h3><span>${bk.client} · ${bk.total} pages</span><br><span class="more">Open the book</span>`;
+  b.innerHTML = `<div class="stand"><div class="b3d"><div class="front"><img src="${bk.pages[0]}" alt="${bk.title} cover" loading="lazy"></div></div></div>
+    <h3>${bk.title}</h3><span>${bk.client} · ${bk.total} pages</span><span class="more">Open the book</span>`;
   b.onclick = () => openBook(k);
   $("#shelf").appendChild(b);
 });
@@ -815,8 +832,8 @@ function initReel() {
     vel *= .94; group.rotation.y += spin + vel + 0;
     group.rotation.x += (py * .1 + .05 - group.rotation.x) * .05;
     camera.position.x += (px * 1.6 - camera.position.x) * .04;
-    camera.position.y = 1.4 + (enter - .5) * 2.4;
-    camera.lookAt(0, -.2, 0);
+    camera.position.y = 1.1 + (enter - .5) * 1.2;
+    camera.lookAt(0, .35, 0);
     points.rotation.y = t * .03;
     panels.forEach(p => p.position.y = p.userData.base + Math.sin(t * .8 + p.userData.i) * .1);
     ray.setFromCamera(ndc, camera);
@@ -855,7 +872,8 @@ function startMotion() {
   // showcase: film grows to full bleed, headline drifts away
   ScrollTrigger.matchMedia({ "(min-width: 761px)": () => {
     const tl = gsap.timeline({ scrollTrigger: { trigger: "#showcase", start: "top 60%", end: "bottom bottom", scrub: .8 } });
-    tl.fromTo("#film", { width: "78vw", borderRadius: 28 }, { width: "100vw", borderRadius: 0, ease: "none" })
+    // grow to the page width (not 100vw, which includes the scrollbar and would clip the right edge)
+    tl.fromTo("#film", { width: () => document.documentElement.clientWidth * .78, borderRadius: 28 }, { width: () => document.documentElement.clientWidth, borderRadius: 0, ease: "none" })
       .fromTo("#heroVid", { scale: 1.12 }, { scale: 1, ease: "none" }, 0);
   } });
   gsap.to(".hero .wrap", { yPercent: -40, opacity: 0, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true } });
@@ -875,14 +893,23 @@ function startMotion() {
   // project cards
   ScrollTrigger.batch(".proj", { start: "top 92%", once: true, onEnter: els => gsap.from(els, { y: 80, opacity: 0, scale: .96, duration: 1, stagger: .08, ease: "power3.out" }) });
   // books rise and turn
-  gsap.from(".book .b3d", { rotateY: -70, y: 60, opacity: 0, duration: 1.4, stagger: .15, ease: "power3.out", scrollTrigger: { trigger: ".shelf", start: "top 85%" } });
+  ScrollTrigger.batch(".book", { start: "top 92%", once: true, onEnter: els => gsap.from(els, { y: 70, opacity: 0, duration: 1, stagger: .1, ease: "power3.out", clearProps: "transform,opacity" }) });
   // Orijin pinned horizontal scroll
   ScrollTrigger.matchMedia({ "(min-width: 900px)": () => {
     const sec = $(".case"), row = $("#caseRow"); sec.classList.add("pin");
+    // size the gallery so the whole pinned section fits the screen (headline never hides under the nav)
+    const fit = () => {
+      const imgs = row.querySelectorAll("img");
+      imgs.forEach(i => i.style.height = "");
+      const top = row.getBoundingClientRect().top - sec.getBoundingClientRect().top;
+      const h = Math.max(150, Math.min(460, innerHeight - top - 64));
+      imgs.forEach(i => i.style.height = h + "px");
+    };
+    fit(); ScrollTrigger.addEventListener("refreshInit", fit);
     const dist = () => Math.max(0, row.scrollWidth - innerWidth + 80);
-    const tw = gsap.to(row, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: sec, start: () => sec.offsetHeight > innerHeight ? "bottom bottom" : "top top", end: () => "+=" + dist(), pin: true, scrub: .7, invalidateOnRefresh: true } });
+    const tw = gsap.to(row, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: sec, start: "top top", end: () => "+=" + dist(), pin: true, scrub: .7, invalidateOnRefresh: true } });
     const sub = gsap.utils.toArray("#caseRow img").map(img => gsap.fromTo(img, { scale: 1.18 }, { scale: 1, ease: "none", scrollTrigger: { trigger: img, containerAnimation: tw, start: "left right", end: "right left", scrub: true } }));
-    return () => { sec.classList.remove("pin"); sub.forEach(t => { t.scrollTrigger?.kill(); t.kill(); }); tw.scrollTrigger?.kill(); tw.kill(); gsap.set(row, { x: 0 }); };
+    return () => { ScrollTrigger.removeEventListener("refreshInit", fit); row.querySelectorAll("img").forEach(i => i.style.height = ""); sec.classList.remove("pin"); sub.forEach(t => { t.scrollTrigger?.kill(); t.kill(); }); tw.scrollTrigger?.kill(); tw.kill(); gsap.set(row, { x: 0 }); };
   } });
   // marquee speeds with scroll velocity
   let x = 0, boost = 0;
